@@ -15,7 +15,7 @@
       --paper: #efe9dd;
       --ink: #161513;
       --muted: #6b665d;
-      --red: #d6402b;
+      --accent: #2f4fd1;
       --line: #161513;
     }
 
@@ -60,7 +60,6 @@
       margin: 0 0 14px;
     }
 
-    h1 span { color: var(--red); }
 
     .lead {
       font-size: 19px;
@@ -120,8 +119,8 @@
     textarea::placeholder { color: #9a948a; }
 
     input:focus,
-    select:focus { border-bottom-color: var(--red); }
-    textarea:focus { border-color: var(--red); }
+    select:focus { border-bottom-color: var(--accent); }
+    textarea:focus { border-color: var(--accent); }
 
     .row {
       display: grid;
@@ -147,8 +146,8 @@
     }
 
     button:hover {
-      background: var(--red);
-      border-color: var(--red);
+      background: var(--accent);
+      border-color: var(--accent);
     }
 
     button:active { transform: translateY(1px); }
@@ -162,7 +161,7 @@
 
     #message:not(:empty)::before {
       content: "→ ";
-      color: var(--red);
+      color: var(--accent);
     }
 
     footer {
@@ -190,7 +189,7 @@
       <span>Venteliste</span>
     </div>
 
-    <h1>Music<span>linq</span></h1>
+    <h1>Musiclinq</h1>
     <p class="lead">Skriv dig op, så hører du fra os, når vi åbner.</p>
 
     <form id="signupForm">
@@ -293,8 +292,7 @@
         message.textContent = "Der skete en fejl. Prøv igen."
       }
     } else {
-      message.textContent = "Tak! Du er skrevet op."
-      form.reset()
+      window.location.href = "tak.html"
     }
   })
 </script>
