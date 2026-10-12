@@ -122,6 +122,44 @@
     select:focus { border-bottom-color: var(--accent); }
     textarea:focus { border-color: var(--accent); }
 
+    .check {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 16px;
+      text-transform: none;
+      letter-spacing: 0;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    .check input {
+      flex: none;
+      width: 22px;
+      height: 22px;
+      margin-top: 1px;
+      padding: 0;
+      border: 2px solid var(--line);
+      cursor: pointer;
+      display: grid;
+      place-content: center;
+    }
+
+    .check input::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: var(--paper);
+      transform: scale(0);
+      transition: transform 0.1s;
+    }
+
+    .check input:checked { background: var(--ink); }
+    .check input:checked::before { transform: scale(1); }
+    .check input:focus-visible { border-color: var(--accent); }
+
     .row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -243,6 +281,11 @@
         <textarea id="comment"></textarea>
       </div>
 
+      <label class="check">
+        <input type="checkbox" id="mail_ved_launch">
+        <span>Ja tak, I må gerne sende mig en mail, når Musiclinq launcher.</span>
+      </label>
+
       <button type="submit">Skriv mig op</button>
     </form>
 
@@ -276,7 +319,8 @@
       beskaeftigelse: document.getElementById("beskaeftigelse").value,
       interesse: document.getElementById("interesse").value,
       hort_fra: document.getElementById("hort_fra").value,
-      comment: document.getElementById("comment").value
+      comment: document.getElementById("comment").value,
+      mail_ved_launch: document.getElementById("mail_ved_launch").checked
     }
 
     const { error } = await supabaseClient
