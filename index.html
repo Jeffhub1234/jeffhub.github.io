@@ -202,13 +202,8 @@
       color: var(--accent);
     }
 
-    .consent-note {
-      font-size: 14px;
-      color: var(--muted);
-      margin: -8px 0 0;
-    }
 
-    .consent-note a,
+    .check a,
     .privacy a { color: var(--ink); }
 
     .privacy {
@@ -239,13 +234,6 @@
 
     .privacy ul { padding-left: 20px; }
 
-    /* Markerer tekst der skal udfyldes – fjern <mark class="udfyld"> når I har skrevet jeres oplysninger ind */
-    .udfyld {
-      background: #ffe14d;
-      color: var(--ink);
-      padding: 0 3px;
-      font-weight: 700;
-    }
 
     footer {
       margin-top: 40px;
@@ -331,20 +319,17 @@
         <span>Ja tak, I må gerne sende mig en mail, når Musiclinq launcher.</span>
       </label>
 
-      <p class="consent-note">
-        Når du skriver dig op, giver du samtykke til, at vi gemmer dine oplysninger som beskrevet i vores
-        <a href="#privatlivspolitik">privatlivspolitik</a>.
-      </p>
+      <label class="check">
+        <input type="checkbox" id="samtykke" required>
+        <span>Jeg har læst <a href="#privatlivspolitik">privatlivspolitikken</a> og giver samtykke til, at I gemmer mine oplysninger indtil januar 2027.</span>
+      </label>
 
       <button type="submit">Skriv mig op</button>
     </form>
 
     <p id="message"></p>
 
-    <!-- ===================== PRIVATLIVSPOLITIK =====================
-         Søg efter "UDFYLD" i filen for at finde de steder, I selv skal skrive oplysninger ind.
-         Når I har udfyldt et felt, så slet hele <mark class="udfyld">...</mark> og skriv jeres tekst i stedet.
-    ================================================================ -->
+    <!-- Privatlivspolitik -->
     <details class="privacy" id="privatlivspolitik">
       <summary>Privatlivspolitik</summary>
 
@@ -355,14 +340,12 @@
 
       <h3>Hvem er ansvarlig for dine data?</h3>
       <p>
-        Dataansvarlige er de fire studerende bag projektet:
-        <!-- UDFYLD: jeres fulde navne -->
-        <mark class="udfyld">[UDFYLD: Navn 1, Navn 2, Navn 3 og Navn 4]</mark>.
+        Dataansvarlige er de tre studerende bag projektet:
+        Jonathan Holm, Christian Striboldt og Axel Neergaard Ovesen.
       </p>
       <p>
         Kontakt:
-        <!-- UDFYLD: den mailadresse folk skal skrive til, fx en af jeres CBS-mails -->
-        <mark class="udfyld">[UDFYLD: kontakt@mail.dk]</mark>
+        joho24af@student.cbs.dk
       </p>
 
       <h3>Hvilke oplysninger gemmer vi?</h3>
@@ -396,15 +379,14 @@
 
       <h3>Hvem har adgang?</h3>
       <p>
-        Kun os fire i projektgruppen. Vi sælger eller deler ikke dine oplysninger med andre.
+        Kun os tre i projektgruppen. Vi sælger eller deler ikke dine oplysninger med andre.
         Vi bruger følgende tjenester til at drive siden:
       </p>
       <ul>
         <li>
           <strong>Supabase</strong> – database, hvor formularens svar gemmes.
           Serverplacering:
-          <!-- UDFYLD: se jeres Supabase-projekt under Project Settings → General → Region (fx "Frankfurt, EU") -->
-          <mark class="udfyld">[UDFYLD: fx EU (Frankfurt)]</mark>.
+          West EU (Ireland).
         </li>
         <li>
           <strong>Cloudflare Web Analytics</strong> – anonym besøgsstatistik. Bruger ikke cookies og gemmer ingen personoplysninger om dig.
@@ -418,8 +400,7 @@
       <p>
         Du har ret til at få indsigt i, rette eller slette de oplysninger, vi har om dig, og til at trække dit samtykke tilbage.
         Skriv til os på
-        <!-- UDFYLD: samme mailadresse som ovenfor -->
-        <mark class="udfyld">[UDFYLD: kontakt@mail.dk]</mark>,
+        joho24af@student.cbs.dk,
         så sletter vi dine oplysninger hurtigst muligt.
       </p>
       <p>
@@ -429,8 +410,7 @@
 
       <p>
         Senest opdateret:
-        <!-- UDFYLD: datoen I lægger politikken op -->
-        <mark class="udfyld">[UDFYLD: dato]</mark>
+        17-10-2026
       </p>
     </details>
 
