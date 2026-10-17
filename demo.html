@@ -56,15 +56,53 @@
 
     /* ---------- Demo-bånd ---------- */
     .demo-strip {
+      position: sticky;
+      top: 0;
+      z-index: 20;
       background: var(--accent-2);
       border-bottom: 2px solid var(--ink);
       font-family: "DM Mono", monospace;
-      font-size: 13px;
-      padding: 8px 0;
+      font-size: 14px;
+      padding: 10px 16px;
       text-align: center;
     }
 
+    .demo-strip b {
+      background: var(--ink);
+      color: var(--accent-2);
+      padding: 2px 8px;
+      margin-right: 8px;
+      letter-spacing: 0.08em;
+    }
+
     .demo-strip a { font-weight: 500; }
+
+    /* Forklaring i toppen om, at det er en demo */
+    .demo-callout {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      max-width: 720px;
+      background: var(--accent-2);
+      color: var(--ink);
+      border: 2px solid var(--accent-2);
+      padding: 14px 16px;
+      margin-bottom: 28px;
+      font-size: 15px;
+    }
+
+    .demo-callout .stamp {
+      flex: none;
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      border: 2px solid var(--ink);
+      padding: 4px 8px;
+      transform: rotate(-4deg);
+    }
+
+    .demo-callout p { margin: 0; }
 
     /* ---------- Header ---------- */
     .site-header {
@@ -360,50 +398,23 @@
 
     .card-cover {
       position: relative;
-      height: 96px;
+      height: 64px;
       border-bottom: 2px solid var(--line);
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
       padding: 10px 12px;
-      overflow: hidden;
     }
-
-    .cover-wave {
-      position: absolute;
-      inset: 14px 60px 14px 12px;
-      display: flex;
-      align-items: center;
-      gap: 2px;
-      opacity: 0.45;
-    }
-
-    .cover-wave span { flex: 1; background: var(--paper); min-height: 3px; }
-    .card.playing .cover-wave { opacity: 1; }
-    .card.playing .cover-wave span { background: var(--accent-2); }
-
-    .mini-play {
-      position: relative;
-      z-index: 2;
-      margin-left: auto;
-      width: 40px;
-      height: 40px;
-      border: 2px solid var(--ink);
-      background: var(--paper);
-      color: var(--ink);
-      cursor: pointer;
-      font-size: 13px;
-    }
-
-    .mini-play:hover { background: var(--accent-2); }
 
     .card-badges {
-      position: absolute;
-      left: 12px;
-      top: 10px;
-      z-index: 2;
       display: flex;
       gap: 6px;
+    }
+
+    .badge.demo {
+      position: absolute;
+      right: 12px;
+      top: 10px;
+      background: var(--ink);
+      color: var(--accent-2);
+      border-color: var(--ink);
     }
 
     .badge {
@@ -501,6 +512,21 @@
       color: var(--muted);
     }
 
+    .offers {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 4px;
+      font-size: 15px;
+    }
+
+    .offers li::before {
+      content: "→ ";
+      color: var(--accent);
+      font-weight: 800;
+    }
+
     .card-foot {
       display: flex;
       justify-content: space-between;
@@ -510,6 +536,14 @@
       border-top: 1px solid var(--soft);
       font-size: 15px;
     }
+
+    .see-more {
+      font-family: "DM Mono", monospace;
+      font-size: 13px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .card:hover .see-more { color: var(--accent); border-color: var(--accent); }
 
     .price { font-weight: 800; font-size: 18px; }
     .rating { font-family: "DM Mono", monospace; font-size: 13px; }
@@ -919,7 +953,7 @@
 <body>
 
   <div class="demo-strip">
-    Demo – alle profiler er opdigtede, og intet kan købes endnu.
+    <b>DEMO</b>Musiclinq er ikke åbnet endnu. Profilerne er opdigtede eksempler.
     <a href="index.html#tilmeld">Skriv dig op til ventelisten</a>
   </div>
 
@@ -938,6 +972,14 @@
 
   <section class="hero">
     <div class="container">
+      <div class="demo-callout">
+        <span class="stamp">DEMO</span>
+        <p>
+          <strong>Sådan kan Musiclinq komme til at se ud.</strong>
+          Siden er et udkast fra vores studieprojekt på CBS. Personerne findes ikke, og intet kan bestilles endnu – men klik gerne rundt.
+        </p>
+      </div>
+
       <h1>Find folk til <em>din musik</em></h1>
       <p class="hero-lead">Producere, mixteknikere, sangere, musikere og undervisere – med lydklip, faste priser og ægte anmeldelser.</p>
 
@@ -976,19 +1018,12 @@
       <div class="toolbar">
         <div class="filters">
           <button class="toggle" type="button" id="onlineToggle" aria-pressed="false">◎ Kan arbejde online</button>
-          <select class="select" id="maxPrice" aria-label="Maks. pris">
-            <option value="">Alle priser</option>
-            <option value="500">Fra under 500 kr.</option>
-            <option value="1000">Fra under 1.000 kr.</option>
-            <option value="2000">Fra under 2.000 kr.</option>
-          </select>
           <span id="activeQuery"></span>
         </div>
         <select class="select" id="sort" aria-label="Sortér">
           <option value="anbefalet">Sortér: Anbefalet</option>
-          <option value="pris">Sortér: Laveste pris</option>
           <option value="rating">Sortér: Bedste bedømmelse</option>
-          <option value="hurtig">Sortér: Hurtigste levering</option>
+          <option value="anmeldelser">Sortér: Flest anmeldelser</option>
         </select>
       </div>
 
@@ -1078,7 +1113,7 @@
 
   <dialog id="profile" aria-labelledby="dlg-name">
     <div class="dlg-top">
-      <span class="mono">Profil · Demo</span>
+      <span class="mono"><span class="badge-demo">Demo</span> &nbsp;Opdigtet eksempelprofil</span>
       <button class="dlg-close" id="close" type="button">Luk ✕</button>
     </div>
     <div id="dlg-body"></div>
@@ -1197,7 +1232,7 @@
     ["Sangskrivning", "✎"], ["Vokal", "🎤"], ["Live", "🔊"], ["Alle", "✦"]
   ]
 
-  const state = { cat: "Alle", q: "", online: false, maxPrice: 0, sort: "anbefalet" }
+  const state = { cat: "Alle", q: "", online: false, sort: "anbefalet" }
 
   const $ = id => document.getElementById(id)
   const grid = $("grid")
@@ -1206,8 +1241,6 @@
 
   const kr = n => n.toLocaleString("da-DK") + " kr."
   const initials = name => name.split(" ").map(w => w[0]).join("")
-  const minPrice = p => Math.min(...p.packages.map(pk => pk[3]))
-  const minDays = p => Math.min(...p.packages.map(pk => pk[4]))
   const stars = r => r.toFixed(1).replace(".", ",")
   const days = d => d === 1 ? "1 dag" : d + " dage"
 
@@ -1252,7 +1285,6 @@
   function matches(p) {
     if (state.cat !== "Alle" && !p.cats.includes(state.cat)) return false
     if (state.online && !p.online) return false
-    if (state.maxPrice && minPrice(p) >= state.maxPrice) return false
     if (!state.q) return true
     const hay = [p.name, p.role, p.city, p.bio, p.online ? "online" : "", ...p.cats, ...p.genres, ...p.packages.map(pk => pk[1])]
       .join(" ").toLowerCase().replace(/aa/g, "å")
@@ -1264,9 +1296,8 @@
 
   function sorted(list) {
     const s = [...list]
-    if (state.sort === "pris") s.sort((a, b) => minPrice(a) - minPrice(b))
     if (state.sort === "rating") s.sort((a, b) => b.rating - a.rating || b.reviews - a.reviews)
-    if (state.sort === "hurtig") s.sort((a, b) => minDays(a) - minDays(b))
+    if (state.sort === "anmeldelser") s.sort((a, b) => b.reviews - a.reviews)
     if (state.sort === "anbefalet") s.sort((a, b) => (b.top - a.top) || b.reviews * b.rating - a.reviews * a.rating)
     return s
   }
@@ -1294,8 +1325,7 @@
             ${p.top ? '<span class="badge top">Topbedømt</span>' : ""}
             ${p.online ? '<span class="badge">Online</span>' : ""}
           </div>
-          <div class="cover-wave" aria-hidden="true">${waveBars(i, 36)}</div>
-          <button class="mini-play" type="button" aria-label="Afspil lydklip fra ${esc(p.name)}">▶</button>
+          <span class="badge demo">Eksempel</span>
         </div>
         <div class="card-body">
           <div class="card-head">
@@ -1306,13 +1336,15 @@
             </div>
           </div>
           <div class="tags">${p.genres.map(g => `<span class="tag">${esc(g)}</span>`).join("")}</div>
+          <ul class="offers" aria-label="Tilbyder">
+            ${p.packages.map(pk => `<li>${esc(pk[1])}</li>`).join("")}
+          </ul>
           <div class="meta">
             <span>⏱ Svarer inden for ${esc(p.response)}</span>
-            <span>⇥ Levering fra ${days(minDays(p))}</span>
           </div>
           <div class="card-foot">
-            <span>Fra <span class="price">${kr(minPrice(p))}</span></span>
             <span class="rating">★ ${stars(p.rating)} (${p.reviews})</span>
+            <span class="see-more">Se priser og pakker →</span>
           </div>
         </div>
       </article>`
@@ -1321,26 +1353,14 @@
 
   grid.addEventListener("click", e => {
     if (e.target.id === "reset") {
-      Object.assign(state, { cat: "Alle", q: "", online: false, maxPrice: 0 })
+      Object.assign(state, { cat: "Alle", q: "", online: false })
       $("search").value = ""
       $("onlineToggle").setAttribute("aria-pressed", "false")
-      $("maxPrice").value = ""
       render()
       return
     }
     const card = e.target.closest(".card")
     if (!card) return
-    if (e.target.closest(".mini-play")) {
-      const btn = e.target.closest(".mini-play")
-      const playing = !card.classList.contains("playing")
-      document.querySelectorAll(".card.playing").forEach(c => {
-        c.classList.remove("playing")
-        c.querySelector(".mini-play").textContent = "▶"
-      })
-      card.classList.toggle("playing", playing)
-      btn.textContent = playing ? "❚❚" : "▶"
-      return
-    }
     openProfile(profiles[card.dataset.i])
   })
 
@@ -1373,7 +1393,6 @@
     render()
   })
 
-  $("maxPrice").addEventListener("change", e => { state.maxPrice = Number(e.target.value) || 0; render() })
   $("sort").addEventListener("change", e => { state.sort = e.target.value; render() })
 
   // Profilvisning
