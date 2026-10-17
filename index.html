@@ -202,8 +202,53 @@
       color: var(--accent);
     }
 
+    .consent-note {
+      font-size: 14px;
+      color: var(--muted);
+      margin: -8px 0 0;
+    }
+
+    .consent-note a,
+    .privacy a { color: var(--ink); }
+
+    .privacy {
+      margin-top: 56px;
+      border-top: 2px solid var(--line);
+      padding-top: 14px;
+      font-size: 15px;
+    }
+
+    .privacy summary {
+      cursor: pointer;
+      font-family: "DM Mono", monospace;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .privacy summary:hover { color: var(--accent); }
+
+    .privacy h3 {
+      font-size: 16px;
+      font-weight: 800;
+      margin: 22px 0 4px;
+    }
+
+    .privacy p,
+    .privacy ul { margin: 0 0 8px; }
+
+    .privacy ul { padding-left: 20px; }
+
+    /* Markerer tekst der skal udfyldes – fjern <mark class="udfyld"> når I har skrevet jeres oplysninger ind */
+    .udfyld {
+      background: #ffe14d;
+      color: var(--ink);
+      padding: 0 3px;
+      font-weight: 700;
+    }
+
     footer {
-      margin-top: 64px;
+      margin-top: 40px;
       padding-top: 10px;
       border-top: 2px solid var(--line);
       font-family: "DM Mono", monospace;
@@ -286,10 +331,108 @@
         <span>Ja tak, I må gerne sende mig en mail, når Musiclinq launcher.</span>
       </label>
 
+      <p class="consent-note">
+        Når du skriver dig op, giver du samtykke til, at vi gemmer dine oplysninger som beskrevet i vores
+        <a href="#privatlivspolitik">privatlivspolitik</a>.
+      </p>
+
       <button type="submit">Skriv mig op</button>
     </form>
 
     <p id="message"></p>
+
+    <!-- ===================== PRIVATLIVSPOLITIK =====================
+         Søg efter "UDFYLD" i filen for at finde de steder, I selv skal skrive oplysninger ind.
+         Når I har udfyldt et felt, så slet hele <mark class="udfyld">...</mark> og skriv jeres tekst i stedet.
+    ================================================================ -->
+    <details class="privacy" id="privatlivspolitik">
+      <summary>Privatlivspolitik</summary>
+
+      <p>
+        Musiclinq er et studieprojekt i faget Innovation på HA(it.) ved Copenhagen Business School (CBS).
+        Siden bruges til at undersøge, om der er interesse for idéen. Musiclinq er ikke en registreret virksomhed.
+      </p>
+
+      <h3>Hvem er ansvarlig for dine data?</h3>
+      <p>
+        Dataansvarlige er de fire studerende bag projektet:
+        <!-- UDFYLD: jeres fulde navne -->
+        <mark class="udfyld">[UDFYLD: Navn 1, Navn 2, Navn 3 og Navn 4]</mark>.
+      </p>
+      <p>
+        Kontakt:
+        <!-- UDFYLD: den mailadresse folk skal skrive til, fx en af jeres CBS-mails -->
+        <mark class="udfyld">[UDFYLD: kontakt@mail.dk]</mark>
+      </p>
+
+      <h3>Hvilke oplysninger gemmer vi?</h3>
+      <ul>
+        <li>Navn og e-mail</li>
+        <li>Dine svar i formularen: hvad du vil bruge Musiclinq til, beskæftigelse, interesser, hvor du har hørt om os og din eventuelle kommentar</li>
+        <li>Om du vil have en mail, når vi launcher</li>
+      </ul>
+
+      <h3>Hvad bruger vi dem til?</h3>
+      <ul>
+        <li>At undersøge interessen for Musiclinq som en del af vores skoleprojekt</li>
+        <li>At sende dig én mail ved launch – kun hvis du har sat flueben i feltet</li>
+      </ul>
+      <p>
+        Resultaterne kan indgå i vores projektrapport og eksamen, men kun som samlede, anonyme tal.
+        Navne og e-mails bliver aldrig nævnt.
+      </p>
+
+      <h3>Retsgrundlag</h3>
+      <p>
+        Vi behandler dine oplysninger på baggrund af dit samtykke (GDPR art. 6, stk. 1, litra a).
+        Du kan til enhver tid trække dit samtykke tilbage.
+      </p>
+
+      <h3>Hvor længe gemmer vi dem?</h3>
+      <p>
+        Vi gemmer dine oplysninger indtil januar 2027, hvor projektet er afsluttet.
+        Derefter sletter vi alle oplysninger.
+      </p>
+
+      <h3>Hvem har adgang?</h3>
+      <p>
+        Kun os fire i projektgruppen. Vi sælger eller deler ikke dine oplysninger med andre.
+        Vi bruger følgende tjenester til at drive siden:
+      </p>
+      <ul>
+        <li>
+          <strong>Supabase</strong> – database, hvor formularens svar gemmes.
+          Serverplacering:
+          <!-- UDFYLD: se jeres Supabase-projekt under Project Settings → General → Region (fx "Frankfurt, EU") -->
+          <mark class="udfyld">[UDFYLD: fx EU (Frankfurt)]</mark>.
+        </li>
+        <li>
+          <strong>Cloudflare Web Analytics</strong> – anonym besøgsstatistik. Bruger ikke cookies og gemmer ingen personoplysninger om dig.
+        </li>
+        <li>
+          <strong>GitHub Pages</strong> og <strong>Google Fonts</strong> – hosting af siden og skrifttyper. Din browser sender din IP-adresse til dem, når siden indlæses.
+        </li>
+      </ul>
+
+      <h3>Dine rettigheder</h3>
+      <p>
+        Du har ret til at få indsigt i, rette eller slette de oplysninger, vi har om dig, og til at trække dit samtykke tilbage.
+        Skriv til os på
+        <!-- UDFYLD: samme mailadresse som ovenfor -->
+        <mark class="udfyld">[UDFYLD: kontakt@mail.dk]</mark>,
+        så sletter vi dine oplysninger hurtigst muligt.
+      </p>
+      <p>
+        Hvis du er utilfreds med, hvordan vi behandler dine oplysninger, kan du klage til
+        <a href="https://www.datatilsynet.dk" target="_blank" rel="noopener">Datatilsynet</a>.
+      </p>
+
+      <p>
+        Senest opdateret:
+        <!-- UDFYLD: datoen I lægger politikken op -->
+        <mark class="udfyld">[UDFYLD: dato]</mark>
+      </p>
+    </details>
 
     <footer>&copy; Musiclinq</footer>
   </main>
@@ -305,6 +448,10 @@
     SUPABASE_URL,
     SUPABASE_KEY
   )
+
+  document.querySelector('a[href="#privatlivspolitik"]').addEventListener("click", function() {
+    document.getElementById("privatlivspolitik").open = true
+  })
 
   const form = document.getElementById("signupForm")
   const message = document.getElementById("message")
