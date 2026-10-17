@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Musiclinq</title>
+  <title>Musiclinq – find folk til din musik</title>
+  <meta name="description" content="Musiclinq samler producere, mixteknikere, sangere, musikere og undervisere ét sted. Skriv dig op til ventelisten.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,14 +14,18 @@
   <style>
     :root {
       --paper: #efe9dd;
+      --card: #f7f3ea;
       --ink: #161513;
       --muted: #6b665d;
+      --soft: #c9c2b4;
       --accent: #2f4fd1;
+      --accent-2: #ffcf3f;
       --line: #161513;
     }
 
     * { box-sizing: border-box; }
 
+    html { scroll-behavior: smooth; }
     html, body { margin: 0; }
 
     body {
@@ -32,63 +37,219 @@
       min-height: 100vh;
     }
 
-    .wrap {
-      max-width: 620px;
+    a { color: inherit; }
+
+    .container {
+      max-width: 1120px;
       margin: 0 auto;
-      padding: 48px 20px 80px;
+      padding: 0 20px;
     }
 
-    .top {
-      display: flex;
-      justify-content: space-between;
+    .mono {
       font-family: "DM Mono", monospace;
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      border-bottom: 2px solid var(--line);
-      padding-bottom: 10px;
-      margin-bottom: 28px;
+    }
+
+    /* ---------- Header ---------- */
+    .site-header {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .site-header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding-top: 18px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid #3a3833;
+    }
+
+    .logo {
+      font-weight: 900;
+      font-stretch: 62%;
+      font-size: 28px;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .header-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .header-links a { text-decoration: none; }
+    .header-links a:hover { color: var(--accent-2); }
+
+    .pill {
+      border: 2px solid var(--paper);
+      padding: 6px 12px;
+    }
+
+    .pill:hover { border-color: var(--accent-2); }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 56px 0 72px;
+    }
+
+    .hero .container {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-2);
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-2);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      50% { opacity: 0.25; }
     }
 
     h1 {
       font-stretch: 62%;
       font-weight: 900;
-      font-size: clamp(64px, 17vw, 128px);
-      line-height: 0.85;
-      letter-spacing: -0.02em;
+      font-size: clamp(56px, 9vw, 112px);
+      line-height: 0.86;
+      letter-spacing: -0.015em;
       text-transform: uppercase;
-      margin: 0 0 14px;
+      margin: 0 0 24px;
     }
 
+    h1 em {
+      font-style: normal;
+      color: var(--accent-2);
+    }
 
-    .lead {
-      font-size: 19px;
-      max-width: 30ch;
-      margin: 0 0 40px;
+    .hero-lead {
+      font-size: 20px;
+      max-width: 34ch;
+      color: #ddd6c8;
+      margin: 0 0 28px;
     }
 
     .demo-link {
       display: inline-block;
       font-family: "DM Mono", monospace;
       font-size: 14px;
-      color: var(--ink);
       text-decoration: none;
-      border-bottom: 2px solid var(--ink);
+      border-bottom: 2px solid currentColor;
       padding-bottom: 2px;
-      margin: -20px 0 40px;
     }
 
-    .demo-link:hover {
-      color: var(--accent);
-      border-color: var(--accent);
+    .demo-link:hover { color: var(--accent-2); }
+
+    /* Produktforsmag: to profilkort fra demoen */
+    .preview {
+      position: relative;
+      height: 250px;
+      margin-top: 44px;
+      max-width: 460px;
+    }
+
+    .preview-card {
+      position: absolute;
+      width: 300px;
+      background: var(--card);
+      color: var(--ink);
+      border: 2px solid var(--paper);
+      padding: 16px;
+      box-shadow: 8px 8px 0 var(--accent);
+    }
+
+    .preview-card:nth-child(1) { left: 0; top: 0; transform: rotate(-3deg); }
+    .preview-card:nth-child(2) { left: 140px; top: 96px; transform: rotate(2.5deg); box-shadow: 8px 8px 0 var(--accent-2); }
+
+    .pc-head { display: flex; gap: 12px; align-items: center; }
+
+    .avatar {
+      flex: none;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-content: center;
+      font-weight: 900;
+      font-stretch: 70%;
+      font-size: 19px;
+      color: var(--paper);
+      border: 2px solid var(--ink);
+    }
+
+    .pc-name { font-weight: 800; margin: 0; line-height: 1.15; }
+    .pc-role { font-size: 13px; color: var(--muted); margin: 2px 0 0; }
+
+    .pc-foot {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--soft);
+      font-size: 14px;
+    }
+
+    .pc-foot b { font-weight: 800; }
+
+    .preview-label {
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      color: var(--soft);
+    }
+
+    /* ---------- Formular ---------- */
+    .signup {
+      background: var(--paper);
+      color: var(--ink);
+      border: 2px solid var(--paper);
+      padding: 28px;
+      box-shadow: 10px 10px 0 var(--accent);
+      scroll-margin-top: 20px;
+    }
+
+    .signup h2 {
+      font-stretch: 70%;
+      font-weight: 900;
+      font-size: 34px;
+      line-height: 1;
+      text-transform: uppercase;
+      margin: 0 0 6px;
+    }
+
+    .signup .sub {
+      color: var(--muted);
+      font-size: 15px;
+      margin: 0 0 22px;
     }
 
     form {
       display: grid;
-      gap: 22px;
+      gap: 18px;
     }
 
-    label {
+    label,
+    legend {
       display: block;
       font-family: "DM Mono", monospace;
       font-size: 12px;
@@ -96,10 +257,18 @@
       letter-spacing: 0.06em;
       color: var(--muted);
       margin-bottom: 6px;
+      padding: 0;
     }
 
-    input,
-    select,
+    fieldset {
+      border: 0;
+      margin: 0;
+      padding: 0;
+      min-width: 0;
+    }
+
+    input[type="text"],
+    input[type="email"],
     textarea {
       width: 100%;
       font: inherit;
@@ -114,18 +283,8 @@
       -webkit-appearance: none;
     }
 
-    select {
-      cursor: pointer;
-      background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%),
-                        linear-gradient(135deg, var(--ink) 50%, transparent 50%);
-      background-position: calc(100% - 12px) 55%, calc(100% - 6px) 55%;
-      background-size: 6px 6px;
-      background-repeat: no-repeat;
-      padding-right: 28px;
-    }
-
     textarea {
-      min-height: 90px;
+      min-height: 80px;
       resize: vertical;
       border: 2px solid var(--line);
       padding: 10px;
@@ -134,9 +293,76 @@
     input::placeholder,
     textarea::placeholder { color: #9a948a; }
 
-    input:focus,
-    select:focus { border-bottom-color: var(--accent); }
+    input[type="text"]:focus,
+    input[type="email"]:focus { border-bottom-color: var(--accent); }
     textarea:focus { border-color: var(--accent); }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    /* Valg af rolle som store knapper */
+    .roles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .role {
+      position: relative;
+      display: block;
+      margin: 0;
+      font-family: inherit;
+      font-size: 15px;
+      text-transform: none;
+      letter-spacing: 0;
+      color: var(--ink);
+      border: 2px solid var(--line);
+      padding: 10px 12px;
+      cursor: pointer;
+      line-height: 1.25;
+    }
+
+    .role small {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .role input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .role:hover { border-color: var(--accent); }
+    .role:has(input:checked) { background: var(--ink); color: var(--paper); }
+    .role:has(input:checked) small { color: var(--soft); }
+    .role:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    /* Valgfrie spørgsmål */
+    .extra {
+      border: 2px dashed var(--muted);
+      padding: 12px 14px;
+    }
+
+    .extra summary {
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .extra summary span {
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    .extra[open] summary { margin-bottom: 16px; }
+
+    .extra-fields { display: grid; gap: 16px; }
 
     .check {
       display: flex;
@@ -144,7 +370,7 @@
       gap: 12px;
       cursor: pointer;
       font-family: inherit;
-      font-size: 16px;
+      font-size: 14px;
       text-transform: none;
       letter-spacing: 0;
       color: var(--ink);
@@ -153,20 +379,23 @@
 
     .check input {
       flex: none;
-      width: 22px;
-      height: 22px;
-      margin-top: 1px;
+      width: 20px;
+      height: 20px;
+      margin: 0;
       padding: 0;
       border: 2px solid var(--line);
       cursor: pointer;
       display: grid;
       place-content: center;
+      appearance: none;
+      -webkit-appearance: none;
+      background: transparent;
     }
 
     .check input::before {
       content: "";
-      width: 10px;
-      height: 10px;
+      width: 9px;
+      height: 9px;
       background: var(--paper);
       transform: scale(0);
       transition: transform 0.1s;
@@ -176,41 +405,40 @@
     .check input:checked::before { transform: scale(1); }
     .check input:focus-visible { border-color: var(--accent); }
 
-    .row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
-    }
-
-    button {
-      justify-self: start;
+    .btn {
+      display: inline-block;
       font: inherit;
       font-weight: 800;
       font-stretch: 80%;
       font-size: 20px;
       text-transform: uppercase;
       letter-spacing: 0.02em;
+      text-decoration: none;
+      text-align: center;
       color: var(--paper);
       background: var(--ink);
       border: 2px solid var(--ink);
       padding: 14px 26px;
       cursor: pointer;
-      margin-top: 6px;
       transition: background 0.12s, border-color 0.12s;
     }
 
-    button:hover {
+    .btn:hover {
       background: var(--accent);
       border-color: var(--accent);
     }
 
-    button:active { transform: translateY(1px); }
+    .btn:active { transform: translateY(1px); }
+
+    form .btn { width: 100%; }
+
+    .btn[disabled] { opacity: 0.6; cursor: wait; }
 
     #message {
       font-family: "DM Mono", monospace;
       font-size: 14px;
       min-height: 1.4em;
-      margin: 18px 0 0;
+      margin: 0;
     }
 
     #message:not(:empty)::before {
@@ -218,15 +446,228 @@
       color: var(--accent);
     }
 
+    /* ---------- Kategoribånd ---------- */
+    .ticker {
+      background: var(--accent-2);
+      border-top: 2px solid var(--ink);
+      border-bottom: 2px solid var(--ink);
+      overflow: hidden;
+      white-space: nowrap;
+    }
 
-    .check a,
-    .privacy a { color: var(--ink); }
+    .ticker-track {
+      display: inline-flex;
+      animation: scroll 40s linear infinite;
+    }
 
+    .ticker span {
+      font-weight: 900;
+      font-stretch: 70%;
+      font-size: 22px;
+      text-transform: uppercase;
+      padding: 12px 0;
+    }
+
+    .ticker span::after {
+      content: "✦";
+      margin: 0 22px;
+      font-size: 16px;
+      vertical-align: 2px;
+    }
+
+    @keyframes scroll {
+      to { transform: translateX(-50%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ticker-track, .eyebrow::before { animation: none; }
+    }
+
+    /* ---------- Sektioner ---------- */
+    section.block { padding: 88px 0 0; }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 12px;
+      margin-bottom: 32px;
+    }
+
+    h2.big {
+      font-stretch: 62%;
+      font-weight: 900;
+      font-size: clamp(40px, 6vw, 64px);
+      line-height: 0.9;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .section-head .mono { color: var(--muted); }
+
+    /* To målgrupper */
+    .audiences {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .audience {
+      border: 2px solid var(--line);
+      padding: 28px;
+      background: var(--card);
+    }
+
+    .audience.dark {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .audience .mono { color: var(--accent); margin: 0 0 10px; }
+    .audience.dark .mono { color: var(--accent-2); }
+
+    .audience h3 {
+      font-stretch: 75%;
+      font-weight: 900;
+      font-size: 30px;
+      line-height: 1;
+      margin: 0 0 18px;
+    }
+
+    .audience ul {
+      list-style: none;
+      margin: 0 0 22px;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .audience li {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 8px;
+    }
+
+    .audience li::before {
+      content: "→";
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .audience.dark li::before { color: var(--accent-2); }
+
+    .audience .examples {
+      font-size: 14px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .audience.dark .examples { color: var(--soft); }
+
+    /* Sådan virker det */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: step;
+      border: 2px solid var(--line);
+    }
+
+    .steps li {
+      counter-increment: step;
+      padding: 26px;
+    }
+
+    .steps li + li { border-left: 2px solid var(--line); }
+
+    .steps li::before {
+      content: "0" counter(step);
+      display: block;
+      font-weight: 900;
+      font-stretch: 62%;
+      font-size: 56px;
+      line-height: 1;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .steps strong { display: block; font-size: 20px; margin-bottom: 6px; }
+    .steps p { margin: 0; color: var(--muted); font-size: 15px; }
+
+    /* Hvem står bag */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .about p { margin: 0 0 14px; font-size: 18px; }
+
+    .about .quote {
+      font-stretch: 75%;
+      font-weight: 800;
+      font-size: 30px;
+      line-height: 1.1;
+      margin: 0;
+    }
+
+    .about .names {
+      font-family: "DM Mono", monospace;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* Afsluttende opfordring */
+    .final {
+      margin-top: 96px;
+      background: var(--accent);
+      color: var(--paper);
+      padding: 64px 0;
+      border-top: 2px solid var(--ink);
+    }
+
+    .final .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .final h2 {
+      font-stretch: 62%;
+      font-weight: 900;
+      font-size: clamp(44px, 7vw, 80px);
+      line-height: 0.9;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .final .btn {
+      background: var(--paper);
+      color: var(--ink);
+      border-color: var(--paper);
+    }
+
+    .final .btn:hover {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+
+    /* ---------- Privatlivspolitik og footer ---------- */
     .privacy {
-      margin-top: 56px;
+      margin-top: 48px;
       border-top: 2px solid var(--line);
       padding-top: 14px;
       font-size: 15px;
+      max-width: 720px;
     }
 
     .privacy summary {
@@ -250,93 +691,268 @@
 
     .privacy ul { padding-left: 20px; }
 
-
     footer {
       margin-top: 40px;
-      padding-top: 10px;
+      padding: 12px 0 48px;
       border-top: 2px solid var(--line);
       font-family: "DM Mono", monospace;
       font-size: 12px;
       color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* ---------- Mobil ---------- */
+    @media (max-width: 900px) {
+      .hero .container,
+      .audiences,
+      .about { grid-template-columns: 1fr; }
+
+      .hero { padding-top: 36px; }
+      .hero .container { gap: 40px; }
+      .preview { display: none; }
+
+      .steps { grid-template-columns: 1fr; }
+      .steps li + li { border-left: 0; border-top: 2px solid var(--line); }
     }
 
     @media (max-width: 520px) {
-      .wrap { padding-top: 28px; }
-      .row { grid-template-columns: 1fr; }
-      button { width: 100%; }
+      .header-links .hide-sm { display: none; }
+      .signup { padding: 22px 18px; box-shadow: 6px 6px 0 var(--accent); }
+      .row, .roles { grid-template-columns: 1fr; }
+      .audience { padding: 22px; }
+      .section-head { flex-direction: column; align-items: start; }
+      .final .btn { width: 100%; }
     }
   </style>
 </head>
 
 <body>
-  <main class="wrap">
 
-    <div class="top">
-      <span>Musiclinq</span>
-      <span>Venteliste</span>
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="index.html">Musiclinq</a>
+      <nav class="header-links mono">
+        <a class="hide-sm" href="demo.html">Se demo</a>
+        <a class="pill" href="#tilmeld">Skriv dig op</a>
+      </nav>
     </div>
+  </header>
 
-    <h1>Musiclinq</h1>
-    <p class="lead">Skriv dig op, så hører du fra os, når vi åbner.</p>
-    <a class="demo-link" href="demo.html">Se hvordan Musiclinq kommer til at se ud →</a>
+  <section class="hero">
+    <div class="container">
 
-    <form id="signupForm">
-      <div class="row">
-        <div>
-          <label for="navn">Navn</label>
-          <input type="text" id="navn" placeholder="Dit navn" required>
+      <div>
+        <p class="eyebrow mono">Venteliste åben · Snart i Danmark</p>
+        <h1>Find folk til din musik. <em>Eller bliv fundet.</em></h1>
+        <p class="hero-lead">
+          Musiclinq samler producere, mixteknikere, sangere, musikere og undervisere ét sted.
+          Find den rette til dit næste projekt – eller få betaling for det, du er god til.
+        </p>
+        <a class="demo-link" href="demo.html">Se hvordan Musiclinq kommer til at se ud →</a>
+
+        <div class="preview" aria-hidden="true">
+          <div class="preview-card">
+            <div class="pc-head">
+              <div class="avatar" style="background:#2f4fd1">SK</div>
+              <div>
+                <p class="pc-name">Sofie Kjær</p>
+                <p class="pc-role">Mix- og masteringtekniker · København</p>
+              </div>
+            </div>
+            <div class="pc-foot"><span>Fra <b>450 kr.</b></span><span>★ 4,9</span></div>
+          </div>
+          <div class="preview-card">
+            <div class="pc-head">
+              <div class="avatar" style="background:#3c7a4f">ML</div>
+              <div>
+                <p class="pc-name">Maja Lindholm</p>
+                <p class="pc-role">Sangunderviser · Online</p>
+              </div>
+            </div>
+            <div class="pc-foot"><span>Fra <b>150 kr.</b></span><span>★ 5,0</span></div>
+          </div>
+          <p class="preview-label mono">Eksempel fra demoen</p>
         </div>
+      </div>
+
+      <div class="signup" id="tilmeld">
+        <h2>Skriv dig op</h2>
+        <p class="sub">Det tager 20 sekunder. Vi skriver kun til dig, hvis du siger ja tak.</p>
+
+        <form id="signupForm">
+          <div class="row">
+            <div>
+              <label for="navn">Navn</label>
+              <input type="text" id="navn" placeholder="Dit navn" autocomplete="name" required>
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input type="email" id="email" placeholder="dig@mail.dk" autocomplete="email" required>
+            </div>
+          </div>
+
+          <fieldset>
+            <legend>Hvad vil du bruge Musiclinq til?</legend>
+            <div class="roles">
+              <label class="role">
+                <input type="radio" name="aktivitet" value="koebe">
+                Finde folk
+                <small>til mine musikprojekter</small>
+              </label>
+              <label class="role">
+                <input type="radio" name="aktivitet" value="tilbyde">
+                Sælge mine ydelser
+                <small>fx mix, undervisning, sessionspil</small>
+              </label>
+              <label class="role">
+                <input type="radio" name="aktivitet" value="begge">
+                Begge dele
+              </label>
+              <label class="role">
+                <input type="radio" name="aktivitet" value="nysgerrig">
+                Er bare nysgerrig
+              </label>
+            </div>
+          </fieldset>
+
+          <details class="extra">
+            <summary>Hjælp os med at bygge det rigtige <span>– 3 korte spørgsmål (valgfrit)</span></summary>
+            <div class="extra-fields">
+              <div>
+                <label for="beskaeftigelse">Beskæftigelse</label>
+                <input type="text" id="beskaeftigelse" placeholder="Fx musiker, producer, studerende">
+              </div>
+              <div>
+                <label for="interesse">Hvilke ydelser interesserer dig?</label>
+                <input type="text" id="interesse" placeholder="Fx mix, master, undervisning">
+              </div>
+              <div>
+                <label for="hort_fra">Hvor har du hørt om os?</label>
+                <input type="text" id="hort_fra" placeholder="Instagram, en ven, ...">
+              </div>
+              <div>
+                <label for="comment">Kommentar</label>
+                <textarea id="comment" placeholder="Hvad mangler du i dag, når du skal finde folk til din musik?"></textarea>
+              </div>
+            </div>
+          </details>
+
+          <label class="check">
+            <input type="checkbox" id="mail_ved_launch">
+            <span>Ja tak, I må gerne sende mig en mail, når Musiclinq launcher.</span>
+          </label>
+
+          <label class="check">
+            <input type="checkbox" id="samtykke" required>
+            <span>Jeg har læst <a href="#privatlivspolitik">privatlivspolitikken</a> og giver samtykke til, at I gemmer mine oplysninger indtil januar 2027.</span>
+          </label>
+
+          <button class="btn" type="submit" id="submitBtn">Skriv mig op</button>
+          <p id="message" role="status"></p>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>Mix &amp; master</span><span>Produktion</span><span>Sangundervisning</span><span>Sessionsguitar</span><span>Trommer</span><span>Sangskrivning</span><span>Topline</span><span>Live-lyd</span><span>Klaver</span><span>Beats</span>
+      <span>Mix &amp; master</span><span>Produktion</span><span>Sangundervisning</span><span>Sessionsguitar</span><span>Trommer</span><span>Sangskrivning</span><span>Topline</span><span>Live-lyd</span><span>Klaver</span><span>Beats</span>
+    </div>
+  </div>
+
+  <main class="container">
+
+    <section class="block">
+      <div class="section-head">
+        <h2 class="big">To sider af samme sag</h2>
+        <span class="mono">Til dem, der søger · og dem, der tilbyder</span>
+      </div>
+
+      <div class="audiences">
+        <article class="audience">
+          <p class="mono">Har du et projekt?</p>
+          <h3>Find den rette til din musik</h3>
+          <ul>
+            <li>Søg efter ydelse, genre eller by – også online</li>
+            <li>Lyt til tidligere arbejde, før du vælger</li>
+            <li>Faste pakker med priser, så du ved, hvad det koster</li>
+            <li>Anmeldelser fra folk, der rent faktisk har købt</li>
+          </ul>
+          <p class="examples">Fx: få mixet din single, find en trommeslager til EP'en eller tag sangtimer.</p>
+        </article>
+
+        <article class="audience dark">
+          <p class="mono">Er du god til noget?</p>
+          <h3>Få betaling for det, du kan</h3>
+          <ul>
+            <li>Lav en profil med dine ydelser, priser og lydklip</li>
+            <li>Bliv fundet af folk, der leder efter præcis dig</li>
+            <li>Saml forespørgsler, aftaler og betaling ét sted</li>
+            <li>Byg dit ry op med anmeldelser</li>
+          </ul>
+          <p class="examples">Fx: producere, mixteknikere, sessionsmusikere, sangskrivere og undervisere.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="section-head">
+        <h2 class="big">Sådan virker det</h2>
+        <a class="mono demo-link" href="demo.html">Prøv demoen →</a>
+      </div>
+
+      <ol class="steps">
+        <li>
+          <strong>Find</strong>
+          <p>Søg blandt profiler, lyt til lydklip og sammenlign priser og anmeldelser.</p>
+        </li>
+        <li>
+          <strong>Aftal</strong>
+          <p>Vælg en pakke, beskriv dit projekt og aftal detaljerne direkte med personen.</p>
+        </li>
+        <li>
+          <strong>Lav musik</strong>
+          <p>Få dit arbejde leveret, giv en anmeldelse – og find den næste, når du har brug for det.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="block">
+      <div class="section-head">
+        <h2 class="big">Hvem står bag?</h2>
+        <span class="mono">Et studieprojekt fra CBS</span>
+      </div>
+
+      <div class="about">
+        <p class="quote">Det skal være lige så nemt at finde en mixtekniker som at finde en frisør.</p>
         <div>
-          <label for="email">Email</label>
-          <input type="email" id="email" placeholder="dig@mail.dk" required>
+          <p>
+            Musiclinq er et innovationsprojekt, vi laver som HA(it.)-studerende på Copenhagen Business School.
+            Lige nu undersøger vi, om der er brug for en dansk platform, der samler musikydelser ét sted.
+          </p>
+          <p>
+            Når du skriver dig op og svarer på vores spørgsmål, hjælper du os med at finde ud af, hvad platformen skal kunne.
+          </p>
+          <p class="names">Jonathan Holm · Christian Striboldt · Axel Neergaard Ovesen</p>
         </div>
       </div>
+    </section>
 
-      <div>
-        <label for="aktivitet">Hvad vil du bruge Musiclinq til?</label>
-        <select id="aktivitet">
-          <option value="">Vælg</option>
-          <option value="tilbyde">Sælge mine ydelser (fx mix, undervisning, sessionspil)</option>
-          <option value="koebe">Finde folk til mine musikprojekter</option>
-          <option value="begge">Begge dele</option>
-          <option value="nysgerrig">Er bare nysgerrig</option>
-        </select>
-      </div>
+  </main>
 
-      <div>
-        <label for="beskaeftigelse">Beskæftigelse</label>
-        <input type="text" id="beskaeftigelse" placeholder="Fx musiker, producer, studerende">
-      </div>
+  <section class="final">
+    <div class="container">
+      <h2>Vær med fra start</h2>
+      <a class="btn" href="#tilmeld">Skriv mig op</a>
+    </div>
+  </section>
 
-      <div>
-        <label for="interesse">Hvilke ydelser interesserer dig?</label>
-        <input type="text" id="interesse" placeholder="Fx mix, master, undervisning">
-      </div>
-
-      <div>
-        <label for="hort_fra">Hvor har du hørt om os?</label>
-        <input type="text" id="hort_fra" placeholder="Instagram, en ven, ...">
-      </div>
-
-      <div>
-        <label for="comment">Kommentar (valgfri)</label>
-        <textarea id="comment"></textarea>
-      </div>
-
-      <label class="check">
-        <input type="checkbox" id="mail_ved_launch">
-        <span>Ja tak, I må gerne sende mig en mail, når Musiclinq launcher.</span>
-      </label>
-
-      <label class="check">
-        <input type="checkbox" id="samtykke" required>
-        <span>Jeg har læst <a href="#privatlivspolitik">privatlivspolitikken</a> og giver samtykke til, at I gemmer mine oplysninger indtil januar 2027.</span>
-      </label>
-
-      <button type="submit">Skriv mig op</button>
-    </form>
-
-    <p id="message"></p>
+  <div class="container">
 
     <!-- Privatlivspolitik -->
     <details class="privacy" id="privatlivspolitik">
@@ -423,8 +1039,11 @@
       </p>
     </details>
 
-    <footer>&copy; Musiclinq</footer>
-  </main>
+    <footer>
+      <span>&copy; Musiclinq · Studieprojekt, CBS</span>
+      <a href="#privatlivspolitik" class="privacy-link">Privatlivspolitik</a>
+    </footer>
+  </div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -438,20 +1057,25 @@
     SUPABASE_KEY
   )
 
-  document.querySelector('a[href="#privatlivspolitik"]').addEventListener("click", function() {
-    document.getElementById("privatlivspolitik").open = true
+  document.querySelectorAll('a[href="#privatlivspolitik"]').forEach(function(link) {
+    link.addEventListener("click", function() {
+      document.getElementById("privatlivspolitik").open = true
+    })
   })
 
   const form = document.getElementById("signupForm")
   const message = document.getElementById("message")
+  const submitBtn = document.getElementById("submitBtn")
 
   form.addEventListener("submit", async function(event) {
     event.preventDefault()
 
+    const valgt = form.querySelector('input[name="aktivitet"]:checked')
+
     const data = {
       navn: document.getElementById("navn").value,
       email: document.getElementById("email").value,
-      aktivitet: document.getElementById("aktivitet").value,
+      aktivitet: valgt ? valgt.value : "",
       beskaeftigelse: document.getElementById("beskaeftigelse").value,
       interesse: document.getElementById("interesse").value,
       hort_fra: document.getElementById("hort_fra").value,
@@ -460,12 +1084,16 @@
       samtykke_privatlivspolitik: document.getElementById("samtykke").checked
     }
 
+    submitBtn.disabled = true
+    message.textContent = ""
+
     const { error } = await supabaseClient
       .from("signups")
       .insert([data])
 
     if (error) {
       console.error(error)
+      submitBtn.disabled = false
 
       if (error.code === "23505") {
         message.textContent = "Denne email er allerede skrevet op."
