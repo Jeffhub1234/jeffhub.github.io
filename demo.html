@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Demo – Musiclinq</title>
+  <meta name="description" content="Se hvordan Musiclinq kommer til at se ud. Demo med opdigtede profiler.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,12 +17,15 @@
       --card: #f7f3ea;
       --ink: #161513;
       --muted: #6b665d;
+      --soft: #c9c2b4;
       --accent: #2f4fd1;
+      --accent-2: #ffcf3f;
       --line: #161513;
     }
 
     * { box-sizing: border-box; }
 
+    html { scroll-behavior: smooth; }
     html, body { margin: 0; }
 
     body {
@@ -33,146 +37,394 @@
       min-height: 100vh;
     }
 
-    a { color: var(--ink); }
+    a { color: inherit; }
 
-    .wrap {
-      max-width: 980px;
+    button { font: inherit; color: inherit; }
+
+    .container {
+      max-width: 1120px;
       margin: 0 auto;
-      padding: 48px 20px 80px;
-    }
-
-    .top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      font-family: "DM Mono", monospace;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      border-bottom: 2px solid var(--line);
-      padding-bottom: 10px;
-      margin-bottom: 20px;
-    }
-
-    .top a { text-decoration: none; }
-    .top a:hover { color: var(--accent); }
-
-    .demo-banner {
-      font-family: "DM Mono", monospace;
-      font-size: 13px;
-      background: var(--ink);
-      color: var(--paper);
-      padding: 10px 14px;
-      margin-bottom: 36px;
-    }
-
-    .demo-banner a { color: var(--paper); }
-
-    h1 {
-      font-stretch: 62%;
-      font-weight: 900;
-      font-size: clamp(48px, 11vw, 96px);
-      line-height: 0.88;
-      letter-spacing: -0.02em;
-      text-transform: uppercase;
-      margin: 0 0 14px;
-    }
-
-    h2 {
-      font-stretch: 70%;
-      font-weight: 900;
-      font-size: 32px;
-      line-height: 1;
-      text-transform: uppercase;
-      margin: 0 0 18px;
-    }
-
-    .lead {
-      font-size: 19px;
-      max-width: 36ch;
-      margin: 0 0 28px;
+      padding: 0 20px;
     }
 
     .mono {
       font-family: "DM Mono", monospace;
       font-size: 12px;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--muted);
+      letter-spacing: 0.08em;
     }
 
-    /* Søgning og filtre */
-    .search {
-      width: 100%;
+    /* ---------- Demo-bånd ---------- */
+    .demo-strip {
+      background: var(--accent-2);
+      border-bottom: 2px solid var(--ink);
+      font-family: "DM Mono", monospace;
+      font-size: 13px;
+      padding: 8px 0;
+      text-align: center;
+    }
+
+    .demo-strip a { font-weight: 500; }
+
+    /* ---------- Header ---------- */
+    .site-header {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .site-header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding-top: 18px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid #3a3833;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      font-weight: 900;
+      font-stretch: 62%;
+      font-size: 28px;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .badge-demo {
+      background: var(--accent-2);
+      color: var(--ink);
+      padding: 2px 6px;
+      font-size: 11px;
+    }
+
+    .header-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .header-links a { text-decoration: none; }
+    .header-links a:hover { color: var(--accent-2); }
+
+    .pill {
+      border: 2px solid var(--paper);
+      padding: 6px 12px;
+    }
+
+    .pill:hover { border-color: var(--accent-2); }
+
+    /* ---------- Hero med søgning ---------- */
+    .hero {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 48px 0 56px;
+    }
+
+    h1 {
+      font-stretch: 62%;
+      font-weight: 900;
+      font-size: clamp(52px, 8.5vw, 104px);
+      line-height: 0.86;
+      letter-spacing: -0.015em;
+      text-transform: uppercase;
+      margin: 0 0 18px;
+      max-width: 12ch;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--accent-2);
+    }
+
+    .hero-lead {
+      font-size: 19px;
+      color: #ddd6c8;
+      max-width: 44ch;
+      margin: 0 0 28px;
+    }
+
+    .searchbar {
+      display: flex;
+      max-width: 720px;
+      background: var(--paper);
+      border: 2px solid var(--paper);
+      box-shadow: 8px 8px 0 var(--accent);
+    }
+
+    .searchbar input {
+      flex: 1;
+      min-width: 0;
       font: inherit;
-      font-size: 20px;
+      font-size: 19px;
       color: var(--ink);
       background: transparent;
       border: 0;
-      border-bottom: 2px solid var(--line);
-      border-radius: 0;
-      padding: 8px 0 10px;
+      padding: 14px 16px;
       outline: none;
-      margin-bottom: 18px;
     }
 
-    .search::placeholder { color: #9a948a; }
-    .search:focus { border-bottom-color: var(--accent); }
+    .searchbar input::placeholder { color: #9a948a; }
 
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 28px;
-    }
-
-    .chip {
-      font-family: "DM Mono", monospace;
-      font-size: 13px;
-      color: var(--ink);
-      background: transparent;
-      border: 2px solid var(--line);
-      padding: 6px 12px;
+    .searchbar button {
+      flex: none;
+      font-weight: 800;
+      font-stretch: 80%;
+      font-size: 18px;
+      text-transform: uppercase;
+      color: var(--paper);
+      background: var(--ink);
+      border: 0;
+      padding: 0 24px;
       cursor: pointer;
     }
 
-    .chip:hover { border-color: var(--accent); color: var(--accent); }
+    .searchbar button:hover { background: var(--accent); }
 
-    .chip[aria-pressed="true"] {
-      background: var(--ink);
+    .popular {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-top: 22px;
+      color: var(--soft);
+    }
+
+    .popular button {
+      font-family: "DM Mono", monospace;
+      font-size: 13px;
       color: var(--paper);
-      border-color: var(--ink);
+      background: transparent;
+      border: 1px solid #55524b;
+      padding: 4px 10px;
+      cursor: pointer;
     }
 
-    .result-count { margin-bottom: 12px; }
+    .popular button:hover { border-color: var(--accent-2); color: var(--accent-2); }
 
-    /* Profilkort */
-    .grid {
+    /* ---------- Kategorier ---------- */
+    section.block { padding-top: 64px; }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+    }
+
+    h2.big {
+      font-stretch: 62%;
+      font-weight: 900;
+      font-size: clamp(36px, 5.5vw, 56px);
+      line-height: 0.9;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .section-head .mono { color: var(--muted); }
+
+    .cats {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
     }
 
-    .card {
+    .cat {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      justify-content: space-between;
+      gap: 18px;
+      min-height: 112px;
       text-align: left;
-      font: inherit;
-      color: var(--ink);
       background: var(--card);
       border: 2px solid var(--line);
-      padding: 18px;
+      padding: 14px 16px;
       cursor: pointer;
       transition: transform 0.12s, box-shadow 0.12s;
     }
 
-    .card:hover,
-    .card:focus-visible {
+    .cat:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 5px 5px 0 var(--ink);
+    }
+
+    .cat[aria-pressed="true"] {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .cat-icon { font-size: 24px; line-height: 1; }
+
+    .cat-name {
+      font-weight: 900;
+      font-stretch: 75%;
+      font-size: 21px;
+      line-height: 1;
+    }
+
+    .cat-count { color: var(--muted); margin-top: 4px; }
+    .cat[aria-pressed="true"] .cat-count { color: var(--soft); }
+
+    /* ---------- Værktøjslinje ---------- */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: "DM Mono", monospace;
+      font-size: 13px;
+      border: 2px solid var(--line);
+      padding: 6px 12px;
+      cursor: pointer;
+      background: transparent;
+    }
+
+    .toggle[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+    .select {
+      font-family: "DM Mono", monospace;
+      font-size: 13px;
+      color: var(--ink);
+      background-color: transparent;
+      border: 2px solid var(--line);
+      border-radius: 0;
+      padding: 7px 30px 7px 12px;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%),
+                        linear-gradient(135deg, var(--ink) 50%, transparent 50%);
+      background-position: calc(100% - 14px) 52%, calc(100% - 9px) 52%;
+      background-size: 5px 5px;
+      background-repeat: no-repeat;
+    }
+
+    .active-query {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: "DM Mono", monospace;
+      font-size: 13px;
+      background: var(--accent-2);
+      border: 2px solid var(--ink);
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    .count { color: var(--muted); }
+
+    /* ---------- Profilkort ---------- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: var(--card);
+      border: 2px solid var(--line);
+      transition: transform 0.12s, box-shadow 0.12s;
+    }
+
+    .card:hover {
       transform: translate(-3px, -3px);
       box-shadow: 6px 6px 0 var(--ink);
-      outline: none;
+    }
+
+    .card-cover {
+      position: relative;
+      height: 96px;
+      border-bottom: 2px solid var(--line);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 10px 12px;
+      overflow: hidden;
+    }
+
+    .cover-wave {
+      position: absolute;
+      inset: 14px 60px 14px 12px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      opacity: 0.45;
+    }
+
+    .cover-wave span { flex: 1; background: var(--paper); min-height: 3px; }
+    .card.playing .cover-wave { opacity: 1; }
+    .card.playing .cover-wave span { background: var(--accent-2); }
+
+    .mini-play {
+      position: relative;
+      z-index: 2;
+      margin-left: auto;
+      width: 40px;
+      height: 40px;
+      border: 2px solid var(--ink);
+      background: var(--paper);
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .mini-play:hover { background: var(--accent-2); }
+
+    .card-badges {
+      position: absolute;
+      left: 12px;
+      top: 10px;
+      z-index: 2;
+      display: flex;
+      gap: 6px;
+    }
+
+    .badge {
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: var(--paper);
+      color: var(--ink);
+      border: 1px solid var(--ink);
+      padding: 2px 6px;
+    }
+
+    .badge.top { background: var(--accent-2); }
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 16px;
+      flex: 1;
     }
 
     .card-head {
@@ -183,18 +435,19 @@
 
     .avatar {
       flex: none;
-      width: 52px;
-      height: 52px;
+      width: 48px;
+      height: 48px;
       display: grid;
       place-content: center;
       font-weight: 900;
       font-stretch: 70%;
-      font-size: 22px;
+      font-size: 20px;
       color: var(--paper);
       border: 2px solid var(--line);
+      margin-top: -36px;
+      position: relative;
+      z-index: 2;
     }
-
-    .avatar.big { width: 76px; height: 76px; font-size: 32px; }
 
     .name {
       font-weight: 800;
@@ -202,6 +455,26 @@
       line-height: 1.15;
       margin: 0;
     }
+
+    /* Hele kortet kan klikkes via navnet */
+    .name button {
+      font-weight: inherit;
+      text-align: left;
+      background: none;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .name button::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .name button:focus-visible { outline: none; }
+    .card:has(.name button:focus-visible) { outline: 3px solid var(--accent); outline-offset: 3px; }
 
     .role { font-size: 14px; color: var(--muted); margin: 2px 0 0; }
 
@@ -221,74 +494,129 @@
       padding: 2px 7px;
     }
 
+    .meta {
+      display: flex;
+      gap: 14px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
     .card-foot {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       margin-top: auto;
       padding-top: 12px;
-      border-top: 1px solid #cfc7b8;
+      border-top: 1px solid var(--soft);
       font-size: 15px;
     }
 
-    .price { font-weight: 800; }
+    .price { font-weight: 800; font-size: 18px; }
     .rating { font-family: "DM Mono", monospace; font-size: 13px; }
 
     .empty {
       grid-column: 1 / -1;
       border: 2px dashed var(--muted);
-      padding: 28px;
+      padding: 36px;
       text-align: center;
       color: var(--muted);
     }
 
-    /* Sådan virker det */
-    .how {
-      margin-top: 72px;
-      border-top: 2px solid var(--line);
-      padding-top: 28px;
-    }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      counter-reset: step;
-    }
-
-    .steps li { counter-increment: step; }
-
-    .steps li::before {
-      content: "0" counter(step);
-      display: block;
+    .empty button {
+      margin-top: 12px;
       font-family: "DM Mono", monospace;
       font-size: 13px;
-      color: var(--accent);
+      border: 2px solid var(--ink);
+      background: transparent;
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+
+    /* ---------- Post et projekt ---------- */
+    .post {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 0;
+      border: 2px solid var(--line);
+    }
+
+    .post-intro {
+      background: var(--accent);
+      color: var(--paper);
+      padding: 32px;
+    }
+
+    .post-intro h3 {
+      font-stretch: 62%;
+      font-weight: 900;
+      font-size: 44px;
+      line-height: 0.92;
+      text-transform: uppercase;
+      margin: 0 0 14px;
+    }
+
+    .post-intro p { margin: 0; color: #dfe4ff; }
+
+    .post-form {
+      background: var(--card);
+      padding: 28px 32px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .post-form label {
+      display: block;
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
       margin-bottom: 6px;
     }
 
-    .steps strong { display: block; font-size: 19px; margin-bottom: 4px; }
-    .steps p { margin: 0; color: var(--muted); font-size: 15px; }
-
-    /* Opfordring til at skrive sig op */
-    .cta {
-      margin-top: 64px;
-      background: var(--ink);
-      color: var(--paper);
-      padding: 32px 28px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
+    .post-form input,
+    .post-form select {
+      width: 100%;
+      font: inherit;
+      color: var(--ink);
+      background: transparent;
+      border: 0;
+      border-bottom: 2px solid var(--line);
+      border-radius: 0;
+      padding: 6px 0 8px;
+      outline: none;
     }
 
-    .cta h2 { margin: 0 0 6px; }
-    .cta p { margin: 0; color: #c9c2b4; }
+    .post-form input:focus,
+    .post-form select:focus { border-bottom-color: var(--accent); }
 
+    .post-form .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* ---------- Tillid ---------- */
+    .trust {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 2px solid var(--line);
+    }
+
+    .trust div { padding: 22px; }
+    .trust div + div { border-left: 2px solid var(--line); }
+
+    .trust .ico {
+      display: block;
+      font-size: 26px;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .trust strong { display: block; font-size: 18px; margin-bottom: 4px; }
+    .trust p { margin: 0; font-size: 14px; color: var(--muted); }
+
+    /* ---------- Knapper ---------- */
     .btn {
       display: inline-block;
       font: inherit;
@@ -298,6 +626,7 @@
       text-transform: uppercase;
       letter-spacing: 0.02em;
       text-decoration: none;
+      text-align: center;
       color: var(--paper);
       background: var(--ink);
       border: 2px solid var(--ink);
@@ -308,51 +637,130 @@
 
     .btn:hover { background: var(--accent); border-color: var(--accent); }
 
-    .cta .btn { color: var(--ink); background: var(--paper); border-color: var(--paper); }
-    .cta .btn:hover { color: var(--paper); background: var(--accent); border-color: var(--accent); }
+    .note {
+      font-family: "DM Mono", monospace;
+      font-size: 13px;
+      margin: 0;
+    }
 
-    /* Profilvisning */
+    .note:not(:empty)::before { content: "→ "; color: var(--accent); }
+
+    /* ---------- Afslutning ---------- */
+    .final {
+      margin-top: 88px;
+      background: var(--accent);
+      color: var(--paper);
+      padding: 56px 0;
+      border-top: 2px solid var(--ink);
+    }
+
+    .final .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .final h2 {
+      font-stretch: 62%;
+      font-weight: 900;
+      font-size: clamp(40px, 6.5vw, 72px);
+      line-height: 0.9;
+      text-transform: uppercase;
+      margin: 0 0 10px;
+    }
+
+    .final p { margin: 0; color: #dfe4ff; max-width: 46ch; }
+
+    .final .btn { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+    .final .btn:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+    footer {
+      padding: 14px 0 48px;
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* ---------- Profilvisning ---------- */
     dialog {
-      width: min(640px, calc(100% - 32px));
+      width: min(960px, calc(100% - 32px));
       max-height: calc(100vh - 48px);
       padding: 0;
       color: var(--ink);
       background: var(--paper);
       border: 2px solid var(--line);
-      box-shadow: 10px 10px 0 var(--ink);
+      box-shadow: 12px 12px 0 var(--accent);
     }
 
-    dialog::backdrop { background: rgba(22, 21, 19, 0.55); }
+    dialog::backdrop { background: rgba(22, 21, 19, 0.6); }
 
-    .dlg-inner { padding: 28px; }
-
-    .dlg-close {
+    .dlg-top {
       position: sticky;
       top: 0;
-      float: right;
-      font-family: "DM Mono", monospace;
-      font-size: 13px;
-      color: var(--ink);
-      background: var(--paper);
-      border: 2px solid var(--line);
-      padding: 4px 10px;
-      cursor: pointer;
-      margin: 12px 12px 0 0;
+      z-index: 5;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 10px 16px;
     }
 
-    .dlg-close:hover { color: var(--accent); border-color: var(--accent); }
+    .dlg-close {
+      font-family: "DM Mono", monospace;
+      font-size: 13px;
+      background: transparent;
+      border: 2px solid var(--paper);
+      padding: 3px 10px;
+      cursor: pointer;
+    }
+
+    .dlg-close:hover { border-color: var(--accent-2); color: var(--accent-2); }
+
+    .dlg-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 32px;
+      padding: 28px;
+      align-items: start;
+    }
 
     .dlg-head {
       display: flex;
       gap: 16px;
       align-items: center;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
-    .dlg-head .name { font-size: 28px; font-stretch: 80%; }
+    .dlg-head .avatar {
+      width: 80px;
+      height: 80px;
+      font-size: 34px;
+      margin-top: 0;
+    }
+
+    .dlg-head .name { font-size: 32px; font-stretch: 75%; font-weight: 900; }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 2px solid var(--line);
+      margin: 18px 0;
+    }
+
+    .stats div { padding: 10px 12px; }
+    .stats div + div { border-left: 2px solid var(--line); }
+    .stats b { display: block; font-size: 18px; }
+    .stats span { font-size: 12px; color: var(--muted); }
 
     .dlg-section { margin-top: 26px; }
-    .dlg-section .mono { margin-bottom: 10px; }
+    .dlg-section > .mono { color: var(--muted); margin: 0 0 10px; }
 
     .player {
       display: flex;
@@ -360,7 +768,11 @@
       gap: 12px;
       border: 2px solid var(--line);
       padding: 10px 12px;
+      margin-bottom: 8px;
     }
+
+    .player .title { font-size: 14px; font-weight: 700; min-width: 0; }
+    .player .title small { display: block; font-weight: 400; color: var(--muted); }
 
     .play {
       flex: none;
@@ -370,404 +782,708 @@
       background: var(--ink);
       color: var(--paper);
       cursor: pointer;
-      font-size: 14px;
+      font-size: 13px;
     }
 
     .wave {
       flex: 1;
-      height: 30px;
+      height: 28px;
       display: flex;
       align-items: center;
       gap: 2px;
+      min-width: 60px;
     }
 
-    .wave span {
-      flex: 1;
-      background: var(--muted);
-      min-height: 3px;
-    }
-
-    .wave.playing span { background: var(--accent); }
-
-    .packages { display: grid; gap: 10px; }
-
-    .package {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      align-items: flex-start;
-      border: 2px solid var(--line);
-      padding: 12px 14px;
-      cursor: pointer;
-    }
-
-    .package input { position: absolute; opacity: 0; }
-    .package:has(input:checked) { background: var(--ink); color: var(--paper); }
-    .package:has(input:checked) .pkg-desc { color: #c9c2b4; }
-    .package:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
-
-    .pkg-name { font-weight: 800; }
-    .pkg-desc { font-size: 14px; color: var(--muted); }
-    .pkg-price { font-weight: 800; white-space: nowrap; }
+    .wave span { flex: 1; background: var(--soft); min-height: 3px; }
+    .player.playing .wave span { background: var(--accent); }
 
     .review {
       border-left: 3px solid var(--accent);
       padding: 2px 0 2px 12px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       font-size: 15px;
     }
 
-    .review .mono { margin: 4px 0 0; }
+    .review .mono { margin: 4px 0 0; color: var(--muted); }
 
-    .dlg-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      align-items: center;
-      margin-top: 26px;
-      padding-top: 20px;
-      border-top: 2px solid var(--line);
+    /* Pakkeboks */
+    .order {
+      position: sticky;
+      top: 64px;
+      border: 2px solid var(--line);
+      background: var(--card);
     }
 
-    .demo-note {
-      font-family: "DM Mono", monospace;
-      font-size: 14px;
-      margin: 14px 0 0;
+    .tabs {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 1fr;
+      border-bottom: 2px solid var(--line);
     }
 
-    .demo-note:not(:empty)::before { content: "→ "; color: var(--accent); }
-
-    footer {
-      margin-top: 40px;
-      padding-top: 10px;
-      border-top: 2px solid var(--line);
+    .tab {
       font-family: "DM Mono", monospace;
       font-size: 12px;
-      color: var(--muted);
+      text-transform: uppercase;
+      background: transparent;
+      border: 0;
+      padding: 12px 6px;
+      cursor: pointer;
     }
 
-    @media (max-width: 700px) {
-      .wrap { padding-top: 28px; }
-      .steps { grid-template-columns: 1fr; }
-      .dlg-inner { padding: 20px; }
-      .btn { width: 100%; text-align: center; }
+    .tab + .tab { border-left: 2px solid var(--line); }
+    .tab[aria-selected="true"] { background: var(--ink); color: var(--paper); }
+
+    .order-body { padding: 20px; }
+
+    .order-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+
+    .order-title b { font-size: 19px; }
+    .order-title .price { font-size: 24px; white-space: nowrap; }
+
+    .order-desc { color: var(--muted); font-size: 15px; margin: 0 0 14px; }
+
+    .includes {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 18px;
+      display: grid;
+      gap: 6px;
+      font-size: 15px;
+    }
+
+    .includes li::before { content: "✓ "; color: var(--accent); font-weight: 800; }
+
+    .order-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .order .btn { width: 100%; }
+
+    .order .secondary {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+      font-family: "DM Mono", monospace;
+      font-size: 13px;
+      background: transparent;
+      border: 2px solid var(--ink);
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .order .secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    .order .note { margin-top: 14px; }
+
+    /* ---------- Mobil ---------- */
+    @media (max-width: 900px) {
+      .cats { grid-template-columns: repeat(2, 1fr); }
+      .post { grid-template-columns: 1fr; }
+      .trust { grid-template-columns: 1fr 1fr; }
+      .trust div:nth-child(3) { border-left: 0; }
+      .trust div:nth-child(n+3) { border-top: 2px solid var(--line); }
+      .dlg-grid { grid-template-columns: 1fr; }
+      .order { position: static; }
+    }
+
+    @media (max-width: 520px) {
+      .header-links .hide-sm { display: none; }
+      .hero { padding-top: 32px; }
+      .searchbar { box-shadow: 5px 5px 0 var(--accent); }
+      .searchbar button { padding: 0 14px; font-size: 15px; }
+      .section-head { flex-direction: column; align-items: start; }
+      .cat { min-height: 96px; }
+      .grid { grid-template-columns: 1fr; }
+      .post-intro, .post-form { padding: 22px; }
+      .post-form .row { grid-template-columns: 1fr; }
+      .trust { grid-template-columns: 1fr; }
+      .trust div + div { border-left: 0; border-top: 2px solid var(--line); }
+      .dlg-grid { padding: 18px; }
+      .dlg-head .name { font-size: 26px; }
+      .final .btn { width: 100%; }
     }
   </style>
 </head>
 
 <body>
-  <main class="wrap">
 
-    <div class="top">
-      <a href="index.html">Musiclinq</a>
-      <span>Demo</span>
-    </div>
+  <div class="demo-strip">
+    Demo – alle profiler er opdigtede, og intet kan købes endnu.
+    <a href="index.html#tilmeld">Skriv dig op til ventelisten</a>
+  </div>
 
-    <p class="demo-banner">
-      DEMO · Sådan kan Musiclinq komme til at se ud. Alle profiler er opdigtede, og intet kan købes endnu.
-      <a href="index.html">Skriv dig op til ventelisten</a>.
-    </p>
-
-    <h1>Find folk til din musik</h1>
-    <p class="lead">Producere, lydteknikere, undervisere og musikere – samlet ét sted.</p>
-
-    <input class="search" id="search" type="search" placeholder="Søg fx “mix”, “guitar” eller “Aarhus”" aria-label="Søg">
-
-    <div class="chips" id="chips" role="group" aria-label="Kategorier"></div>
-
-    <p class="mono result-count" id="count"></p>
-    <div class="grid" id="grid"></div>
-
-    <section class="how">
-      <h2>Sådan virker det</h2>
-      <ol class="steps">
-        <li>
-          <strong>Find den rigtige</strong>
-          <p>Søg efter ydelse, genre eller by, og lyt til tidligere arbejde direkte på profilen.</p>
-        </li>
-        <li>
-          <strong>Send en forespørgsel</strong>
-          <p>Vælg en pakke, beskriv dit projekt, og aftal detaljerne i en chat.</p>
-        </li>
-        <li>
-          <strong>Betal sikkert</strong>
-          <p>Pengene udbetales først, når du har modtaget og godkendt arbejdet.</p>
-        </li>
-      </ol>
-    </section>
-
-    <section class="cta">
-      <div>
-        <h2>Vil du være med fra start?</h2>
-        <p>Skriv dig op, uanset om du vil sælge dine ydelser eller finde folk til dine projekter.</p>
+  <header class="site-header">
+    <div class="container">
+      <div class="brand">
+        <a class="logo" href="index.html">Musiclinq</a>
+        <span class="badge-demo mono">Demo</span>
       </div>
-      <a class="btn" href="index.html">Skriv mig op</a>
+      <nav class="header-links mono">
+        <a class="hide-sm" href="#projekt">Post et projekt</a>
+        <a class="pill" href="index.html#tilmeld">Skriv dig op</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Find folk til <em>din musik</em></h1>
+      <p class="hero-lead">Producere, mixteknikere, sangere, musikere og undervisere – med lydklip, faste priser og ægte anmeldelser.</p>
+
+      <form class="searchbar" id="searchForm" role="search">
+        <input id="search" type="search" placeholder="Hvad har du brug for? Fx “mix af min single”" aria-label="Søg">
+        <button type="submit">Søg</button>
+      </form>
+
+      <div class="popular">
+        <span class="mono">Populært:</span>
+        <button type="button" data-q="mix">Mix</button>
+        <button type="button" data-q="sangtimer">Sangtimer</button>
+        <button type="button" data-q="trommer">Trommer</button>
+        <button type="button" data-q="beats">Beats</button>
+        <button type="button" data-q="aarhus">Aarhus</button>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+
+    <section class="block" id="kategorier">
+      <div class="section-head">
+        <h2 class="big">Udforsk kategorier</h2>
+        <span class="mono">Klik for at filtrere</span>
+      </div>
+      <div class="cats" id="cats"></div>
     </section>
 
-    <footer>&copy; Musiclinq · Demo med opdigtede profiler</footer>
+    <section class="block" id="profiler">
+      <div class="section-head">
+        <h2 class="big" id="results-title">Alle profiler</h2>
+        <span class="mono count" id="count"></span>
+      </div>
+
+      <div class="toolbar">
+        <div class="filters">
+          <button class="toggle" type="button" id="onlineToggle" aria-pressed="false">◎ Kan arbejde online</button>
+          <select class="select" id="maxPrice" aria-label="Maks. pris">
+            <option value="">Alle priser</option>
+            <option value="500">Fra under 500 kr.</option>
+            <option value="1000">Fra under 1.000 kr.</option>
+            <option value="2000">Fra under 2.000 kr.</option>
+          </select>
+          <span id="activeQuery"></span>
+        </div>
+        <select class="select" id="sort" aria-label="Sortér">
+          <option value="anbefalet">Sortér: Anbefalet</option>
+          <option value="pris">Sortér: Laveste pris</option>
+          <option value="rating">Sortér: Bedste bedømmelse</option>
+          <option value="hurtig">Sortér: Hurtigste levering</option>
+        </select>
+      </div>
+
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <section class="block" id="projekt">
+      <div class="post">
+        <div class="post-intro">
+          <p class="mono" style="color:var(--accent-2);margin:0 0 12px">Ved du ikke, hvem du skal vælge?</p>
+          <h3>Lad folk komme til dig</h3>
+          <p>Beskriv dit projekt, så sender de rigtige profiler dig et tilbud. Du vælger selv, hvem du vil arbejde med.</p>
+        </div>
+        <form class="post-form" id="postForm">
+          <div>
+            <label for="p-what">Hvad har du brug for?</label>
+            <input id="p-what" type="text" placeholder="Fx trommer til en indie-single">
+          </div>
+          <div class="row">
+            <div>
+              <label for="p-cat">Kategori</label>
+              <select id="p-cat"></select>
+            </div>
+            <div>
+              <label for="p-budget">Budget</label>
+              <select id="p-budget">
+                <option>Under 1.000 kr.</option>
+                <option>1.000–3.000 kr.</option>
+                <option>3.000–7.500 kr.</option>
+                <option>Over 7.500 kr.</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn" type="submit">Post projekt</button>
+          <p class="note" id="postNote" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="section-head">
+        <h2 class="big">Tryghed for begge parter</h2>
+        <span class="mono">Det vil Musiclinq tilbyde</span>
+      </div>
+      <div class="trust">
+        <div>
+          <span class="ico">🔒</span>
+          <strong>Sikker betaling</strong>
+          <p>Pengene udbetales først, når du har godkendt det leverede.</p>
+        </div>
+        <div>
+          <span class="ico">★</span>
+          <strong>Ægte anmeldelser</strong>
+          <p>Kun folk, der har købt en ydelse, kan anmelde den.</p>
+        </div>
+        <div>
+          <span class="ico">₍kr₎</span>
+          <strong>Faste priser</strong>
+          <p>Pakker med klar pris og indhold – ingen overraskelser.</p>
+        </div>
+        <div>
+          <span class="ico">♫</span>
+          <strong>Hør før du vælger</strong>
+          <p>Lyt til tidligere arbejde direkte på profilen.</p>
+        </div>
+      </div>
+    </section>
+
   </main>
 
+  <section class="final">
+    <div class="container">
+      <div>
+        <h2>Kan du lide det, du ser?</h2>
+        <p>Skriv dig op – uanset om du vil finde folk til din musik eller sælge dine egne ydelser.</p>
+      </div>
+      <a class="btn" href="index.html#tilmeld">Skriv mig op</a>
+    </div>
+  </section>
+
+  <div class="container">
+    <footer>
+      <span>&copy; Musiclinq · Demo med opdigtede profiler</span>
+      <a href="index.html#privatlivspolitik">Privatlivspolitik</a>
+    </footer>
+  </div>
+
   <dialog id="profile" aria-labelledby="dlg-name">
-    <button class="dlg-close" id="close" type="button">Luk ✕</button>
-    <div class="dlg-inner" id="dlg-body"></div>
+    <div class="dlg-top">
+      <span class="mono">Profil · Demo</span>
+      <button class="dlg-close" id="close" type="button">Luk ✕</button>
+    </div>
+    <div id="dlg-body"></div>
   </dialog>
 
 <script>
   // Opdigtede profiler – kun til demo
   const profiles = [
     {
-      name: "Sofie Kjær", role: "Mix- og masteringtekniker", city: "København", color: "#2f4fd1",
-      cats: ["Mix & master"], genres: ["Pop", "Indie", "Elektronisk"], rating: 4.9, reviews: 38,
+      name: "Sofie Kjær", role: "Mix- og masteringtekniker", city: "København", online: true, color: "#2f4fd1",
+      cats: ["Mix & master"], genres: ["Pop", "Indie", "Elektronisk"], rating: 4.9, reviews: 38, response: "1 time", jobs: 112, top: true,
       bio: "Har mixet for danske indie- og popnavne de sidste otte år. Arbejder analogt-hybrid i eget studie på Nørrebro.",
+      tracks: [["Natlys – indie-pop", "Mix + master"], ["Sydhavn – elektronisk", "Master"]],
       packages: [
-        ["Master af én sang", "Klar til streaming, inkl. én revision", 450],
-        ["Mix + master", "Op til 40 spor, tre revisioner", 1800],
-        ["EP-pakke", "Mix og master af 4–6 numre", 7500]
+        ["Master", "Master af én sang", "Klar til streaming på alle platforme.", 450, 2, ["1 sang", "WAV + MP3", "1 revision"]],
+        ["Mix + master", "Mix og master af én sang", "Op til 40 spor. Du får et mix, der kan stå ved siden af dine referencer.", 1800, 5, ["Op til 40 spor", "3 revisioner", "Instrumental version"]],
+        ["EP", "Mix og master af en EP", "4–6 numre med en ensartet lyd hele vejen igennem.", 7500, 14, ["4–6 sange", "3 revisioner pr. sang", "Instrumental versioner"]]
       ],
-      reviewsList: [["Mit nummer lyder endelig som det, jeg hørte i hovedet. Hurtig og meget lydhør.", "Mads, singer-songwriter"]]
+      reviewsList: [["Mit nummer lyder endelig som det, jeg hørte i hovedet. Hurtig og meget lydhør.", "Mads, singer-songwriter"], ["Tredje gang jeg bruger Sofie. Hun forstår bare, hvad sangen skal.", "Band fra Aarhus"]]
     },
     {
-      name: "Ahmed Rashid", role: "Producer og beatmaker", city: "Aarhus", color: "#b5432f",
-      cats: ["Produktion"], genres: ["Hiphop", "R&B", "Afrobeats"], rating: 4.8, reviews: 52,
+      name: "Ahmed Rashid", role: "Producer og beatmaker", city: "Aarhus", online: true, color: "#b5432f",
+      cats: ["Produktion"], genres: ["Hiphop", "R&B", "Afrobeats"], rating: 4.8, reviews: 52, response: "3 timer", jobs: 140, top: true,
       bio: "Laver beats og fulde produktioner. Kan både levere færdige beats og bygge et nummer op omkring din idé.",
+      tracks: [["Sommer i byen – beats", "Produktion"], ["Gaden – hiphop", "Produktion"]],
       packages: [
-        ["Lease af beat", "Ikke-eksklusiv licens, MP3 + WAV", 300],
-        ["Eksklusivt beat", "Fulde rettigheder og stems", 2500],
-        ["Fuld produktion", "Fra idé til færdigt nummer, sessions i studiet", 6000]
+        ["Lease", "Lease af beat", "Ikke-eksklusiv licens til et af mine færdige beats.", 300, 1, ["MP3 + WAV", "Op til 10.000 streams"]],
+        ["Eksklusiv", "Eksklusivt beat", "Fulde rettigheder – beatet bliver kun dit.", 2500, 3, ["Fulde rettigheder", "Stems", "Ubegrænsede streams"]],
+        ["Produktion", "Fuld produktion", "Fra idé til færdigt nummer, sammen i studiet.", 6000, 21, ["2 studiesessioner", "Stems", "Arrangement"]]
       ],
       reviewsList: [["Forstod præcis, hvilken vibe jeg gik efter. Har allerede booket ham igen.", "Lina, rapper"]]
     },
     {
-      name: "Maja Lindholm", role: "Sangunderviser", city: "Online", color: "#3c7a4f",
-      cats: ["Undervisning", "Vokal"], genres: ["Pop", "Jazz", "Musical"], rating: 5.0, reviews: 24,
-      bio: "Uddannet fra Rytmisk Musikkonservatorium. Underviser begyndere og øvede i teknik, vejrtrækning og fremførelse.",
+      name: "Maja Lindholm", role: "Sangunderviser", city: "København", online: true, color: "#3c7a4f",
+      cats: ["Undervisning", "Vokal"], genres: ["Pop", "Jazz", "Musical"], rating: 5.0, reviews: 24, response: "2 timer", jobs: 60, top: true,
+      bio: "Uddannet fra Rytmisk Musikkonservatorium. Underviser begyndere og øvede i teknik, vejrtrækning og fremførelse. Sangtimer online eller i København.",
+      tracks: [["Fly Me to the Moon – jazz", "Egen vokal"]],
       packages: [
-        ["Prøvetime", "30 minutter online", 150],
-        ["Enkelt lektion", "60 minutter online eller i København", 450],
-        ["Forløb på 5 lektioner", "Med plan og øvelser mellem timerne", 2000]
+        ["Prøvetime", "Prøvetime", "30 minutter online, hvor vi finder ud af, hvad du skal arbejde med.", 150, 1, ["30 min.", "Online"]],
+        ["Lektion", "Enkelt lektion", "60 minutter online eller i København.", 450, 2, ["60 min.", "Øvelser til hjemmebrug"]],
+        ["Forløb", "Forløb på 5 lektioner", "Med plan og øvelser mellem timerne.", 2000, 7, ["5 × 60 min.", "Personlig plan", "Lydoptagelser"]]
       ],
       reviewsList: [["Jeg har fået meget mere styr på mine høje toner på bare en måned.", "Emil, hobbysanger"]]
     },
     {
-      name: "Jonas Brix", role: "Sessionsguitarist", city: "Odense", color: "#8a5a1f",
-      cats: ["Sessionsmusik"], genres: ["Rock", "Country", "Pop"], rating: 4.7, reviews: 19,
+      name: "Jonas Brix", role: "Sessionsguitarist", city: "Odense", online: true, color: "#8a5a1f",
+      cats: ["Sessionsmusik"], genres: ["Rock", "Country", "Pop"], rating: 4.7, reviews: 19, response: "5 timer", jobs: 45, top: false,
       bio: "Indspiller guitar til dit nummer hjemmefra og sender færdige spor. Elektrisk, akustisk og lap steel.",
+      tracks: [["Landevej – country", "Guitar og lap steel"]],
       packages: [
-        ["Ét guitarspor", "Indspillet efter dine noter eller reference", 600],
-        ["Fuldt arrangement", "Op til fire guitarspor", 1600]
+        ["Ét spor", "Ét guitarspor", "Indspillet efter dine noter eller en reference.", 600, 3, ["1 spor", "2 revisioner", "WAV-fil"]],
+        ["Arrangement", "Fuldt guitararrangement", "Op til fire guitarspor, der løfter hele nummeret.", 1600, 5, ["Op til 4 spor", "3 revisioner", "Flere bud på solo"]]
       ],
       reviewsList: [["Leverede tre forskellige bud på soloen dagen efter. Super professionelt.", "Band fra Vejle"]]
     },
     {
-      name: "Clara Vestergaard", role: "Sangskriver og topliner", city: "København", color: "#7a3c7a",
-      cats: ["Sangskrivning", "Vokal"], genres: ["Pop", "Dance"], rating: 4.9, reviews: 31,
+      name: "Clara Vestergaard", role: "Sangskriver og topliner", city: "København", online: true, color: "#7a3c7a",
+      cats: ["Sangskrivning", "Vokal"], genres: ["Pop", "Dance"], rating: 4.9, reviews: 31, response: "4 timer", jobs: 70, top: true,
       bio: "Skriver melodier og tekster på dansk og engelsk til producere og artister. Leverer demo med vokal.",
+      tracks: [["Ingen anden – pop", "Topline og demovokal"]],
       packages: [
-        ["Topline til dit beat", "Melodi og tekst, demovokal", 2000],
-        ["Co-write session", "4 timer i studiet eller online", 1500]
+        ["Co-write", "Co-write session", "4 timer i studiet eller online.", 1500, 4, ["4 timer", "Delt ophavsret"]],
+        ["Topline", "Topline til dit beat", "Melodi og tekst med demovokal.", 2000, 7, ["Melodi + tekst", "Demovokal", "1 revision"]]
       ],
       reviewsList: [["Hun fandt omkvædet, vi havde ledt efter i månedsvis.", "Ahmed, producer"]]
     },
     {
-      name: "Peter Holm", role: "Lydtekniker til livekoncerter", city: "Aalborg", color: "#2b6c7a",
-      cats: ["Live"], genres: ["Rock", "Pop", "Folk"], rating: 4.6, reviews: 14,
+      name: "Peter Holm", role: "Lydtekniker til livekoncerter", city: "Aalborg", online: false, color: "#2b6c7a",
+      cats: ["Live"], genres: ["Rock", "Pop", "Folk"], rating: 4.6, reviews: 14, response: "1 dag", jobs: 38, top: false,
       bio: "Klarer lyden til koncerter, festivaler og events i Nordjylland. Kan medbringe eget udstyr.",
+      tracks: [["Live fra Studenterhuset", "Livemix"]],
       packages: [
-        ["Koncert med husets anlæg", "Op til 6 timer", 2200],
-        ["Koncert med eget anlæg", "PA, mixer og mikrofoner til op til 200 gæster", 5500]
+        ["Husets anlæg", "Koncert med husets anlæg", "Op til 6 timer inkl. soundcheck.", 2200, 1, ["Op til 6 timer", "Soundcheck"]],
+        ["Eget anlæg", "Koncert med eget anlæg", "PA, mixer og mikrofoner til op til 200 gæster.", 5500, 1, ["PA + mixer", "Mikrofoner", "Op til 200 gæster"]]
       ],
       reviewsList: [["Lyden var skarp hele aftenen, og han var rolig, da en mikrofon døde.", "Spillested i Aalborg"]]
     },
     {
-      name: "Emma Thorsen", role: "Klaverunderviser", city: "Aarhus", color: "#a6732b",
-      cats: ["Undervisning"], genres: ["Klassisk", "Pop", "Akkompagnement"], rating: 4.9, reviews: 41,
+      name: "Emma Thorsen", role: "Klaverunderviser", city: "Aarhus", online: false, color: "#a6732b",
+      cats: ["Undervisning"], genres: ["Klassisk", "Pop", "Akkompagnement"], rating: 4.9, reviews: 41, response: "3 timer", jobs: 95, top: false,
       bio: "Underviser børn og voksne – fra første akkord til at akkompagnere sig selv. Fokus på at spille det, du har lyst til.",
+      tracks: [["Vals i a-mol", "Klaver"]],
       packages: [
-        ["Enkelt lektion", "45 minutter i Aarhus C", 350],
-        ["Månedsforløb", "4 lektioner", 1300]
+        ["Lektion", "Enkelt lektion", "45 minutter i Aarhus C.", 350, 2, ["45 min.", "Noder inkluderet"]],
+        ["Måned", "Månedsforløb", "4 lektioner med fast tid hver uge.", 1300, 7, ["4 × 45 min.", "Fast ugentlig tid"]]
       ],
       reviewsList: [["Min datter glæder sig til hver eneste time.", "Forælder"]]
     },
     {
-      name: "Oliver Sand", role: "Trommeslager", city: "Online", color: "#444038",
-      cats: ["Sessionsmusik"], genres: ["Indie", "Rock", "Funk"], rating: 4.8, reviews: 27,
+      name: "Oliver Sand", role: "Trommeslager", city: "Roskilde", online: true, color: "#444038",
+      cats: ["Sessionsmusik"], genres: ["Indie", "Rock", "Funk"], rating: 4.8, reviews: 27, response: "2 timer", jobs: 66, top: false,
       bio: "Indspiller rigtige trommer til dit nummer i eget studie. Leverer multitrack klar til mix.",
+      tracks: [["Tunnel – indie-rock", "Trommer"]],
       packages: [
-        ["Trommer til én sang", "Multitrack, to revisioner", 900],
-        ["Trommer til EP", "Op til 6 numre", 4500]
+        ["Én sang", "Trommer til én sang", "Multitrack klar til mix.", 900, 4, ["Multitrack", "2 revisioner"]],
+        ["EP", "Trommer til en EP", "Op til 6 numre indspillet i samme setup.", 4500, 10, ["Op til 6 sange", "Multitrack", "2 revisioner pr. sang"]]
       ],
       reviewsList: [["Det er en helt anden energi end programmerede trommer.", "Sofie, mixtekniker"]]
     },
     {
-      name: "Nikolaj Friis", role: "Producer og mixer", city: "København", color: "#2f4fd1",
-      cats: ["Produktion", "Mix & master"], genres: ["Elektronisk", "House", "Techno"], rating: 4.7, reviews: 22,
-      bio: "Producerer og mixer elektronisk musik til klub og streaming. Giver også feedback på dine egne tracks.",
+      name: "Nikolaj Friis", role: "Producer og mixer", city: "København", online: true, color: "#1f5fa6",
+      cats: ["Produktion", "Mix & master"], genres: ["Elektronisk", "House", "Techno"], rating: 4.7, reviews: 22, response: "6 timer", jobs: 50, top: false,
+      bio: "Producerer og mixer elektronisk musik til klub og streaming. Giver også feedback på dine egne tracks og beats.",
+      tracks: [["Afterhours – house", "Produktion og mix"]],
       packages: [
-        ["Feedback på dit track", "Skriftlig og video-gennemgang", 300],
-        ["Mixdown", "Klar til master, to revisioner", 1200],
-        ["Co-produktion", "Vi færdiggør dit track sammen", 3500]
+        ["Feedback", "Feedback på dit track", "Skriftlig og video-gennemgang af dit nummer.", 300, 2, ["Video-gennemgang", "Konkrete forslag"]],
+        ["Mixdown", "Mixdown", "Klar til master med to revisioner.", 1200, 5, ["2 revisioner", "Klar til master"]],
+        ["Co-produktion", "Co-produktion", "Vi færdiggør dit track sammen.", 3500, 10, ["Arrangement", "Mix", "Stems"]]
       ],
       reviewsList: [["Fik mit track klar til at sende til labels på en uge.", "DJ fra Roskilde"]]
     }
   ]
 
-  const categories = ["Alle", "Mix & master", "Produktion", "Undervisning", "Sessionsmusik", "Sangskrivning", "Vokal", "Live"]
+  const categories = [
+    ["Mix & master", "🎚"], ["Produktion", "🎛"], ["Undervisning", "🎓"], ["Sessionsmusik", "🎸"],
+    ["Sangskrivning", "✎"], ["Vokal", "🎤"], ["Live", "🔊"], ["Alle", "✦"]
+  ]
 
-  let activeCat = "Alle"
+  const state = { cat: "Alle", q: "", online: false, maxPrice: 0, sort: "anbefalet" }
 
-  const grid = document.getElementById("grid")
-  const count = document.getElementById("count")
-  const search = document.getElementById("search")
-  const chips = document.getElementById("chips")
-  const dialog = document.getElementById("profile")
-  const dlgBody = document.getElementById("dlg-body")
+  const $ = id => document.getElementById(id)
+  const grid = $("grid")
+  const dialog = $("profile")
+  const dlgBody = $("dlg-body")
 
   const kr = n => n.toLocaleString("da-DK") + " kr."
   const initials = name => name.split(" ").map(w => w[0]).join("")
-  const minPrice = p => Math.min(...p.packages.map(pk => pk[2]))
+  const minPrice = p => Math.min(...p.packages.map(pk => pk[3]))
+  const minDays = p => Math.min(...p.packages.map(pk => pk[4]))
+  const stars = r => r.toFixed(1).replace(".", ",")
+  const days = d => d === 1 ? "1 dag" : d + " dage"
 
   function esc(s) {
     return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]))
   }
 
-  categories.forEach(cat => {
-    const b = document.createElement("button")
-    b.className = "chip"
-    b.type = "button"
-    b.textContent = cat
-    b.setAttribute("aria-pressed", cat === activeCat)
-    b.addEventListener("click", () => {
-      activeCat = cat
-      chips.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c.textContent === cat))
-      render()
-    })
-    chips.appendChild(b)
-  })
-
-  function matches(p, q) {
-    if (activeCat !== "Alle" && !p.cats.includes(activeCat)) return false
-    if (!q) return true
-    const hay = [p.name, p.role, p.city, p.bio, ...p.cats, ...p.genres, ...p.packages.map(pk => pk[0])].join(" ").toLowerCase()
-    return q.split(/\s+/).every(word => hay.includes(word))
-  }
-
-  function render() {
-    const q = search.value.trim().toLowerCase()
-    const list = profiles.filter(p => matches(p, q))
-    count.textContent = list.length === 1 ? "1 profil" : list.length + " profiler"
-
-    if (!list.length) {
-      grid.innerHTML = '<div class="empty">Ingen profiler matcher din søgning. Prøv et andet ord eller en anden kategori.</div>'
-      return
-    }
-
-    grid.innerHTML = list.map(p => `
-      <button class="card" type="button" data-i="${profiles.indexOf(p)}">
-        <div class="card-head">
-          <div class="avatar" style="background:${p.color}">${esc(initials(p.name))}</div>
-          <div>
-            <p class="name">${esc(p.name)}</p>
-            <p class="role">${esc(p.role)} · ${esc(p.city)}</p>
-          </div>
-        </div>
-        <div class="tags">${p.genres.map(g => `<span class="tag">${esc(g)}</span>`).join("")}</div>
-        <div class="card-foot">
-          <span>Fra <span class="price">${kr(minPrice(p))}</span></span>
-          <span class="rating">★ ${p.rating.toFixed(1).replace(".", ",")} (${p.reviews})</span>
-        </div>
-      </button>
-    `).join("")
-  }
-
-  function waveBars() {
+  function waveBars(seed, n) {
     let bars = ""
-    for (let i = 0; i < 48; i++) {
-      const h = 15 + Math.round(Math.abs(Math.sin(i * 0.7) * 60 + Math.sin(i * 2.3) * 25))
+    for (let i = 0; i < n; i++) {
+      const h = 15 + Math.round(Math.abs(Math.sin(i * 0.7 + seed) * 55 + Math.sin(i * 2.3 + seed * 2) * 30))
       bars += `<span style="height:${Math.min(h, 100)}%"></span>`
     }
     return bars
   }
 
-  function openProfile(p) {
-    dlgBody.innerHTML = `
-      <div class="dlg-head">
-        <div class="avatar big" style="background:${p.color}">${esc(initials(p.name))}</div>
-        <div>
-          <p class="name" id="dlg-name">${esc(p.name)}</p>
-          <p class="role">${esc(p.role)} · ${esc(p.city)}</p>
-          <p class="rating">★ ${p.rating.toFixed(1).replace(".", ",")} · ${p.reviews} anmeldelser</p>
-        </div>
-      </div>
-      <p>${esc(p.bio)}</p>
-      <div class="tags">${[...p.cats, ...p.genres].map(g => `<span class="tag">${esc(g)}</span>`).join("")}</div>
+  // Kategorier
+  $("cats").innerHTML = categories.map(([name, icon]) => {
+    const n = name === "Alle" ? profiles.length : profiles.filter(p => p.cats.includes(name)).length
+    return `
+      <button class="cat" type="button" data-cat="${esc(name)}" aria-pressed="${name === state.cat}">
+        <span class="cat-icon" aria-hidden="true">${icon}</span>
+        <span>
+          <span class="cat-name">${esc(name === "Alle" ? "Alle kategorier" : name)}</span>
+          <span class="cat-count mono" style="display:block">${n} ${n === 1 ? "profil" : "profiler"}</span>
+        </span>
+      </button>`
+  }).join("")
 
-      <div class="dlg-section">
-        <p class="mono">Lyt til tidligere arbejde</p>
-        <div class="player">
-          <button class="play" type="button" id="play" aria-label="Afspil">▶</button>
-          <div class="wave" id="wave">${waveBars()}</div>
-          <span class="mono">2:48</span>
-        </div>
-      </div>
+  $("cats").addEventListener("click", e => {
+    const b = e.target.closest(".cat")
+    if (!b) return
+    state.cat = b.dataset.cat
+    render()
+    $("profiler").scrollIntoView({ behavior: "smooth" })
+  })
 
-      <div class="dlg-section">
-        <p class="mono">Vælg en pakke</p>
-        <div class="packages">
-          ${p.packages.map((pk, i) => `
-            <label class="package">
-              <input type="radio" name="pkg" ${i === 0 ? "checked" : ""}>
-              <span>
-                <span class="pkg-name">${esc(pk[0])}</span><br>
-                <span class="pkg-desc">${esc(pk[1])}</span>
-              </span>
-              <span class="pkg-price">${kr(pk[2])}</span>
-            </label>
-          `).join("")}
-        </div>
-      </div>
+  // Søgning
+  const synonyms = { sangtimer: "sangunderviser", sangtime: "sangunderviser", trommer: "trommeslager", beats: "beat" }
+  const stopwords = new Set(["af", "min", "mit", "mine", "til", "en", "et", "og", "jeg", "med", "for", "på", "fra", "der", "som", "har", "brug", "skal", "vil", "gerne", "søger", "ny", "nyt"])
 
-      <div class="dlg-section">
-        <p class="mono">Anmeldelser</p>
-        ${p.reviewsList.map(r => `
-          <div class="review">
-            “${esc(r[0])}”
-            <p class="mono">${esc(r[1])}</p>
+  function matches(p) {
+    if (state.cat !== "Alle" && !p.cats.includes(state.cat)) return false
+    if (state.online && !p.online) return false
+    if (state.maxPrice && minPrice(p) >= state.maxPrice) return false
+    if (!state.q) return true
+    const hay = [p.name, p.role, p.city, p.bio, p.online ? "online" : "", ...p.cats, ...p.genres, ...p.packages.map(pk => pk[1])]
+      .join(" ").toLowerCase().replace(/aa/g, "å")
+    const words = state.q.toLowerCase().replace(/aa/g, "å").split(/\s+/)
+      .filter(w => w.length > 1 && !stopwords.has(w))
+    if (!words.length) return true
+    return words.some(word => hay.includes(synonyms[word] || word))
+  }
+
+  function sorted(list) {
+    const s = [...list]
+    if (state.sort === "pris") s.sort((a, b) => minPrice(a) - minPrice(b))
+    if (state.sort === "rating") s.sort((a, b) => b.rating - a.rating || b.reviews - a.reviews)
+    if (state.sort === "hurtig") s.sort((a, b) => minDays(a) - minDays(b))
+    if (state.sort === "anbefalet") s.sort((a, b) => (b.top - a.top) || b.reviews * b.rating - a.reviews * a.rating)
+    return s
+  }
+
+  function render() {
+    document.querySelectorAll(".cat").forEach(c => c.setAttribute("aria-pressed", c.dataset.cat === state.cat))
+    $("results-title").textContent = state.cat === "Alle" ? "Alle profiler" : state.cat
+    $("activeQuery").innerHTML = state.q
+      ? `<button class="active-query" type="button" id="clearQ">“${esc(state.q)}” ✕</button>` : ""
+
+    const list = sorted(profiles.filter(matches))
+    $("count").textContent = list.length === 1 ? "1 profil" : list.length + " profiler"
+
+    if (!list.length) {
+      grid.innerHTML = `<div class="empty">Ingen profiler matcher – prøv et andet ord eller fjern et filter.<br><button type="button" id="reset">Nulstil filtre</button></div>`
+      return
+    }
+
+    grid.innerHTML = list.map(p => {
+      const i = profiles.indexOf(p)
+      return `
+      <article class="card" data-i="${i}">
+        <div class="card-cover" style="background:${p.color}">
+          <div class="card-badges">
+            ${p.top ? '<span class="badge top">Topbedømt</span>' : ""}
+            ${p.online ? '<span class="badge">Online</span>' : ""}
           </div>
-        `).join("")}
-      </div>
-
-      <div class="dlg-actions">
-        <button class="btn" type="button" id="request">Send forespørgsel</button>
-        <a href="index.html">Skriv dig op til ventelisten</a>
-      </div>
-      <p class="demo-note" id="note"></p>
-    `
-
-    const play = document.getElementById("play")
-    play.addEventListener("click", () => {
-      const playing = document.getElementById("wave").classList.toggle("playing")
-      play.textContent = playing ? "❚❚" : "▶"
-      play.setAttribute("aria-label", playing ? "Pause" : "Afspil")
-    })
-
-    document.getElementById("request").addEventListener("click", () => {
-      document.getElementById("note").innerHTML =
-        'Det her er kun en demo, så forespørgslen bliver ikke sendt. <a href="index.html">Skriv dig op</a>, så hører du fra os, når Musiclinq åbner.'
-    })
-
-    dialog.showModal()
-    dialog.scrollTop = 0
+          <div class="cover-wave" aria-hidden="true">${waveBars(i, 36)}</div>
+          <button class="mini-play" type="button" aria-label="Afspil lydklip fra ${esc(p.name)}">▶</button>
+        </div>
+        <div class="card-body">
+          <div class="card-head">
+            <div class="avatar" style="background:${p.color}">${esc(initials(p.name))}</div>
+            <div>
+              <p class="name"><button type="button" class="open">${esc(p.name)}</button></p>
+              <p class="role">${esc(p.role)} · ${esc(p.city)}</p>
+            </div>
+          </div>
+          <div class="tags">${p.genres.map(g => `<span class="tag">${esc(g)}</span>`).join("")}</div>
+          <div class="meta">
+            <span>⏱ Svarer inden for ${esc(p.response)}</span>
+            <span>⇥ Levering fra ${days(minDays(p))}</span>
+          </div>
+          <div class="card-foot">
+            <span>Fra <span class="price">${kr(minPrice(p))}</span></span>
+            <span class="rating">★ ${stars(p.rating)} (${p.reviews})</span>
+          </div>
+        </div>
+      </article>`
+    }).join("")
   }
 
   grid.addEventListener("click", e => {
+    if (e.target.id === "reset") {
+      Object.assign(state, { cat: "Alle", q: "", online: false, maxPrice: 0 })
+      $("search").value = ""
+      $("onlineToggle").setAttribute("aria-pressed", "false")
+      $("maxPrice").value = ""
+      render()
+      return
+    }
     const card = e.target.closest(".card")
-    if (card) openProfile(profiles[card.dataset.i])
+    if (!card) return
+    if (e.target.closest(".mini-play")) {
+      const btn = e.target.closest(".mini-play")
+      const playing = !card.classList.contains("playing")
+      document.querySelectorAll(".card.playing").forEach(c => {
+        c.classList.remove("playing")
+        c.querySelector(".mini-play").textContent = "▶"
+      })
+      card.classList.toggle("playing", playing)
+      btn.textContent = playing ? "❚❚" : "▶"
+      return
+    }
+    openProfile(profiles[card.dataset.i])
   })
 
-  document.getElementById("close").addEventListener("click", () => dialog.close())
+  $("searchForm").addEventListener("submit", e => {
+    e.preventDefault()
+    state.q = $("search").value.trim()
+    state.cat = "Alle"
+    render()
+    $("profiler").scrollIntoView({ behavior: "smooth" })
+  })
+
+  document.querySelector(".popular").addEventListener("click", e => {
+    const b = e.target.closest("button[data-q]")
+    if (!b) return
+    $("search").value = b.dataset.q
+    $("searchForm").requestSubmit()
+  })
+
+  $("activeQuery").addEventListener("click", e => {
+    if (e.target.closest("#clearQ")) {
+      state.q = ""
+      $("search").value = ""
+      render()
+    }
+  })
+
+  $("onlineToggle").addEventListener("click", e => {
+    state.online = !state.online
+    e.currentTarget.setAttribute("aria-pressed", state.online)
+    render()
+  })
+
+  $("maxPrice").addEventListener("change", e => { state.maxPrice = Number(e.target.value) || 0; render() })
+  $("sort").addEventListener("change", e => { state.sort = e.target.value; render() })
+
+  // Profilvisning
+  function openProfile(p) {
+    const seed = profiles.indexOf(p)
+    const defaultPkg = Math.min(1, p.packages.length - 1)
+
+    dlgBody.innerHTML = `
+      <div class="dlg-grid">
+        <div>
+          <div class="dlg-head">
+            <div class="avatar" style="background:${p.color}">${esc(initials(p.name))}</div>
+            <div>
+              <p class="name" id="dlg-name">${esc(p.name)}</p>
+              <p class="role">${esc(p.role)} · ${esc(p.city)}${p.online ? " · Arbejder online" : ""}</p>
+            </div>
+          </div>
+          <div class="tags">
+            ${p.top ? '<span class="badge top">Topbedømt</span>' : ""}
+            ${[...p.cats, ...p.genres].map(g => `<span class="tag">${esc(g)}</span>`).join("")}
+          </div>
+
+          <div class="stats">
+            <div><b>★ ${stars(p.rating)}</b><span>${p.reviews} anmeldelser</span></div>
+            <div><b>${p.jobs}</b><span>opgaver løst</span></div>
+            <div><b>${esc(p.response)}</b><span>svartid</span></div>
+          </div>
+
+          <p>${esc(p.bio)}</p>
+
+          <div class="dlg-section">
+            <p class="mono">Lyt til tidligere arbejde</p>
+            ${p.tracks.map((t, i) => `
+              <div class="player">
+                <button class="play" type="button" aria-label="Afspil ${esc(t[0])}">▶</button>
+                <div class="title">${esc(t[0])}<small>${esc(t[1])}</small></div>
+                <div class="wave" aria-hidden="true">${waveBars(seed + i * 3, 40)}</div>
+              </div>`).join("")}
+          </div>
+
+          <div class="dlg-section">
+            <p class="mono">Anmeldelser</p>
+            ${p.reviewsList.map(r => `
+              <div class="review">
+                “${esc(r[0])}”
+                <p class="mono">★★★★★ · ${esc(r[1])}</p>
+              </div>`).join("")}
+          </div>
+        </div>
+
+        <aside class="order">
+          <div class="tabs" role="tablist">
+            ${p.packages.map((pk, i) => `<button class="tab" type="button" role="tab" data-pkg="${i}" aria-selected="${i === defaultPkg}">${esc(pk[0])}</button>`).join("")}
+          </div>
+          <div class="order-body" id="orderBody"></div>
+        </aside>
+      </div>
+    `
+
+    function showPackage(i) {
+      const pk = p.packages[i]
+      dlgBody.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.pkg == i))
+      $("orderBody").innerHTML = `
+        <div class="order-title"><b>${esc(pk[1])}</b><span class="price">${kr(pk[3])}</span></div>
+        <p class="order-desc">${esc(pk[2])}</p>
+        <ul class="includes">${pk[5].map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+        <div class="order-meta"><span>⇥ Levering: ${days(pk[4])}</span><span>⏱ Svarer inden for ${esc(p.response)}</span></div>
+        <button class="btn" type="button" data-action="request">Send forespørgsel</button>
+        <button class="secondary" type="button" data-action="message">Skriv til ${esc(p.name.split(" ")[0])}</button>
+        <p class="note" role="status"></p>
+      `
+    }
+
+    dlgBody.addEventListener("click", onDialogClick)
+    showPackage(defaultPkg)
+    dialog.showModal()
+    dialog.scrollTop = 0
+
+    function onDialogClick(e) {
+      const tab = e.target.closest(".tab")
+      if (tab) return showPackage(Number(tab.dataset.pkg))
+
+      const play = e.target.closest(".play")
+      if (play) {
+        const player = play.closest(".player")
+        const on = player.classList.toggle("playing")
+        play.textContent = on ? "❚❚" : "▶"
+        return
+      }
+
+      const action = e.target.closest("[data-action]")
+      if (action) {
+        dlgBody.querySelector(".order .note").innerHTML =
+          'Det her er kun en demo, så intet bliver sendt. <a href="index.html#tilmeld">Skriv dig op</a>, så hører du fra os, når Musiclinq åbner.'
+      }
+    }
+
+    dialog.addEventListener("close", () => dlgBody.removeEventListener("click", onDialogClick), { once: true })
+  }
+
+  $("close").addEventListener("click", () => dialog.close())
   dialog.addEventListener("click", e => { if (e.target === dialog) dialog.close() })
 
-  search.addEventListener("input", render)
+  // Post et projekt
+  $("p-cat").innerHTML = categories.filter(c => c[0] !== "Alle").map(c => `<option>${esc(c[0])}</option>`).join("")
+  $("postForm").addEventListener("submit", e => {
+    e.preventDefault()
+    $("postNote").innerHTML = 'Det her er kun en demo, så projektet bliver ikke postet. <a href="index.html#tilmeld">Skriv dig op</a>, så hører du fra os, når Musiclinq åbner.'
+  })
+
   render()
 </script>
 
