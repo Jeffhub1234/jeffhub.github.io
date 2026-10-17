@@ -67,6 +67,22 @@
       margin: 0 0 40px;
     }
 
+    .demo-link {
+      display: inline-block;
+      font-family: "DM Mono", monospace;
+      font-size: 14px;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 2px;
+      margin: -20px 0 40px;
+    }
+
+    .demo-link:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
     form {
       display: grid;
       gap: 22px;
@@ -262,6 +278,7 @@
 
     <h1>Musiclinq</h1>
     <p class="lead">Skriv dig op, så hører du fra os, når vi åbner.</p>
+    <a class="demo-link" href="demo.html">Se hvordan Musiclinq kommer til at se ud →</a>
 
     <form id="signupForm">
       <div class="row">
