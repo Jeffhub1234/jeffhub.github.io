@@ -994,6 +994,7 @@
         <button type="button" data-q="sangtimer">Sangtimer</button>
         <button type="button" data-q="trommer">Trommer</button>
         <button type="button" data-q="beats">Beats</button>
+        <button type="button" data-q="band bryllup">Band til bryllup</button>
         <button type="button" data-q="aarhus">Aarhus</button>
       </div>
     </div>
@@ -1190,6 +1191,18 @@
         ["Eget anlæg", "Koncert med eget anlæg", "PA, mixer og mikrofoner til op til 200 gæster.", 5500, 1, ["PA + mixer", "Mikrofoner", "Op til 200 gæster"]]
       ],
       reviewsList: [["Lyden var skarp hele aftenen, og han var rolig, da en mikrofon døde.", "Spillested i Aalborg"]]
+    },
+    {
+      name: "Nordlys Band", role: "Liveband · 5 musikere", city: "Hele Danmark", online: false, color: "#c2410c",
+      cats: ["Live"], genres: ["Pop", "Soul", "Funk", "Danske klassikere"], rating: 4.9, reviews: 33, response: "5 timer", jobs: 84, top: true,
+      bio: "Fem musikere med sang, guitar, bas, keys og trommer. Vi spiller alt fra Gasolin og Medina til Bruno Mars og Earth, Wind & Fire til bryllupper, firmafester og fødselsdage – og tager selv lyd og lys med.",
+      tracks: [["Live til bryllup i Vejle", "Uptown Funk (cover)"], ["Firmafest i København", "Medley med danske klassikere"]],
+      packages: [
+        ["Koncert", "Koncert – 1 sæt", "45 minutters koncert, fx til en reception eller et arrangement.", 6500, 1, ["45 min. musik", "Eget lydanlæg", "Op til 150 gæster"]],
+        ["Fest", "Bryllup eller fest – 3 sæt", "3 × 45 minutter, så dansegulvet er fyldt hele aftenen.", 18000, 1, ["3 × 45 min. musik", "Lyd og lys", "Ønskesang til første dans", "Playliste mellem sættene"]],
+        ["Firmafest", "Firmafest – 4 sæt", "Hele aftenen med musik og DJ-playliste i pauserne.", 24000, 1, ["4 × 45 min. musik", "Lyd og lys", "Op til 400 gæster", "Kørsel i hele Danmark"]]
+      ],
+      reviewsList: [["Dansegulvet var fyldt fra første til sidste nummer. Alle gæsterne spurgte, hvor vi havde fundet dem.", "Sara og Mikkel, bryllup"], ["Professionelle fra start til slut – de klarede både opsætning og lyd selv.", "Eventkoordinator, firmafest"]]
     },
     {
       name: "Emma Thorsen", role: "Klaverunderviser", city: "Aarhus", online: false, color: "#a6732b",
@@ -1459,7 +1472,7 @@
         <div class="order-title"><b>${esc(pk[1])}</b><span class="price">${kr(pk[3])}</span></div>
         <p class="order-desc">${esc(pk[2])}</p>
         <ul class="includes">${pk[5].map(x => `<li>${esc(x)}</li>`).join("")}</ul>
-        <div class="order-meta"><span>⇥ Levering: ${days(pk[4])}</span><span>⏱ Svarer inden for ${esc(p.response)}</span></div>
+        <div class="order-meta"><span>${p.cats.includes("Live") ? "⌖ Kommer ud til dig" : "⇥ Levering: " + days(pk[4])}</span><span>⏱ Svarer inden for ${esc(p.response)}</span></div>
         <button class="btn" type="button" data-action="request">Send forespørgsel</button>
         <button class="secondary" type="button" data-action="message">Skriv til ${esc(p.name.split(" ")[0])}</button>
         <p class="note" role="status"></p>
