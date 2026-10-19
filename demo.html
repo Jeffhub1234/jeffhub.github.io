@@ -154,7 +154,16 @@
 
     .mode-switch button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-    .hero .mode-switch { border-color: var(--paper); margin-bottom: 24px; }
+    .hero .mode-switch { border-color: var(--paper); }
+    .hero .switch-wrap { margin-bottom: 24px; }
+    .hero .switch-label { color: var(--soft); }
+
+    .switch-label {
+      margin: 0 0 6px;
+      color: var(--muted);
+    }
+
+    .mode-switch button { font-size: 14px; }
 
     .switch-row {
       display: flex;
@@ -1233,7 +1242,7 @@
         <h1 id="homeTitle"></h1>
         <p class="hero-lead" id="homeLead"></p>
 
-        <div class="mode-switch" role="group" aria-label="Vis profiler, der tilbyder eller søger"><button type="button" data-mode="tilbyder">Tilbyder</button><button type="button" data-mode="soeger">Søger</button></div>
+        <div class="switch-wrap"><p class="switch-label mono">Find nogen, som</p><div class="mode-switch" role="group" aria-label="Find nogen, som tilbyder eller søger"><button type="button" data-mode="tilbyder">tilbyder</button><button type="button" data-mode="soeger">søger</button></div></div>
 
         <div class="dept-cards" id="deptCards"></div>
       </div>
@@ -1260,8 +1269,7 @@
     <main class="container">
       <section class="block" id="profiler">
         <div class="switch-row">
-          <div class="mode-switch" role="group" aria-label="Vis profiler, der tilbyder eller søger"><button type="button" data-mode="tilbyder">Tilbyder</button><button type="button" data-mode="soeger">Søger</button></div>
-          <span class="mono" id="switchHint"></span>
+          <div class="switch-wrap"><p class="switch-label mono">Find nogen, som</p><div class="mode-switch" role="group" aria-label="Find nogen, som tilbyder eller søger"><button type="button" data-mode="tilbyder">tilbyder</button><button type="button" data-mode="soeger">søger</button></div></div>
         </div>
 
         <div class="section-head">
@@ -1789,7 +1797,6 @@
       sw.dataset.mode = mode
       sw.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b.dataset.mode === mode))
     })
-    $("switchHint").textContent = requestsView() ? "Opslag fra folk, der søger" : "Profiler, der tilbyder ydelser"
 
     $("deptbar").innerHTML = Object.entries(departments).map(([k, dep]) =>
       `<a class="dept-tab" href="${link(mode, k)}" ${k === key ? 'aria-current="page"' : ""} style="--tab-color:${dep.color}"><span class="dot"></span>${esc(dep.name)}</a>`
