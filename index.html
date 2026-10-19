@@ -177,13 +177,13 @@
       gap: 12px;
     }
 
-    .final .btn-ghost {
+    .final .btn.btn-ghost {
       background: transparent;
       color: var(--paper);
       border-color: var(--paper);
     }
 
-    .final .btn-ghost:hover {
+    .final .btn.btn-ghost:hover {
       background: var(--paper);
       color: var(--ink);
       border-color: var(--paper);
@@ -191,10 +191,10 @@
 
     /* Tydelig knap til demoen i toppen */
     .demo-btn {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       gap: 14px;
-      max-width: 100%;
+      max-width: 560px;
       text-decoration: none;
       color: var(--paper);
       border: 2px solid var(--paper);
@@ -252,7 +252,7 @@
       display: flex;
       align-items: stretch;
       gap: 16px;
-      margin-top: 40px;
+      margin-top: 20px;
       max-width: 560px;
     }
 
@@ -354,11 +354,6 @@
     .pv-foot span, .pv-foot u { white-space: nowrap; }
 
     .pv-foot u { text-decoration: none; border-bottom: 2px solid var(--ink); }
-
-    .preview-label {
-      color: var(--soft);
-      margin: 16px 0 0;
-    }
 
     /* ---------- Formular ---------- */
     .signup {
@@ -767,7 +762,6 @@
       background: var(--accent);
       color: var(--paper);
       padding: 64px 0;
-      border-top: 2px solid var(--ink);
     }
 
     .final .container {
@@ -862,7 +856,7 @@
 
       .hero { padding-top: 36px; }
       .hero .container { gap: 40px; }
-      .preview, .preview-label { display: none; }
+      .preview { display: none; }
 
     }
 
@@ -951,7 +945,6 @@
             </div>
           </div>
         </div>
-        <p class="preview-label mono" aria-hidden="true">Eksempler fra demoen: en der tilbyder, og en der søger</p>
       </div>
 
       <div class="signup" id="tilmeld">
