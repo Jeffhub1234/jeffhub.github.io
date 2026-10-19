@@ -110,53 +110,65 @@
 
     .pill:hover { border-color: var(--accent-2); }
 
-    /* ---------- Søger / tilbyder ---------- */
-    .modebar {
-      background: var(--ink);
-      border-top: 1px solid #3a3833;
-    }
-
-    .modebar .container {
-      display: grid;
+    /* ---------- Søger / tilbyder-kontakt ---------- */
+    .mode-switch {
+      position: relative;
+      display: inline-grid;
       grid-template-columns: 1fr 1fr;
+      padding: 3px;
+      border: 2px solid var(--line);
+      border-radius: 999px;
+      background: var(--card);
     }
 
-    .mode-tab {
-      display: block;
-      text-decoration: none;
-      color: var(--soft);
-      padding: 14px 18px;
-      border: 2px solid #3a3833;
-      border-bottom: 0;
+    .mode-switch::before {
+      content: "";
+      position: absolute;
+      top: 3px;
+      bottom: 3px;
+      left: 3px;
+      width: calc(50% - 3px);
+      border-radius: 999px;
+      background: var(--ink);
+      transition: transform 0.2s ease;
     }
 
-    .mode-tab + .mode-tab { border-left: 0; }
+    .mode-switch[data-mode="tilbyder"]::before { transform: translateX(100%); }
 
-    .mode-tab .mode-label {
-      display: block;
-      font-weight: 900;
-      font-stretch: 70%;
-      font-size: 24px;
-      line-height: 1;
-      text-transform: uppercase;
-    }
-
-    .mode-tab small {
-      display: block;
+    .mode-switch button {
+      position: relative;
+      z-index: 1;
       font-family: "DM Mono", monospace;
-      font-size: 12px;
-      margin-top: 4px;
-    }
-
-    .mode-tab:hover { color: var(--paper); }
-
-    .mode-tab[aria-current="true"] {
-      background: var(--paper);
+      font-size: 13px;
+      background: none;
+      border: 0;
+      border-radius: 999px;
+      padding: 6px 16px;
+      cursor: pointer;
       color: var(--ink);
-      border-color: var(--paper);
+      white-space: nowrap;
+      transition: color 0.2s;
     }
 
-    .mode-tab[aria-current="true"] small { color: var(--muted); }
+    .mode-switch button[aria-pressed="true"] { color: var(--paper); }
+
+    .mode-switch button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    .hero .mode-switch { border-color: var(--paper); margin-bottom: 24px; }
+
+    .switch-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .switch-row .mono { color: var(--muted); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .mode-switch::before, .mode-switch button { transition: none; }
+    }
 
     /* ---------- Afdelingsbjælke + demo-bånd (klæber til toppen) ---------- */
     .sticky-top {
@@ -1159,9 +1171,6 @@
 
     @media (max-width: 560px) {
       .header-links .hide-sm { display: none; }
-      .mode-tab { padding: 10px 12px; }
-      .mode-tab .mode-label { font-size: 19px; }
-      .mode-tab small { font-size: 10px; }
       .deptbar .container { justify-content: space-between; }
       .dept-tab, .dept-tab:first-child { padding: 12px 0 9px; font-size: 14px; }
       .dept-tab .dot { display: none; }
@@ -1199,19 +1208,6 @@
     </div>
   </header>
 
-  <nav class="modebar" aria-label="Søger eller tilbyder">
-    <div class="container">
-      <a class="mode-tab" data-mode="soeger" href="#soeger">
-        <span class="mode-label">Jeg søger</span>
-        <small>Find folk til din musik</small>
-      </a>
-      <a class="mode-tab" data-mode="tilbyder" href="#tilbyder">
-        <span class="mode-label">Jeg tilbyder</span>
-        <small>Find opgaver og bliv fundet</small>
-      </a>
-    </div>
-  </nav>
-
   <div class="sticky-top">
     <nav class="deptbar" aria-label="Afdelinger">
       <div class="container" id="deptbar"></div>
@@ -1237,6 +1233,8 @@
         <h1 id="homeTitle"></h1>
         <p class="hero-lead" id="homeLead"></p>
 
+        <div class="mode-switch" role="group" aria-label="Søger eller tilbyder"><button type="button" data-mode="soeger">Jeg søger</button><button type="button" data-mode="tilbyder">Jeg tilbyder</button></div>
+
         <div class="dept-cards" id="deptCards"></div>
       </div>
     </section>
@@ -1261,6 +1259,11 @@
 
     <main class="container">
       <section class="block" id="profiler">
+        <div class="switch-row">
+          <div class="mode-switch" role="group" aria-label="Søger eller tilbyder"><button type="button" data-mode="soeger">Jeg søger</button><button type="button" data-mode="tilbyder">Jeg tilbyder</button></div>
+          <span class="mono" id="switchHint"></span>
+        </div>
+
         <div class="section-head">
           <h2 class="big" id="resultsTitle"></h2>
           <span class="mono" id="count"></span>
@@ -1777,10 +1780,11 @@
     const d = departments[key]
     state.mode = mode
 
-    document.querySelectorAll(".mode-tab").forEach(t => {
-      t.setAttribute("aria-current", t.dataset.mode === mode)
-      t.href = link(t.dataset.mode, d ? key : null)
+    document.querySelectorAll(".mode-switch").forEach(sw => {
+      sw.dataset.mode = mode
+      sw.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b.dataset.mode === mode))
     })
+    $("switchHint").textContent = seller() ? "Viser opslag fra folk, der søger" : "Viser profiler, du kan booke"
 
     $("deptbar").innerHTML = Object.entries(departments).map(([k, dep]) =>
       `<a class="dept-tab" href="${link(mode, k)}" ${k === key ? 'aria-current="page"' : ""} style="--tab-color:${dep.color}"><span class="dot"></span>${esc(dep.name)}</a>`
@@ -1982,6 +1986,11 @@
       </article>
     `).join("")
   }
+
+  document.querySelectorAll(".mode-switch").forEach(sw => sw.addEventListener("click", e => {
+    const b = e.target.closest("button")
+    if (b && b.dataset.mode !== state.mode) location.hash = link(b.dataset.mode, state.dept)
+  }))
 
   $("subs").addEventListener("click", e => {
     const b = e.target.closest(".sub")
@@ -2199,7 +2208,14 @@
   $("close").addEventListener("click", () => $("profile").close())
   $("profile").addEventListener("click", e => { if (e.target === $("profile")) $("profile").close() })
 
-  window.addEventListener("hashchange", () => { showView(); window.scrollTo(0, 0) })
+  window.addEventListener("hashchange", () => {
+    const before = state.dept
+    const y = $("profiler").getBoundingClientRect().top
+    showView()
+    // Skiftede man kun mellem søger/tilbyder i samme afdeling, bliver siden stående ved kontakten
+    if (state.dept && state.dept === before) window.scrollBy(0, $("profiler").getBoundingClientRect().top - y)
+    else window.scrollTo(0, 0)
+  })
   showView()
 </script>
 
