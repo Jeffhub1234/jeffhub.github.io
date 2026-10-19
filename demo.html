@@ -315,6 +315,8 @@
 
     .strip-short { display: none; }
 
+    .show-sm { display: none; }
+
     /* ---------- Startside: vælg afdeling ---------- */
     .hero {
       background: var(--ink);
@@ -1242,6 +1244,12 @@
       #dlgKind { display: none; }
 
       .header-links .hide-sm { display: none; }
+      .header-links .show-sm { display: inline; }
+      .brand .badge-demo { display: none; }
+      .logo { font-size: 24px; }
+      .header-links { gap: 10px; font-size: 11px; }
+      .header-links a { white-space: nowrap; }
+      .header-links .pill { padding: 5px 8px; }
       .deptbar .container { justify-content: space-between; }
       .dept-tab, .dept-tab:first-child { padding: 12px 0 9px; font-size: 14px; }
       .dept-tab .dot { display: none; }
@@ -1271,7 +1279,7 @@
         <span class="badge-demo mono">Demo</span>
       </div>
       <nav class="header-links mono">
-        <a class="hide-sm" href="index.html">← Tilbage til forsiden</a>
+        <a href="index.html">← <span class="hide-sm">Tilbage til </span><span class="show-sm">F</span><span class="hide-sm">f</span>orsiden</a>
         <a class="pill pill-cta" href="index.html#tilmeld">Skriv dig op</a>
       </nav>
     </div>
@@ -2203,7 +2211,7 @@
           <p>${esc(p.bio)}</p>
 
           <div class="dlg-section">
-            <p class="mono">${live ? "Hør dem live" : "Lyt til tidligere arbejde"}</p>
+            <p class="mono">${live ? "Hør dem live" : "Lyt til tidligere arbejde"} · uden lyd i demoen</p>
             ${p.tracks.map((t, i) => `
               <div class="player">
                 <button class="play" type="button" aria-label="Afspil ${esc(t[0])}">▶</button>

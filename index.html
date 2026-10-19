@@ -109,7 +109,7 @@
 
     .eyebrow {
       display: inline-flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 8px;
       color: var(--accent-2);
       margin-bottom: 18px;
@@ -119,6 +119,8 @@
       content: "";
       width: 8px;
       height: 8px;
+      flex: none;
+      margin-top: 0.45em;
       border-radius: 50%;
       background: var(--accent-2);
       animation: pulse 1.8s infinite;
@@ -958,7 +960,7 @@
 
       <div class="signup" id="tilmeld">
         <h2>Skriv dig op</h2>
-        <p class="sub">Det tager 20 sekunder. Vi skriver kun til dig, hvis du siger ja tak.</p>
+        <p class="sub">Vis, at du synes, idéen er interessant. Det tager 20 sekunder, og vi skriver kun til dig, hvis du siger ja tak til det.</p>
 
         <form id="signupForm">
           <div class="row">
