@@ -161,6 +161,49 @@
 
     .demo-link:hover { color: var(--accent-2); }
 
+    .pill-demo {
+      border-color: var(--accent-2);
+      color: var(--accent-2);
+    }
+
+    .header-links a.pill-demo:hover {
+      background: var(--accent-2);
+      color: var(--ink);
+    }
+
+    .demo-btn.demo-btn-light {
+      color: var(--ink);
+      border-color: var(--ink);
+      margin-top: 20px;
+    }
+
+    .demo-btn.demo-btn-light .demo-text small { color: var(--muted); }
+
+    .demo-btn.demo-btn-light:hover {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .demo-btn.demo-btn-light:hover .demo-text small { color: var(--soft); }
+
+    .final-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .final .btn-ghost {
+      background: transparent;
+      color: var(--paper);
+      border-color: var(--paper);
+    }
+
+    .final .btn-ghost:hover {
+      background: var(--paper);
+      color: var(--ink);
+      border-color: var(--paper);
+    }
+
     /* Tydelig knap til demoen i toppen */
     .demo-btn {
       display: inline-flex;
@@ -697,14 +740,17 @@
     }
 
     .audience .more {
-      font-family: "DM Mono", monospace;
-      font-size: 14px;
-      border-bottom: 2px solid currentColor;
-      padding-bottom: 2px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 16px;
+      border: 2px solid currentColor;
+      padding: 8px 14px 8px 8px;
     }
 
-    a.audience:hover .more { color: var(--accent); }
-    a.audience.dark:hover .more { color: var(--accent-2); }
+    a.audience:hover .more { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+    a.audience.dark:hover .more { background: var(--paper); color: var(--ink); border-color: var(--paper); }
 
     /* Sådan virker det */
     .steps {
@@ -865,6 +911,9 @@
       .audience { padding: 22px; }
       .section-head { flex-direction: column; align-items: start; }
       .final .btn { width: 100%; }
+      .final-actions { width: 100%; }
+      .header-links { gap: 8px; }
+      .header-links .pill { padding: 5px 8px; font-size: 11px; }
     }
   </style>
 </head>
@@ -875,7 +924,7 @@
     <div class="container">
       <a class="logo" href="index.html">Musiclinq</a>
       <nav class="header-links mono">
-        <a class="hide-sm" href="demo.html">Se demo</a>
+        <a class="pill pill-demo" href="demo.html">Se demoen</a>
         <a class="pill" href="#tilmeld">Skriv dig op</a>
       </nav>
     </div>
@@ -1042,14 +1091,14 @@
           <p class="mono">Har du et projekt?</p>
           <h3>Find den rette til din musik</h3>
           <p class="one">Søg, lyt og book – med faste priser.</p>
-          <span class="more">Se profiler i demoen →</span>
+          <span class="more"><span class="demo-tag">Demo</span>Se profiler →</span>
         </a>
 
         <a class="audience dark" href="demo.html#soeger">
           <p class="mono">Er du god til noget?</p>
           <h3>Tilbyd det, du er god til</h3>
           <p class="one">Lav en profil, og bliv fundet af dem, der søger.</p>
-          <span class="more">Se opslag i demoen →</span>
+          <span class="more"><span class="demo-tag">Demo</span>Se opslag →</span>
         </a>
       </div>
     </section>
@@ -1057,7 +1106,6 @@
     <section class="block">
       <div class="section-head">
         <h2 class="big">Sådan virker det</h2>
-        <a class="mono demo-link" href="demo.html">Prøv demoen →</a>
       </div>
 
       <ol class="steps">
@@ -1074,6 +1122,15 @@
           <p>Få dit arbejde leveret, giv en anmeldelse – og find den næste, når du har brug for det.</p>
         </li>
       </ol>
+
+      <a class="demo-btn demo-btn-light" href="demo.html">
+        <span class="demo-tag">Demo</span>
+        <span class="demo-text">
+          <strong>Prøv det selv i demoen</strong>
+          <small>Find en profil, åbn den og se pakkerne</small>
+        </span>
+        <span class="demo-arrow" aria-hidden="true">→</span>
+      </a>
     </section>
 
     <section class="block">
@@ -1102,7 +1159,10 @@
   <section class="final">
     <div class="container">
       <h2>Vær med fra start</h2>
-      <a class="btn" href="#tilmeld">Skriv mig op</a>
+      <div class="final-actions">
+        <a class="btn btn-ghost" href="demo.html">Se demoen</a>
+        <a class="btn" href="#tilmeld">Skriv mig op</a>
+      </div>
     </div>
   </section>
 
