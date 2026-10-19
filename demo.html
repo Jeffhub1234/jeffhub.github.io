@@ -1828,6 +1828,22 @@
       text: "Vi har en scene med 8 bands over to dage. Anlægget er lejet – vi mangler en tekniker til FOH og soundcheck." }
   ]
 
+  // Titel over listen – hvad den faktisk viser
+  const listTitles = {
+    undervisning: { tilbyder: "Undervisere", soeger: "Elever, der søger undervisning" },
+    livemusik: { tilbyder: "Bands, DJs og musikere", soeger: "Arrangementer, der søger musik" },
+    produktion: { tilbyder: "Producere og teknikere", soeger: "Artister, der søger hjælp" },
+    band: { tilbyder: "Musikere til dit band", soeger: "Bands, der søger en musiker" }
+  }
+
+  // "Sang" bliver til "sang", men "DJ" bliver ved med at være "DJ"
+  const lowerFirst = t => /^[A-ZÆØÅ][a-zæøå]/.test(t) ? t[0].toLowerCase() + t.slice(1) : t
+
+  function listTitle() {
+    if (state.sub !== "Alle") return (requestsView() ? "Søger " : "Tilbyder ") + lowerFirst(state.sub)
+    return listTitles[state.dept][state.mode]
+  }
+
   // ---------- Hjælpefunktioner ----------
   const $ = id => document.getElementById(id)
   const kr = n => n === 0 ? "Gratis" : n.toLocaleString("da-DK") + " kr."
@@ -2017,7 +2033,7 @@
 
     if (requestsView()) return renderRequests(d)
 
-    $("resultsTitle").textContent = state.sub === "Alle" ? "Alle i " + d.name.toLowerCase() : state.sub
+    $("resultsTitle").textContent = listTitle()
     const list = sorted(profiles.filter(matches))
     $("count").textContent = list.length === 1 ? "1 profil" : list.length + " profiler"
 
@@ -2055,7 +2071,7 @@
   }
 
   function renderRequests(d) {
-    $("resultsTitle").textContent = state.sub === "Alle" ? "Opslag i " + d.name.toLowerCase() : "Opslag: " + state.sub
+    $("resultsTitle").textContent = listTitle()
     const list = requests.filter(requestMatches)
     $("count").textContent = list.length === 1 ? "1 opslag" : list.length + " opslag"
 
