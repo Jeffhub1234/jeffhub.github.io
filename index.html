@@ -161,6 +161,64 @@
 
     .demo-link:hover { color: var(--accent-2); }
 
+    /* Tydelig knap til demoen i toppen */
+    .demo-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      max-width: 100%;
+      text-decoration: none;
+      color: var(--paper);
+      border: 2px solid var(--paper);
+      padding: 12px 16px;
+      transition: background 0.12s, color 0.12s, border-color 0.12s;
+    }
+
+    .demo-btn:hover {
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .demo-tag {
+      flex: none;
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--accent-2);
+      color: var(--ink);
+      padding: 4px 8px;
+    }
+
+    .demo-text strong {
+      display: block;
+      font-size: 17px;
+      line-height: 1.2;
+    }
+
+    .demo-text small {
+      display: block;
+      font-size: 13px;
+      color: var(--soft);
+      margin-top: 2px;
+    }
+
+    .demo-btn:hover .demo-text small { color: var(--muted); }
+
+    .demo-arrow {
+      flex: none;
+      font-size: 22px;
+      margin-left: auto;
+      transition: transform 0.12s;
+    }
+
+    .demo-btn:hover .demo-arrow { transform: translateX(4px); }
+
+    @media (max-width: 900px) {
+      .demo-btn { display: flex; width: 100%; }
+    }
+
     /* Produktforsmag: et profilkort og et opslag fra demoen */
     .preview {
       display: flex;
@@ -833,7 +891,14 @@
           Musiclinq samler producere, mixteknikere, sangere, musikere og undervisere ét sted.
           Find den rette til dit næste projekt – eller del det, du er god til, med andre.
         </p>
-        <a class="demo-link" href="demo.html">Se hvordan Musiclinq kommer til at se ud →</a>
+        <a class="demo-btn" href="demo.html">
+          <span class="demo-tag">Demo</span>
+          <span class="demo-text">
+            <strong>Se hvordan Musiclinq kommer til at se ud</strong>
+            <small>Klik rundt i et udkast af platformen</small>
+          </span>
+          <span class="demo-arrow" aria-hidden="true">→</span>
+        </a>
 
         <div class="preview" aria-hidden="true">
           <div class="pv pv-profile">
