@@ -110,7 +110,7 @@
 
     .pill:hover { border-color: var(--accent-2); }
 
-    /* ---------- Søger / tilbyder-kontakt ---------- */
+    /* ---------- Kontakt: tilbyder / søger ---------- */
     .mode-switch {
       position: relative;
       display: inline-grid;
@@ -133,7 +133,7 @@
       transition: transform 0.2s ease;
     }
 
-    .mode-switch[data-mode="tilbyder"]::before { transform: translateX(100%); }
+    .mode-switch[data-mode="soeger"]::before { transform: translateX(100%); }
 
     .mode-switch button {
       position: relative;
@@ -688,7 +688,7 @@
 
     .card:hover .see-more { color: var(--dept); border-color: var(--dept); }
 
-    /* ---------- Opslag (tilbyder-siden) ---------- */
+    /* ---------- Opslag fra folk, der søger ---------- */
     .req {
       border-left: 10px solid var(--dept);
     }
@@ -1233,7 +1233,7 @@
         <h1 id="homeTitle"></h1>
         <p class="hero-lead" id="homeLead"></p>
 
-        <div class="mode-switch" role="group" aria-label="Søger eller tilbyder"><button type="button" data-mode="soeger">Jeg søger</button><button type="button" data-mode="tilbyder">Jeg tilbyder</button></div>
+        <div class="mode-switch" role="group" aria-label="Vis profiler, der tilbyder eller søger"><button type="button" data-mode="tilbyder">Tilbyder</button><button type="button" data-mode="soeger">Søger</button></div>
 
         <div class="dept-cards" id="deptCards"></div>
       </div>
@@ -1260,7 +1260,7 @@
     <main class="container">
       <section class="block" id="profiler">
         <div class="switch-row">
-          <div class="mode-switch" role="group" aria-label="Søger eller tilbyder"><button type="button" data-mode="soeger">Jeg søger</button><button type="button" data-mode="tilbyder">Jeg tilbyder</button></div>
+          <div class="mode-switch" role="group" aria-label="Vis profiler, der tilbyder eller søger"><button type="button" data-mode="tilbyder">Tilbyder</button><button type="button" data-mode="soeger">Søger</button></div>
           <span class="mono" id="switchHint"></span>
         </div>
 
@@ -1640,7 +1640,7 @@
     }
   ]
 
-  // ---------- Tekster til tilbyder-siden ----------
+  // ---------- Tekster, når kontakten står på "Søger" ----------
   const sellerText = {
     band: {
       title: "Musikere søges",
@@ -1765,14 +1765,15 @@
     return bars
   }
 
-  const state = { mode: "soeger", dept: null, sub: "Alle", q: "", extra: false, sort: "anbefalet" }
-  const seller = () => state.mode === "tilbyder"
+  const state = { mode: "tilbyder", dept: null, sub: "Alle", q: "", extra: false, sort: "anbefalet" }
+  // "tilbyder" viser profiler, der tilbyder ydelser – "soeger" viser opslag fra folk, der søger
+  const requestsView = () => state.mode === "soeger"
 
-  // ---------- Visning: søger/tilbyder × startside/afdeling ----------
+  // ---------- Visning: tilbyder/søger × startside/afdeling ----------
   function parseHash() {
     const [a, b] = location.hash.slice(1).split("/")
     if (a === "soeger" || a === "tilbyder") return { mode: a, key: b || null }
-    return { mode: "soeger", key: a || null }
+    return { mode: "tilbyder", key: a || null }
   }
 
   function showView() {
@@ -1784,13 +1785,13 @@
       sw.dataset.mode = mode
       sw.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b.dataset.mode === mode))
     })
-    $("switchHint").textContent = seller() ? "Viser opslag fra folk, der søger" : "Viser profiler, du kan booke"
+    $("switchHint").textContent = requestsView() ? "Opslag fra folk, der søger" : "Profiler, der tilbyder ydelser"
 
     $("deptbar").innerHTML = Object.entries(departments).map(([k, dep]) =>
       `<a class="dept-tab" href="${link(mode, k)}" ${k === key ? 'aria-current="page"' : ""} style="--tab-color:${dep.color}"><span class="dot"></span>${esc(dep.name)}</a>`
     ).join("")
 
-    $("crumbHome").textContent = seller() ? "Jeg tilbyder" : "Jeg søger"
+    $("crumbHome").textContent = "Alle afdelinger"
     $("crumbHome").href = link(mode)
 
     if (!d) {
@@ -1803,10 +1804,10 @@
       return
     }
 
-    const t = seller() ? sellerText[key] : d
+    const t = requestsView() ? sellerText[key] : d
     Object.assign(state, { dept: key, sub: "Alle", q: "", extra: false })
     document.documentElement.style.setProperty("--dept", d.color)
-    document.title = d.name + (seller() ? " – opslag" : "") + " – Musiclinq demo"
+    document.title = d.name + (requestsView() ? " – opslag" : "") + " – Musiclinq demo"
 
     $("view-home").hidden = true
     $("view-dept").hidden = false
@@ -1815,7 +1816,7 @@
     $("deptLead").textContent = t.lead
     $("search").value = ""
     $("search").placeholder = t.placeholder
-    $("toolbar").hidden = seller()
+    $("toolbar").hidden = requestsView()
     $("extraToggle").textContent = "◎ " + d.toggle[0]
     $("extraToggle").setAttribute("aria-pressed", "false")
 
@@ -1823,29 +1824,29 @@
       `<button class="sub" type="button" data-sub="${esc(s)}" aria-pressed="${s === "Alle"}">${esc(s)}</button>`
     ).join("")
 
-    $("postEyebrow").textContent = seller() ? "Vil du findes af andre?" : "Fandt du ikke den rette?"
+    $("postEyebrow").textContent = requestsView() ? "Vil du findes af andre?" : "Fandt du ikke den rette?"
     $("postTitle").textContent = t.post.title
     $("postText").textContent = t.post.text
-    $("postForm").innerHTML = buildPostForm(t.post.fields, seller() ? "Opret profil" : "Post opslag")
+    $("postForm").innerHTML = buildPostForm(t.post.fields, requestsView() ? "Opret profil" : "Post opslag")
 
     render()
   }
 
   function renderHome() {
-    $("homeTitle").innerHTML = seller() ? "Hvad kan <em>du tilbyde?</em>" : "Hvad leder <em>du efter?</em>"
-    $("homeLead").textContent = seller()
-      ? "Vælg din afdeling og se, hvem der søger lige nu – eller opret en profil, så de kan finde dig."
+    $("homeTitle").innerHTML = requestsView() ? "Hvem søger <em>lige nu?</em>" : "Hvad leder <em>du efter?</em>"
+    $("homeLead").textContent = requestsView()
+      ? "Se opslag fra folk, der søger en musiker, en underviser, en producer eller livemusik – og send dem et tilbud."
       : "Musiclinq er delt op i fire afdelinger. Vælg den, der passer til det, du skal bruge."
 
     $("deptCards").innerHTML = Object.entries(departments).map(([key, d], i) => {
-      const n = seller() ? requests.filter(r => r.dept === key).length : profiles.filter(p => p.dept === key).length
+      const n = requestsView() ? requests.filter(r => r.dept === key).length : profiles.filter(p => p.dept === key).length
       return `
         <a class="dept-card" href="${link(state.mode, key)}" style="--c:${d.color}">
           <span class="mono num">0${i + 1}</span>
           <h2>${esc(d.name)}</h2>
-          <p>${esc(seller() ? sellerText[key].card : d.card)}</p>
+          <p>${esc(requestsView() ? sellerText[key].card : d.card)}</p>
           <p class="ex">${esc(d.examples)}</p>
-          <span class="go"><span>${n} ${seller() ? "opslag" : "profiler"}</span><span>Gå til →</span></span>
+          <span class="go"><span>${n} ${requestsView() ? "opslag" : "profiler"}</span><span>Gå til →</span></span>
         </a>`
     }).join("")
   }
@@ -1915,7 +1916,7 @@
     $("activeQuery").innerHTML = state.q
       ? `<button class="active-query" type="button" id="clearQ">“${esc(state.q)}” ✕</button>` : ""
 
-    if (seller()) return renderRequests(d)
+    if (requestsView()) return renderRequests(d)
 
     $("resultsTitle").textContent = state.sub === "Alle" ? "Alle i " + d.name.toLowerCase() : state.sub
     const list = sorted(profiles.filter(matches))
@@ -2039,10 +2040,10 @@
 
   $("postForm").addEventListener("submit", e => {
     e.preventDefault()
-    $("postNote").innerHTML = demoNote(seller() ? "oprettet" : "postet")
+    $("postNote").innerHTML = demoNote(requestsView() ? "oprettet" : "postet")
   })
 
-  // ---------- Opslag (tilbyder-siden) ----------
+  // ---------- Opslag fra folk, der søger ----------
   function openRequest(r) {
     $("dlgKind").textContent = "Opdigtet eksempelopslag"
     $("dlg-body").innerHTML = `
@@ -2212,7 +2213,7 @@
     const before = state.dept
     const y = $("profiler").getBoundingClientRect().top
     showView()
-    // Skiftede man kun mellem søger/tilbyder i samme afdeling, bliver siden stående ved kontakten
+    // Skiftede man kun mellem tilbyder/søger i samme afdeling, bliver siden stående ved kontakten
     if (state.dept && state.dept === before) window.scrollBy(0, $("profiler").getBoundingClientRect().top - y)
     else window.scrollTo(0, 0)
   })
