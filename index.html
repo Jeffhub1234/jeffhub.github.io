@@ -621,6 +621,32 @@
 
     .audience.dark .examples { color: var(--soft); }
 
+    a.audience {
+      display: block;
+      text-decoration: none;
+      transition: transform 0.12s, box-shadow 0.12s;
+    }
+
+    a.audience:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 6px 6px 0 var(--accent);
+    }
+
+    .audience .one {
+      font-size: 18px;
+      margin: 0 0 20px;
+    }
+
+    .audience .more {
+      font-family: "DM Mono", monospace;
+      font-size: 14px;
+      border-bottom: 2px solid currentColor;
+      padding-bottom: 2px;
+    }
+
+    a.audience:hover .more { color: var(--accent); }
+    a.audience.dark:hover .more { color: var(--accent-2); }
+
     /* Sådan virker det */
     .steps {
       display: grid;
@@ -939,33 +965,22 @@
     <section class="block">
       <div class="section-head">
         <h2 class="big">To sider af samme sag</h2>
-        <span class="mono">Til dem, der søger · og dem, der tilbyder</span>
       </div>
 
       <div class="audiences">
-        <article class="audience">
+        <a class="audience" href="demo.html#tilbyder">
           <p class="mono">Har du et projekt?</p>
           <h3>Find den rette til din musik</h3>
-          <ul>
-            <li>Søg efter ydelse, genre eller by – også online</li>
-            <li>Lyt til tidligere arbejde, før du vælger</li>
-            <li>Faste pakker med priser, så du ved, hvad det koster</li>
-            <li>Anmeldelser fra folk, der rent faktisk har købt</li>
-          </ul>
-          <p class="examples">Fx: få mixet din single, find en trommeslager til EP'en eller tag sangtimer.</p>
-        </article>
+          <p class="one">Søg, lyt og book – med faste priser.</p>
+          <span class="more">Se profiler i demoen →</span>
+        </a>
 
-        <article class="audience dark">
+        <a class="audience dark" href="demo.html#soeger">
           <p class="mono">Er du god til noget?</p>
           <h3>Få betaling for det, du kan</h3>
-          <ul>
-            <li>Lav en profil med dine ydelser, priser og lydklip</li>
-            <li>Bliv fundet af folk, der leder efter præcis dig</li>
-            <li>Saml forespørgsler, aftaler og betaling ét sted</li>
-            <li>Byg dit ry op med anmeldelser</li>
-          </ul>
-          <p class="examples">Fx: producere, mixteknikere, sessionsmusikere, sangskrivere og undervisere.</p>
-        </article>
+          <p class="one">Lav en profil, og bliv fundet af dem, der søger.</p>
+          <span class="more">Se opslag i demoen →</span>
+        </a>
       </div>
     </section>
 
