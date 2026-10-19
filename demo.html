@@ -1435,6 +1435,10 @@
     }
   }
 
+  // Rækkefølgen i bjælken og på startsiden
+  const deptOrder = ["undervisning", "livemusik", "produktion", "band"]
+  Object.assign(departments, Object.fromEntries(deptOrder.map(k => { const d = departments[k]; delete departments[k]; return [k, d] })))
+
   // ---------- Opdigtede profiler – kun til demo ----------
   // packages: [fanenavn, titel, beskrivelse, pris, leveringsdage, indhold]
   const profiles = [
