@@ -1796,7 +1796,7 @@
   const stars = r => r.toFixed(1).replace(".", ",")
   const days = d => d === 1 ? "1 dag" : d + " dage"
   const link = (mode, key) => "#" + mode + (key ? "/" + key : "")
-  const demoNote = what => `Det her er kun en demo, så intet bliver ${what}. <a href="index.html#tilmeld">Skriv dig op</a>, så hører du fra os, når Musiclinq åbner.`
+  const demoNote = what => `Det her er kun en demo, så intet bliver ${what}. Synes du, idéen er god, så <a href="index.html#tilmeld">skriv dig op</a> og hjælp os med projektet.`
 
   function esc(s) {
     return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]))
@@ -2272,7 +2272,7 @@
 
     if (e.target.closest("[data-action]")) {
       document.querySelector("#orderBody .note").innerHTML =
-        'Det her er kun en demo, så intet bliver sendt. <a href="index.html#tilmeld">Skriv dig op</a>, så hører du fra os, når Musiclinq åbner.'
+        'Det her er kun en demo, så intet bliver sendt. Synes du, idéen er god, så <a href="index.html#tilmeld">skriv dig op</a> og hjælp os med projektet.'
     }
   })
 
