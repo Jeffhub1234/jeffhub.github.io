@@ -248,6 +248,11 @@
     }
 
     /* Produktforsmag: et profilkort og et opslag fra demoen */
+    .preview-label {
+      color: var(--soft);
+      margin: 14px 0 0;
+    }
+
     .preview {
       display: flex;
       align-items: stretch;
@@ -856,7 +861,7 @@
 
       .hero { padding-top: 36px; }
       .hero .container { gap: 40px; }
-      .preview { display: none; }
+      .preview, .preview-label { display: none; }
 
     }
 
@@ -945,6 +950,7 @@
             </div>
           </div>
         </div>
+        <p class="preview-label mono" aria-hidden="true">Eksempler fra demoen</p>
       </div>
 
       <div class="signup" id="tilmeld">
