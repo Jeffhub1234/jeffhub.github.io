@@ -161,61 +161,116 @@
 
     .demo-link:hover { color: var(--accent-2); }
 
-    /* Produktforsmag: to profilkort fra demoen */
+    /* Produktforsmag: et profilkort og et opslag fra demoen */
     .preview {
       position: relative;
-      height: 250px;
+      height: 450px;
       margin-top: 44px;
-      max-width: 460px;
+      max-width: 520px;
     }
 
-    .preview-card {
+    .pv {
       position: absolute;
-      width: 300px;
+      width: 290px;
       background: var(--card);
       color: var(--ink);
       border: 2px solid var(--paper);
-      padding: 16px;
-      box-shadow: 8px 8px 0 var(--accent);
+      font-size: 14px;
     }
 
-    .preview-card:nth-child(1) { left: 0; top: 0; transform: rotate(-3deg); }
-    .preview-card:nth-child(2) { left: 140px; top: 96px; transform: rotate(2.5deg); box-shadow: 8px 8px 0 var(--accent-2); }
+    .pv-profile { left: 0; top: 0; transform: rotate(-2.5deg); box-shadow: 8px 8px 0 var(--accent); }
+    .pv-request { left: 200px; top: 215px; transform: rotate(2deg); box-shadow: 8px 8px 0 var(--accent-2); border-left: 10px solid #7a3c7a; }
 
-    .pc-head { display: flex; gap: 12px; align-items: center; }
+    .pv-cover {
+      position: relative;
+      height: 44px;
+      background: #3c7a4f;
+      border-bottom: 2px solid var(--ink);
+      padding: 8px 10px;
+    }
+
+    .pv-body { padding: 12px 14px 14px; display: grid; gap: 8px; }
+
+    .pv-head { display: flex; gap: 10px; align-items: center; }
 
     .avatar {
       flex: none;
-      width: 44px;
-      height: 44px;
+      width: 42px;
+      height: 42px;
       display: grid;
       place-content: center;
       font-weight: 900;
       font-stretch: 70%;
-      font-size: 19px;
+      font-size: 18px;
       color: var(--paper);
+      background: #3c7a4f;
       border: 2px solid var(--ink);
+      margin-top: -30px;
     }
 
-    .pc-name { font-weight: 800; margin: 0; line-height: 1.15; }
-    .pc-role { font-size: 13px; color: var(--muted); margin: 2px 0 0; }
+    .pv-name { font-weight: 800; font-size: 16px; margin: 0; line-height: 1.15; }
+    .pv-sub { font-size: 12px; color: var(--muted); margin: 2px 0 0; }
 
-    .pc-foot {
+    .pv-badges { display: flex; gap: 5px; }
+
+    .pv-badge {
+      font-family: "DM Mono", monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: var(--paper);
+      color: var(--ink);
+      border: 1px solid var(--ink);
+      padding: 1px 5px;
+    }
+
+    .pv-badge.top { background: var(--accent-2); }
+    .pv-badge.new { background: #7a3c7a; color: var(--paper); border-color: #7a3c7a; }
+
+    .pv-badge.demo {
+      position: absolute;
+      right: 8px;
+      top: 8px;
+      background: var(--ink);
+      color: var(--accent-2);
+    }
+
+    .pv-request .pv-badge.demo { top: 10px; }
+
+    .pv-tag {
+      font-family: "DM Mono", monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+      border: 1px solid var(--muted);
+      color: var(--muted);
+      padding: 1px 5px;
+    }
+
+    .pv-offers { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+    .pv-offers li::before { content: "→ "; color: #3c7a4f; font-weight: 800; }
+
+    .pv-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0; }
+    .pv-facts dt { font-family: "DM Mono", monospace; font-size: 9px; text-transform: uppercase; color: var(--muted); }
+    .pv-facts dd { margin: 0; font-weight: 700; font-size: 13px; }
+
+    .pv-foot {
       display: flex;
       justify-content: space-between;
-      margin-top: 12px;
-      padding-top: 10px;
+      padding-top: 8px;
       border-top: 1px solid var(--soft);
-      font-size: 14px;
+      font-family: "DM Mono", monospace;
+      font-size: 11px;
     }
 
-    .pc-foot b { font-weight: 800; }
+    .pv-foot u { text-decoration: none; border-bottom: 2px solid var(--ink); }
 
     .preview-label {
       position: absolute;
       left: 0;
       bottom: -6px;
       color: var(--soft);
+      max-width: 200px;
+      line-height: 1.6;
     }
 
     /* ---------- Formular ---------- */
@@ -754,27 +809,41 @@
         <a class="demo-link" href="demo.html">Se hvordan Musiclinq kommer til at se ud →</a>
 
         <div class="preview" aria-hidden="true">
-          <div class="preview-card">
-            <div class="pc-head">
-              <div class="avatar" style="background:#2f4fd1">SK</div>
-              <div>
-                <p class="pc-name">Sofie Kjær</p>
-                <p class="pc-role">Mix- og masteringtekniker · København</p>
-              </div>
+          <div class="pv pv-profile">
+            <div class="pv-cover">
+              <div class="pv-badges"><span class="pv-badge top">Topbedømt</span><span class="pv-badge">Online</span></div>
+              <span class="pv-badge demo">Eksempel</span>
             </div>
-            <div class="pc-foot"><span>Fra <b>450 kr.</b></span><span>★ 4,9</span></div>
-          </div>
-          <div class="preview-card">
-            <div class="pc-head">
-              <div class="avatar" style="background:#3c7a4f">ML</div>
-              <div>
-                <p class="pc-name">Maja Lindholm</p>
-                <p class="pc-role">Sangunderviser · Online</p>
+            <div class="pv-body">
+              <div class="pv-head">
+                <div class="avatar">ML</div>
+                <div>
+                  <p class="pv-name">Maja Lindholm</p>
+                  <p class="pv-sub">Sangunderviser · København</p>
+                </div>
               </div>
+              <ul class="pv-offers">
+                <li>Prøvetime</li>
+                <li>Enkelt lektion</li>
+                <li>Forløb på 5 lektioner</li>
+              </ul>
+              <div class="pv-foot"><span>★ 5,0 (24)</span><u>Se priser og pakker →</u></div>
             </div>
-            <div class="pc-foot"><span>Fra <b>150 kr.</b></span><span>★ 5,0</span></div>
           </div>
-          <p class="preview-label mono">Eksempel fra demoen</p>
+          <div class="pv pv-request">
+            <span class="pv-badge demo">Eksempel</span>
+            <div class="pv-body">
+              <div class="pv-badges"><span class="pv-tag">Band</span><span class="pv-badge new">Nyt</span></div>
+              <p class="pv-name">Band til bryllup 14. juni</p>
+              <p class="pv-sub" style="margin-top:-6px">Sara og Mikkel · Skanderborg</p>
+              <dl class="pv-facts">
+                <div><dt>Budget</dt><dd>15.000–20.000 kr.</dd></div>
+                <div><dt>Hvornår</dt><dd>14. juni, kl. 21–01</dd></div>
+              </dl>
+              <div class="pv-foot"><span>I dag · 3 svar</span><u>Se opslag →</u></div>
+            </div>
+          </div>
+          <p class="preview-label mono">Eksempler fra demoen: en der tilbyder, og en der søger</p>
         </div>
       </div>
 
