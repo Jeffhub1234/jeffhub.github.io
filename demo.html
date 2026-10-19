@@ -313,6 +313,8 @@
 
     .demo-strip a { font-weight: 500; }
 
+    .strip-short { display: none; }
+
     /* ---------- Startside: vælg afdeling ---------- */
     .hero {
       background: var(--ink);
@@ -1225,6 +1227,20 @@
     }
 
     @media (max-width: 560px) {
+      .strip-long { display: none; }
+      .strip-short { display: inline; }
+      .demo-strip { padding: 6px 12px; }
+
+      .float-cta { padding: 10px 14px; font-size: 15px; box-shadow: 3px 3px 0 var(--ink); }
+
+      dialog {
+        width: calc(100% - 16px);
+        max-height: calc(100vh - 24px);
+        box-shadow: 5px 5px 0 var(--dept);
+      }
+
+      #dlgKind { display: none; }
+
       .header-links .hide-sm { display: none; }
       .deptbar .container { justify-content: space-between; }
       .dept-tab, .dept-tab:first-child { padding: 12px 0 9px; font-size: 14px; }
@@ -1266,7 +1282,7 @@
       <div class="container" id="deptbar"></div>
     </nav>
     <div class="demo-strip">
-      <b>DEMO</b>Musiclinq er ikke åbnet endnu. Profiler og opslag er opdigtede eksempler.
+      <b>DEMO</b><span class="strip-long">Musiclinq er ikke åbnet endnu. Profiler og opslag er opdigtede eksempler.</span><span class="strip-short">Opdigtede eksempler.</span>
       <a href="index.html#tilmeld">Skriv dig op</a>
     </div>
   </div>
