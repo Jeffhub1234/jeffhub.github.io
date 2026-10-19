@@ -873,26 +873,6 @@
       gap: 16px;
     }
 
-    /* ---------- Tillid ---------- */
-    .trust {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      border: 2px solid var(--line);
-    }
-
-    .trust div { padding: 22px; }
-    .trust div + div { border-left: 2px solid var(--line); }
-
-    .trust .ico {
-      display: block;
-      font-size: 26px;
-      line-height: 1;
-      margin-bottom: 12px;
-    }
-
-    .trust strong { display: block; font-size: 18px; margin-bottom: 4px; }
-    .trust p { margin: 0; font-size: 14px; color: var(--muted); }
-
     /* ---------- Knapper ---------- */
     .btn {
       display: inline-block;
@@ -1171,9 +1151,6 @@
 
     @media (max-width: 900px) {
       .post { grid-template-columns: 1fr; }
-      .trust { grid-template-columns: 1fr 1fr; }
-      .trust div:nth-child(3) { border-left: 0; }
-      .trust div:nth-child(n+3) { border-top: 2px solid var(--line); }
       .dlg-grid { grid-template-columns: 1fr; }
       .order { position: static; }
     }
@@ -1193,8 +1170,6 @@
       .grid { grid-template-columns: 1fr; }
       .post-intro, .post-form { padding: 22px; }
       .post-form .row { grid-template-columns: 1fr; }
-      .trust { grid-template-columns: 1fr; }
-      .trust div + div { border-left: 0; border-top: 2px solid var(--line); }
       .dlg-grid { padding: 18px; }
       .dlg-head .name { font-size: 26px; }
       .final .btn { width: 100%; }
@@ -1303,38 +1278,6 @@
         </div>
       </section>
     </main>
-  </div>
-
-  <!-- ===== Fælles bund ===== -->
-  <div class="container">
-    <section class="block">
-      <div class="section-head">
-        <h2 class="big">Tryghed for begge parter</h2>
-        <span class="mono">Det vil Musiclinq tilbyde</span>
-      </div>
-      <div class="trust">
-        <div>
-          <span class="ico">🔒</span>
-          <strong>Sikker betaling</strong>
-          <p>Pengene udbetales først, når du har fået det, I har aftalt.</p>
-        </div>
-        <div>
-          <span class="ico">★</span>
-          <strong>Ægte anmeldelser</strong>
-          <p>Kun folk, der har købt en ydelse, kan anmelde den.</p>
-        </div>
-        <div>
-          <span class="ico">₍kr₎</span>
-          <strong>Faste priser</strong>
-          <p>Pakker med klar pris og indhold – ingen overraskelser.</p>
-        </div>
-        <div>
-          <span class="ico">♫</span>
-          <strong>Hør før du vælger</strong>
-          <p>Lyt til tidligere arbejde direkte på profilen.</p>
-        </div>
-      </div>
-    </section>
   </div>
 
   <section class="final">
@@ -2220,13 +2163,16 @@
   $("close").addEventListener("click", () => $("profile").close())
   $("profile").addEventListener("click", e => { if (e.target === $("profile")) $("profile").close() })
 
+  // Det element, kontakten sidder ved i den visning, man er i
+  const switchAnchor = () => state.dept ? $("profiler") : document.querySelector("#view-home .mode-switch")
+
   window.addEventListener("hashchange", () => {
     const before = state.dept
-    const y = $("profiler").getBoundingClientRect().top
+    const y = switchAnchor().getBoundingClientRect().top
     showView()
-    // Skiftede man kun mellem tilbyder/søger i samme afdeling, bliver siden stående ved kontakten
-    if (state.dept && state.dept === before) window.scrollBy(0, $("profiler").getBoundingClientRect().top - y)
-    else window.scrollTo(0, 0)
+    // Skiftede man kun mellem tilbyder/søger (samme afdeling eller startsiden), bliver siden stående ved kontakten
+    if (state.dept === before) window.scrollBy({ top: switchAnchor().getBoundingClientRect().top - y, behavior: "instant" })
+    else window.scrollTo({ top: 0, behavior: "instant" })
   })
   showView()
 </script>
