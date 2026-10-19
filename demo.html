@@ -21,6 +21,7 @@
       --accent: #2f4fd1;
       --accent-2: #ffcf3f;
       --line: #161513;
+      --dept: var(--accent);
     }
 
     * { box-sizing: border-box; }
@@ -41,6 +42,8 @@
 
     button { font: inherit; color: inherit; }
 
+    [hidden] { display: none !important; }
+
     .container {
       max-width: 1120px;
       margin: 0 auto;
@@ -54,56 +57,6 @@
       letter-spacing: 0.08em;
     }
 
-    /* ---------- Demo-bånd ---------- */
-    .demo-strip {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: var(--accent-2);
-      border-bottom: 2px solid var(--ink);
-      font-family: "DM Mono", monospace;
-      font-size: 14px;
-      padding: 10px 16px;
-      text-align: center;
-    }
-
-    .demo-strip b {
-      background: var(--ink);
-      color: var(--accent-2);
-      padding: 2px 8px;
-      margin-right: 8px;
-      letter-spacing: 0.08em;
-    }
-
-    .demo-strip a { font-weight: 500; }
-
-    /* Forklaring i toppen om, at det er en demo */
-    .demo-callout {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      max-width: 720px;
-      background: var(--accent-2);
-      color: var(--ink);
-      border: 2px solid var(--accent-2);
-      padding: 14px 16px;
-      margin-bottom: 28px;
-      font-size: 15px;
-    }
-
-    .demo-callout .stamp {
-      flex: none;
-      font-family: "DM Mono", monospace;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      border: 2px solid var(--ink);
-      padding: 4px 8px;
-      transform: rotate(-4deg);
-    }
-
-    .demo-callout p { margin: 0; }
-
     /* ---------- Header ---------- */
     .site-header {
       background: var(--ink);
@@ -115,9 +68,8 @@
       justify-content: space-between;
       align-items: center;
       gap: 16px;
-      padding-top: 18px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid #3a3833;
+      padding-top: 16px;
+      padding-bottom: 16px;
     }
 
     .brand {
@@ -158,12 +110,108 @@
 
     .pill:hover { border-color: var(--accent-2); }
 
-    /* ---------- Hero med søgning ---------- */
+    /* ---------- Afdelingsbjælke + demo-bånd (klæber til toppen) ---------- */
+    .sticky-top {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .deptbar {
+      background: var(--ink);
+      border-top: 1px solid #3a3833;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .deptbar .container {
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .deptbar .container::-webkit-scrollbar { display: none; }
+
+    .dept-tab {
+      flex: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      font-stretch: 80%;
+      font-size: 17px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      color: var(--soft);
+      padding: 14px 20px 12px;
+      border-bottom: 4px solid transparent;
+    }
+
+    .dept-tab:first-child { padding-left: 0; }
+    .dept-tab:hover { color: var(--paper); }
+
+    .dept-tab[aria-current="page"] {
+      color: var(--paper);
+      border-bottom-color: var(--tab-color);
+    }
+
+    .dept-tab .dot {
+      width: 10px;
+      height: 10px;
+      background: var(--tab-color);
+    }
+
+    .demo-strip {
+      background: var(--accent-2);
+      border-bottom: 2px solid var(--ink);
+      font-family: "DM Mono", monospace;
+      font-size: 13px;
+      padding: 7px 16px;
+      text-align: center;
+    }
+
+    .demo-strip b {
+      background: var(--ink);
+      color: var(--accent-2);
+      padding: 2px 8px;
+      margin-right: 8px;
+      letter-spacing: 0.08em;
+    }
+
+    .demo-strip a { font-weight: 500; }
+
+    /* ---------- Startside: vælg afdeling ---------- */
     .hero {
       background: var(--ink);
       color: var(--paper);
-      padding: 48px 0 56px;
+      padding: 48px 0 64px;
     }
+
+    .demo-callout {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      max-width: 720px;
+      background: var(--accent-2);
+      color: var(--ink);
+      padding: 14px 16px;
+      margin-bottom: 32px;
+      font-size: 15px;
+    }
+
+    .demo-callout .stamp {
+      flex: none;
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      border: 2px solid var(--ink);
+      padding: 4px 8px;
+      transform: rotate(-4deg);
+    }
+
+    .demo-callout p { margin: 0; }
 
     h1 {
       font-stretch: 62%;
@@ -172,8 +220,7 @@
       line-height: 0.86;
       letter-spacing: -0.015em;
       text-transform: uppercase;
-      margin: 0 0 18px;
-      max-width: 12ch;
+      margin: 0 0 16px;
     }
 
     h1 em {
@@ -184,16 +231,92 @@
     .hero-lead {
       font-size: 19px;
       color: #ddd6c8;
-      max-width: 44ch;
-      margin: 0 0 28px;
+      max-width: 46ch;
+      margin: 0 0 36px;
     }
+
+    .dept-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .dept-card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 280px;
+      text-decoration: none;
+      background: var(--card);
+      color: var(--ink);
+      border: 2px solid var(--paper);
+      border-top: 14px solid var(--c);
+      padding: 20px;
+      transition: transform 0.12s, box-shadow 0.12s;
+    }
+
+    .dept-card:hover,
+    .dept-card:focus-visible {
+      transform: translate(-4px, -4px);
+      box-shadow: 8px 8px 0 var(--c);
+      outline: none;
+    }
+
+    .dept-card .num { color: var(--muted); }
+
+    .dept-card h2 {
+      font-stretch: 62%;
+      font-weight: 900;
+      font-size: 44px;
+      line-height: 0.9;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .dept-card p { margin: 0; font-size: 15px; }
+
+    .dept-card .ex {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .dept-card .go {
+      margin-top: auto;
+      font-family: "DM Mono", monospace;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid var(--soft);
+      padding-top: 10px;
+    }
+
+    .dept-card:hover .go { color: var(--c); }
+
+    /* ---------- Afdelingsside ---------- */
+    .dept-hero {
+      background: var(--dept);
+      color: var(--paper);
+      padding: 40px 0 48px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .crumbs {
+      color: rgba(255, 255, 255, 0.75);
+      margin-bottom: 16px;
+    }
+
+    .crumbs a { text-decoration: none; }
+    .crumbs a:hover { color: #fff; }
+
+    .dept-hero h1 { margin-bottom: 12px; }
+    .dept-hero .hero-lead { color: rgba(255, 255, 255, 0.88); margin-bottom: 26px; }
 
     .searchbar {
       display: flex;
       max-width: 720px;
       background: var(--paper);
-      border: 2px solid var(--paper);
-      box-shadow: 8px 8px 0 var(--accent);
+      border: 2px solid var(--ink);
+      box-shadow: 8px 8px 0 var(--ink);
     }
 
     .searchbar input {
@@ -223,31 +346,33 @@
       cursor: pointer;
     }
 
-    .searchbar button:hover { background: var(--accent); }
-
-    .popular {
+    .subs {
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
       gap: 8px;
-      margin-top: 22px;
-      color: var(--soft);
+      margin-top: 24px;
     }
 
-    .popular button {
+    .sub {
       font-family: "DM Mono", monospace;
       font-size: 13px;
       color: var(--paper);
       background: transparent;
-      border: 1px solid #55524b;
-      padding: 4px 10px;
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      padding: 6px 12px;
       cursor: pointer;
     }
 
-    .popular button:hover { border-color: var(--accent-2); color: var(--accent-2); }
+    .sub:hover { border-color: #fff; }
 
-    /* ---------- Kategorier ---------- */
-    section.block { padding-top: 64px; }
+    .sub[aria-pressed="true"] {
+      background: var(--paper);
+      color: var(--ink);
+      border-color: var(--paper);
+    }
+
+    /* ---------- Sektioner ---------- */
+    section.block { padding-top: 56px; }
 
     .section-head {
       display: flex;
@@ -269,48 +394,6 @@
     }
 
     .section-head .mono { color: var(--muted); }
-
-    .cats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-    }
-
-    .cat {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 18px;
-      min-height: 112px;
-      text-align: left;
-      background: var(--card);
-      border: 2px solid var(--line);
-      padding: 14px 16px;
-      cursor: pointer;
-      transition: transform 0.12s, box-shadow 0.12s;
-    }
-
-    .cat:hover {
-      transform: translate(-3px, -3px);
-      box-shadow: 5px 5px 0 var(--ink);
-    }
-
-    .cat[aria-pressed="true"] {
-      background: var(--ink);
-      color: var(--paper);
-    }
-
-    .cat-icon { font-size: 24px; line-height: 1; }
-
-    .cat-name {
-      font-weight: 900;
-      font-stretch: 75%;
-      font-size: 21px;
-      line-height: 1;
-    }
-
-    .cat-count { color: var(--muted); margin-top: 4px; }
-    .cat[aria-pressed="true"] .cat-count { color: var(--soft); }
 
     /* ---------- Værktøjslinje ---------- */
     .toolbar {
@@ -373,8 +456,6 @@
       cursor: pointer;
     }
 
-    .count { color: var(--muted); }
-
     /* ---------- Profilkort ---------- */
     .grid {
       display: grid;
@@ -405,16 +486,9 @@
 
     .card-badges {
       display: flex;
+      flex-wrap: wrap;
       gap: 6px;
-    }
-
-    .badge.demo {
-      position: absolute;
-      right: 12px;
-      top: 10px;
-      background: var(--ink);
-      color: var(--accent-2);
-      border-color: var(--ink);
+      padding-right: 80px;
     }
 
     .badge {
@@ -429,6 +503,15 @@
     }
 
     .badge.top { background: var(--accent-2); }
+
+    .badge.demo {
+      position: absolute;
+      right: 12px;
+      top: 10px;
+      background: var(--ink);
+      color: var(--accent-2);
+      border-color: var(--ink);
+    }
 
     .card-body {
       display: flex;
@@ -505,13 +588,6 @@
       padding: 2px 7px;
     }
 
-    .meta {
-      display: flex;
-      gap: 14px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
     .offers {
       list-style: none;
       margin: 0;
@@ -523,8 +599,13 @@
 
     .offers li::before {
       content: "→ ";
-      color: var(--accent);
+      color: var(--dept);
       font-weight: 800;
+    }
+
+    .meta {
+      font-size: 13px;
+      color: var(--muted);
     }
 
     .card-foot {
@@ -537,16 +618,15 @@
       font-size: 15px;
     }
 
+    .rating { font-family: "DM Mono", monospace; font-size: 13px; }
+
     .see-more {
       font-family: "DM Mono", monospace;
       font-size: 13px;
       border-bottom: 2px solid var(--ink);
     }
 
-    .card:hover .see-more { color: var(--accent); border-color: var(--accent); }
-
-    .price { font-weight: 800; font-size: 18px; }
-    .rating { font-family: "DM Mono", monospace; font-size: 13px; }
+    .card:hover .see-more { color: var(--dept); border-color: var(--dept); }
 
     .empty {
       grid-column: 1 / -1;
@@ -570,15 +650,17 @@
     .post {
       display: grid;
       grid-template-columns: 0.9fr 1.1fr;
-      gap: 0;
       border: 2px solid var(--line);
     }
 
     .post-intro {
-      background: var(--accent);
+      background: var(--ink);
       color: var(--paper);
       padding: 32px;
+      border-left: 14px solid var(--dept);
     }
+
+    .post-intro .mono { color: var(--accent-2); margin: 0 0 12px; }
 
     .post-intro h3 {
       font-stretch: 62%;
@@ -589,7 +671,7 @@
       margin: 0 0 14px;
     }
 
-    .post-intro p { margin: 0; color: #dfe4ff; }
+    .post-intro p { margin: 0; color: #ddd6c8; }
 
     .post-form {
       background: var(--card);
@@ -622,7 +704,7 @@
     }
 
     .post-form input:focus,
-    .post-form select:focus { border-bottom-color: var(--accent); }
+    .post-form select:focus { border-bottom-color: var(--dept); }
 
     .post-form .row {
       display: grid;
@@ -669,7 +751,7 @@
       transition: background 0.12s, border-color 0.12s;
     }
 
-    .btn:hover { background: var(--accent); border-color: var(--accent); }
+    .btn:hover { background: var(--dept); border-color: var(--dept); }
 
     .note {
       font-family: "DM Mono", monospace;
@@ -729,7 +811,7 @@
       color: var(--ink);
       background: var(--paper);
       border: 2px solid var(--line);
-      box-shadow: 12px 12px 0 var(--accent);
+      box-shadow: 12px 12px 0 var(--dept);
     }
 
     dialog::backdrop { background: rgba(22, 21, 19, 0.6); }
@@ -775,7 +857,7 @@
     .dlg-head .avatar {
       width: 80px;
       height: 80px;
-      font-size: 34px;
+      font-size: 32px;
       margin-top: 0;
     }
 
@@ -829,10 +911,10 @@
     }
 
     .wave span { flex: 1; background: var(--soft); min-height: 3px; }
-    .player.playing .wave span { background: var(--accent); }
+    .player.playing .wave span { background: var(--dept); }
 
     .review {
-      border-left: 3px solid var(--accent);
+      border-left: 3px solid var(--dept);
       padding: 2px 0 2px 12px;
       margin-bottom: 14px;
       font-size: 15px;
@@ -840,7 +922,6 @@
 
     .review .mono { margin: 4px 0 0; color: var(--muted); }
 
-    /* Pakkeboks */
     .order {
       position: sticky;
       top: 64px;
@@ -879,7 +960,7 @@
     }
 
     .order-title b { font-size: 19px; }
-    .order-title .price { font-size: 24px; white-space: nowrap; }
+    .order-title .price { font-weight: 800; font-size: 24px; white-space: nowrap; }
 
     .order-desc { color: var(--muted); font-size: 15px; margin: 0 0 14px; }
 
@@ -892,11 +973,12 @@
       font-size: 15px;
     }
 
-    .includes li::before { content: "✓ "; color: var(--accent); font-weight: 800; }
+    .includes li::before { content: "✓ "; color: var(--dept); font-weight: 800; }
 
     .order-meta {
       display: flex;
       justify-content: space-between;
+      gap: 10px;
       font-size: 13px;
       color: var(--muted);
       margin-bottom: 16px;
@@ -916,13 +998,17 @@
       cursor: pointer;
     }
 
-    .order .secondary:hover { border-color: var(--accent); color: var(--accent); }
+    .order .secondary:hover { border-color: var(--dept); color: var(--dept); }
 
     .order .note { margin-top: 14px; }
 
     /* ---------- Mobil ---------- */
+    @media (max-width: 960px) {
+      .dept-cards { grid-template-columns: 1fr 1fr; }
+      .dept-card { min-height: 0; }
+    }
+
     @media (max-width: 900px) {
-      .cats { grid-template-columns: repeat(2, 1fr); }
       .post { grid-template-columns: 1fr; }
       .trust { grid-template-columns: 1fr 1fr; }
       .trust div:nth-child(3) { border-left: 0; }
@@ -931,13 +1017,18 @@
       .order { position: static; }
     }
 
-    @media (max-width: 520px) {
+    @media (max-width: 560px) {
       .header-links .hide-sm { display: none; }
-      .hero { padding-top: 32px; }
-      .searchbar { box-shadow: 5px 5px 0 var(--accent); }
+      .deptbar .container { justify-content: space-between; }
+      .dept-tab, .dept-tab:first-child { padding: 12px 0 9px; font-size: 14px; }
+      .dept-tab .dot { display: none; }
+      .demo-strip { font-size: 12px; }
+      .hero, .dept-hero { padding-top: 28px; }
+      .dept-cards { grid-template-columns: 1fr; }
+      .dept-card h2 { font-size: 38px; }
+      .searchbar { box-shadow: 5px 5px 0 var(--ink); }
       .searchbar button { padding: 0 14px; font-size: 15px; }
       .section-head { flex-direction: column; align-items: start; }
-      .cat { min-height: 96px; }
       .grid { grid-template-columns: 1fr; }
       .post-intro, .post-form { padding: 22px; }
       .post-form .row { grid-template-columns: 1fr; }
@@ -952,118 +1043,103 @@
 
 <body>
 
-  <div class="demo-strip">
-    <b>DEMO</b>Musiclinq er ikke åbnet endnu. Profilerne er opdigtede eksempler.
-    <a href="index.html#tilmeld">Skriv dig op til ventelisten</a>
-  </div>
-
   <header class="site-header">
     <div class="container">
       <div class="brand">
-        <a class="logo" href="index.html">Musiclinq</a>
+        <a class="logo" href="#">Musiclinq</a>
         <span class="badge-demo mono">Demo</span>
       </div>
       <nav class="header-links mono">
-        <a class="hide-sm" href="#projekt">Post et projekt</a>
+        <a class="hide-sm" href="index.html">Om Musiclinq</a>
         <a class="pill" href="index.html#tilmeld">Skriv dig op</a>
       </nav>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="container">
-      <div class="demo-callout">
-        <span class="stamp">DEMO</span>
-        <p>
-          <strong>Sådan kan Musiclinq komme til at se ud.</strong>
-          Siden er et udkast fra vores studieprojekt på CBS. Personerne findes ikke, og intet kan bestilles endnu – men klik gerne rundt.
-        </p>
-      </div>
-
-      <h1>Find folk til <em>din musik</em></h1>
-      <p class="hero-lead">Producere, mixteknikere, sangere, musikere og undervisere – med lydklip, faste priser og ægte anmeldelser.</p>
-
-      <form class="searchbar" id="searchForm" role="search">
-        <input id="search" type="search" placeholder="Hvad har du brug for? Fx “mix af min single”" aria-label="Søg">
-        <button type="submit">Søg</button>
-      </form>
-
-      <div class="popular">
-        <span class="mono">Populært:</span>
-        <button type="button" data-q="mix">Mix</button>
-        <button type="button" data-q="sangtimer">Sangtimer</button>
-        <button type="button" data-q="trommer">Trommer</button>
-        <button type="button" data-q="beats">Beats</button>
-        <button type="button" data-q="band bryllup">Band til bryllup</button>
-        <button type="button" data-q="aarhus">Aarhus</button>
-      </div>
+  <div class="sticky-top">
+    <nav class="deptbar" aria-label="Afdelinger">
+      <div class="container" id="deptbar"></div>
+    </nav>
+    <div class="demo-strip">
+      <b>DEMO</b>Musiclinq er ikke åbnet endnu. Profilerne er opdigtede eksempler.
+      <a href="index.html#tilmeld">Skriv dig op</a>
     </div>
-  </section>
+  </div>
 
-  <main class="container">
-
-    <section class="block" id="kategorier">
-      <div class="section-head">
-        <h2 class="big">Udforsk kategorier</h2>
-        <span class="mono">Klik for at filtrere</span>
-      </div>
-      <div class="cats" id="cats"></div>
-    </section>
-
-    <section class="block" id="profiler">
-      <div class="section-head">
-        <h2 class="big" id="results-title">Alle profiler</h2>
-        <span class="mono count" id="count"></span>
-      </div>
-
-      <div class="toolbar">
-        <div class="filters">
-          <button class="toggle" type="button" id="onlineToggle" aria-pressed="false">◎ Kan arbejde online</button>
-          <span id="activeQuery"></span>
+  <!-- ===== Startside: vælg afdeling ===== -->
+  <div id="view-home">
+    <section class="hero">
+      <div class="container">
+        <div class="demo-callout">
+          <span class="stamp">DEMO</span>
+          <p>
+            <strong>Sådan kan Musiclinq komme til at se ud.</strong>
+            Siden er et udkast fra vores studieprojekt på CBS. Personerne findes ikke, og intet kan bestilles endnu – men klik gerne rundt.
+          </p>
         </div>
-        <select class="select" id="sort" aria-label="Sortér">
-          <option value="anbefalet">Sortér: Anbefalet</option>
-          <option value="rating">Sortér: Bedste bedømmelse</option>
-          <option value="anmeldelser">Sortér: Flest anmeldelser</option>
-        </select>
+
+        <h1>Hvad leder <em>du efter?</em></h1>
+        <p class="hero-lead">Musiclinq er delt op i fire afdelinger. Vælg den, der passer til det, du skal bruge.</p>
+
+        <div class="dept-cards" id="deptCards"></div>
       </div>
-
-      <div class="grid" id="grid"></div>
     </section>
+  </div>
 
-    <section class="block" id="projekt">
-      <div class="post">
-        <div class="post-intro">
-          <p class="mono" style="color:var(--accent-2);margin:0 0 12px">Ved du ikke, hvem du skal vælge?</p>
-          <h3>Lad folk komme til dig</h3>
-          <p>Beskriv dit projekt, så sender de rigtige profiler dig et tilbud. Du vælger selv, hvem du vil arbejde med.</p>
-        </div>
-        <form class="post-form" id="postForm">
-          <div>
-            <label for="p-what">Hvad har du brug for?</label>
-            <input id="p-what" type="text" placeholder="Fx trommer til en indie-single">
-          </div>
-          <div class="row">
-            <div>
-              <label for="p-cat">Kategori</label>
-              <select id="p-cat"></select>
-            </div>
-            <div>
-              <label for="p-budget">Budget</label>
-              <select id="p-budget">
-                <option>Under 1.000 kr.</option>
-                <option>1.000–3.000 kr.</option>
-                <option>3.000–7.500 kr.</option>
-                <option>Over 7.500 kr.</option>
-              </select>
-            </div>
-          </div>
-          <button class="btn" type="submit">Post projekt</button>
-          <p class="note" id="postNote" role="status"></p>
+  <!-- ===== Afdelingsside ===== -->
+  <div id="view-dept" hidden>
+    <section class="dept-hero">
+      <div class="container">
+        <p class="crumbs mono"><a href="#">Alle afdelinger</a> / <span id="crumb"></span></p>
+        <h1 id="deptTitle"></h1>
+        <p class="hero-lead" id="deptLead"></p>
+
+        <form class="searchbar" id="searchForm" role="search">
+          <input id="search" type="search" aria-label="Søg i afdelingen">
+          <button type="submit">Søg</button>
         </form>
+
+        <div class="subs" id="subs" role="group" aria-label="Underkategorier"></div>
       </div>
     </section>
 
+    <main class="container">
+      <section class="block" id="profiler">
+        <div class="section-head">
+          <h2 class="big" id="resultsTitle"></h2>
+          <span class="mono" id="count"></span>
+        </div>
+
+        <div class="toolbar">
+          <div class="filters">
+            <button class="toggle" type="button" id="extraToggle" aria-pressed="false"></button>
+            <span id="activeQuery"></span>
+          </div>
+          <select class="select" id="sort" aria-label="Sortér">
+            <option value="anbefalet">Sortér: Anbefalet</option>
+            <option value="rating">Sortér: Bedste bedømmelse</option>
+            <option value="anmeldelser">Sortér: Flest anmeldelser</option>
+          </select>
+        </div>
+
+        <div class="grid" id="grid"></div>
+      </section>
+
+      <section class="block" id="projekt">
+        <div class="post">
+          <div class="post-intro">
+            <p class="mono">Fandt du ikke den rette?</p>
+            <h3 id="postTitle"></h3>
+            <p id="postText"></p>
+          </div>
+          <form class="post-form" id="postForm"></form>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ===== Fælles bund ===== -->
+  <div class="container">
     <section class="block">
       <div class="section-head">
         <h2 class="big">Tryghed for begge parter</h2>
@@ -1073,7 +1149,7 @@
         <div>
           <span class="ico">🔒</span>
           <strong>Sikker betaling</strong>
-          <p>Pengene udbetales først, når du har godkendt det leverede.</p>
+          <p>Pengene udbetales først, når du har fået det, I har aftalt.</p>
         </div>
         <div>
           <span class="ico">★</span>
@@ -1092,8 +1168,7 @@
         </div>
       </div>
     </section>
-
-  </main>
+  </div>
 
   <section class="final">
     <div class="container">
@@ -1121,23 +1196,210 @@
   </dialog>
 
 <script>
-  // Opdigtede profiler – kun til demo
+  // ---------- Afdelinger ----------
+  const departments = {
+    band: {
+      name: "Band", color: "#b5432f",
+      title: "Find musikere til dit band",
+      lead: "Mangler du en bassist til koncerten, en trommeslager til indspilningen eller et fast medlem? Find musikere, der passer til din genre og dit niveau.",
+      card: "Find musikere til dit band eller projekt – til én indspilning, en koncert eller som fast medlem.",
+      examples: "Guitar · Bas · Trommer · Keys · Vokal",
+      placeholder: "Fx “bassist til indie-band i Aarhus”",
+      subs: ["Guitar", "Bas", "Trommer", "Keys", "Vokal"],
+      toggle: ["Åben for fast band", p => p.member],
+      post: {
+        title: "Søg en musiker",
+        text: "Skriv, hvilket instrument du mangler, og hvad det skal bruges til. Så kan musikere, der passer, skrive til dig.",
+        fields: [
+          ["Hvad søger du?", "text", "Fx trommeslager til rockband i København"],
+          ["Instrument", "select", ["Guitar", "Bas", "Trommer", "Keys", "Vokal", "Andet"]],
+          ["Til hvad?", "select", ["Én indspilning", "Koncert / vikar", "Fast medlem"]]
+        ]
+      }
+    },
+    undervisning: {
+      name: "Undervisning", color: "#3c7a4f",
+      title: "Lær at spille, synge eller producere",
+      lead: "Find en underviser til dit instrument og dit niveau – online eller hos dig i nærheden.",
+      card: "Find en underviser til sang, instrument eller produktion – online eller i nærheden af dig.",
+      examples: "Sang · Klaver · Guitar · Produktion",
+      placeholder: "Fx “sangtimer for begyndere”",
+      subs: ["Sang", "Klaver", "Guitar", "Produktion"],
+      toggle: ["Underviser online", p => p.online],
+      post: {
+        title: "Fortæl, hvad du vil lære",
+        text: "Beskriv dit niveau og dit mål, så finder vi undervisere, der passer til dig.",
+        fields: [
+          ["Hvad vil du lære?", "text", "Fx at akkompagnere mig selv på klaver"],
+          ["Instrument", "select", ["Sang", "Klaver", "Guitar", "Produktion", "Andet"]],
+          ["Niveau", "select", ["Begynder", "Let øvet", "Øvet", "Erfaren"]]
+        ]
+      }
+    },
+    produktion: {
+      name: "Produktion", color: "#2f4fd1",
+      title: "Få din musik færdig",
+      lead: "Mix, mastering, beats og sangskrivning. Find den rette til at gøre dit nummer klar til udgivelse.",
+      card: "Mix, mastering, beats og sangskrivning – få dit nummer klar til udgivelse.",
+      examples: "Mix & master · Beats · Sangskrivning",
+      placeholder: "Fx “mix og master af min single”",
+      subs: ["Mix & master", "Beats & produktion", "Sangskrivning"],
+      toggle: ["Kan arbejde online", p => p.online],
+      post: {
+        title: "Beskriv dit projekt",
+        text: "Fortæl, hvad du har brug for, så sender de rigtige producere og teknikere dig et tilbud.",
+        fields: [
+          ["Hvad har du brug for?", "text", "Fx mix og master af en EP med 5 numre"],
+          ["Ydelse", "select", ["Mix & master", "Beats & produktion", "Sangskrivning"]],
+          ["Budget", "select", ["Under 1.000 kr.", "1.000–3.000 kr.", "3.000–7.500 kr.", "Over 7.500 kr."]]
+        ]
+      }
+    },
+    livemusik: {
+      name: "Livemusik", color: "#7a3c7a",
+      title: "Musik til dit arrangement",
+      lead: "Book et band, en duo, en DJ eller en lydtekniker til bryllup, firmafest, fødselsdag eller koncert.",
+      card: "Book band, duo, DJ eller lydtekniker til bryllup, firmafest eller koncert.",
+      examples: "Band · Duo & solo · DJ · Lydtekniker",
+      placeholder: "Fx “band til bryllup i juni”",
+      subs: ["Band", "Duo & solo", "DJ", "Lydtekniker"],
+      toggle: ["Medbringer eget anlæg", p => p.gear],
+      post: {
+        title: "Beskriv dit arrangement",
+        text: "Fortæl, hvad der skal fejres, hvor og hvornår, så kan de musikere, der har tid, sende dig et tilbud.",
+        fields: [
+          ["Hvad skal der ske?", "text", "Fx bryllup for 120 gæster i Odense"],
+          ["Hvad søger du?", "select", ["Band", "Duo & solo", "DJ", "Lydtekniker"]],
+          ["Dato", "date"]
+        ]
+      }
+    }
+  }
+
+  // ---------- Opdigtede profiler – kun til demo ----------
+  // packages: [fanenavn, titel, beskrivelse, pris, leveringsdage, indhold]
   const profiles = [
+    // Band
     {
-      name: "Sofie Kjær", role: "Mix- og masteringtekniker", city: "København", online: true, color: "#2f4fd1",
-      cats: ["Mix & master"], genres: ["Pop", "Indie", "Elektronisk"], rating: 4.9, reviews: 38, response: "1 time", jobs: 112, top: true,
+      dept: "band", subs: ["Guitar"], name: "Jonas Brix", role: "Guitarist", city: "Odense", online: true, member: false, color: "#8a5a1f",
+      genres: ["Rock", "Country", "Pop"], rating: 4.7, reviews: 19, response: "5 timer", jobs: 45, top: false,
+      bio: "Indspiller guitar til dit nummer hjemmefra og hopper gerne ind som vikar til koncerter på Fyn. Elektrisk, akustisk og lap steel.",
+      tracks: [["Landevej – country", "Guitar og lap steel"]],
+      packages: [
+        ["Indspilning", "Ét guitarspor", "Indspillet efter dine noter eller en reference.", 600, 3, ["1 spor", "2 revisioner", "WAV-fil"]],
+        ["Koncert", "Vikar til koncert", "Jeg lærer sættet og spiller koncerten med jer.", 2500, 7, ["1 prøve", "Koncert op til 2 timer"]]
+      ],
+      reviewsList: [["Leverede tre forskellige bud på soloen dagen efter. Super professionelt.", "Band fra Vejle"]]
+    },
+    {
+      dept: "band", subs: ["Trommer"], name: "Oliver Sand", role: "Trommeslager", city: "Roskilde", online: true, member: true, color: "#444038",
+      genres: ["Indie", "Rock", "Funk"], rating: 4.8, reviews: 27, response: "2 timer", jobs: 66, top: true,
+      bio: "Indspiller rigtige trommer til dit nummer i eget studie og leder efter et fast band i Roskilde/København.",
+      tracks: [["Tunnel – indie-rock", "Trommer"]],
+      packages: [
+        ["Indspilning", "Trommer til én sang", "Multitrack klar til mix.", 900, 4, ["Multitrack", "2 revisioner"]],
+        ["Koncert", "Vikar til koncert", "Jeg lærer sættet og spiller med på aftenen.", 2800, 7, ["2 prøver", "Koncert"]],
+        ["Fast band", "Prøvespil som fast medlem", "Lad os mødes til en prøve og se, om det klikker.", 0, 7, ["Gratis prøvespil", "Øver 1–2 gange om ugen"]]
+      ],
+      reviewsList: [["Det er en helt anden energi end programmerede trommer.", "Sofie, mixtekniker"]]
+    },
+    {
+      dept: "band", subs: ["Bas"], name: "Line Mørk", role: "Bassist", city: "København", online: false, member: true, color: "#1f6f6a",
+      genres: ["Soul", "Jazz", "Indie"], rating: 4.9, reviews: 16, response: "3 timer", jobs: 34, top: true,
+      bio: "El- og kontrabas. Har spillet i flere københavnske bands og søger et nyt fast projekt med fokus på soul og indie.",
+      tracks: [["Søndag – neo-soul", "El-bas"]],
+      packages: [
+        ["Koncert", "Vikar til koncert", "Kontrabas eller el-bas – jeg læser noder og lærer hurtigt.", 2500, 5, ["1 prøve", "Koncert"]],
+        ["Fast band", "Prøvespil som fast medlem", "Uforpligtende prøve, så vi kan mærke, om det spiller.", 0, 7, ["Gratis prøvespil"]]
+      ],
+      reviewsList: [["Line lærte hele sættet på to dage og løftede koncerten.", "Sangerinde, København"]]
+    },
+    {
+      dept: "band", subs: ["Keys"], name: "Kasper Juul", role: "Keys og synth", city: "Aarhus", online: true, member: false, color: "#5b4b9a",
+      genres: ["Pop", "Elektronisk", "Gospel"], rating: 4.8, reviews: 21, response: "4 timer", jobs: 52, top: false,
+      bio: "Klaver, orgel og synth til indspilninger og koncerter. Har eget setup med Nord og Moog.",
+      tracks: [["Lysår – synth-pop", "Synth og klaver"]],
+      packages: [
+        ["Indspilning", "Keys til én sang", "Klaver, orgel eller synth efter dine ønsker.", 800, 4, ["Op til 3 spor", "2 revisioner"]],
+        ["Koncert", "Vikar til koncert", "Med eget setup og in-ears.", 2700, 7, ["1 prøve", "Eget setup"]]
+      ],
+      reviewsList: [["Kom med idéer, vi slet ikke havde tænkt på. Nummeret blev meget bedre.", "Popduo fra Aarhus"]]
+    },
+    {
+      dept: "band", subs: ["Vokal"], name: "Freja Dahl", role: "Forsanger og korsanger", city: "Odense", online: true, member: true, color: "#a63d5c",
+      genres: ["Pop", "Rock", "Soul"], rating: 4.9, reviews: 23, response: "2 timer", jobs: 48, top: false,
+      bio: "Synger lead og kor på indspilninger og live. Søger et fast band på Fyn, der spiller eget materiale.",
+      tracks: [["Hjem – akustisk", "Lead-vokal"]],
+      packages: [
+        ["Indspilning", "Vokal på én sang", "Lead eller kor, indspillet i mit hjemmestudie.", 1200, 5, ["Lead eller kor", "2 revisioner", "Tørre spor"]],
+        ["Fast band", "Prøvesang som fast medlem", "Uforpligtende prøve med jeres materiale.", 0, 7, ["Gratis prøvesang"]]
+      ],
+      reviewsList: [["Hendes kor fik omkvædet til at løfte sig helt vildt.", "Rockband fra Svendborg"]]
+    },
+
+    // Undervisning
+    {
+      dept: "undervisning", subs: ["Sang"], name: "Maja Lindholm", role: "Sangunderviser", city: "København", online: true, color: "#3c7a4f",
+      genres: ["Pop", "Jazz", "Musical"], rating: 5.0, reviews: 24, response: "2 timer", jobs: 60, top: true,
+      bio: "Uddannet fra Rytmisk Musikkonservatorium. Underviser begyndere og øvede i teknik, vejrtrækning og fremførelse.",
+      tracks: [["Fly Me to the Moon – jazz", "Egen vokal"]],
+      packages: [
+        ["Prøvetime", "Prøvetime", "30 minutter online, hvor vi finder ud af, hvad du skal arbejde med.", 150, 1, ["30 min.", "Online"]],
+        ["Lektion", "Enkelt lektion", "60 minutter online eller i København.", 450, 2, ["60 min.", "Øvelser til hjemmebrug"]],
+        ["Forløb", "Forløb på 5 lektioner", "Med plan og øvelser mellem timerne.", 2000, 7, ["5 × 60 min.", "Personlig plan", "Lydoptagelser"]]
+      ],
+      reviewsList: [["Jeg har fået meget mere styr på mine høje toner på bare en måned.", "Emil, hobbysanger"]]
+    },
+    {
+      dept: "undervisning", subs: ["Klaver"], name: "Emma Thorsen", role: "Klaverunderviser", city: "Aarhus", online: false, color: "#a6732b",
+      genres: ["Klassisk", "Pop", "Akkompagnement"], rating: 4.9, reviews: 41, response: "3 timer", jobs: 95, top: true,
+      bio: "Underviser børn og voksne – fra første akkord til at akkompagnere sig selv. Fokus på at spille det, du har lyst til.",
+      tracks: [["Vals i a-mol", "Klaver"]],
+      packages: [
+        ["Lektion", "Enkelt lektion", "45 minutter i Aarhus C.", 350, 2, ["45 min.", "Noder inkluderet"]],
+        ["Måned", "Månedsforløb", "4 lektioner med fast tid hver uge.", 1300, 7, ["4 × 45 min.", "Fast ugentlig tid"]]
+      ],
+      reviewsList: [["Min datter glæder sig til hver eneste time.", "Forælder"]]
+    },
+    {
+      dept: "undervisning", subs: ["Guitar"], name: "Rasmus Bach", role: "Guitarunderviser", city: "Online", online: true, color: "#6b4f2a",
+      genres: ["Rock", "Blues", "Singer-songwriter"], rating: 4.8, reviews: 37, response: "1 time", jobs: 120, top: false,
+      bio: "Lær de akkorder og sange, du gerne vil kunne spille. Videotimer med noter og øvelser efter hver time.",
+      tracks: [["Blues i E", "Akustisk guitar"]],
+      packages: [
+        ["Lektion", "Enkelt lektion", "45 minutter over video.", 300, 1, ["45 min.", "Noter efter timen"]],
+        ["Forløb", "Begynderforløb", "8 lektioner fra nul til dine første sange.", 2200, 7, ["8 × 45 min.", "Øveplan", "Sangark"]]
+      ],
+      reviewsList: [["Efter to måneder kan jeg spille til lejrbål. Det havde jeg aldrig troet.", "Anna, begynder"]]
+    },
+    {
+      dept: "undervisning", subs: ["Produktion"], name: "Signe Holt", role: "Underviser i musikproduktion", city: "København", online: true, color: "#2b5f8a",
+      genres: ["Ableton", "Elektronisk", "Pop"], rating: 4.9, reviews: 18, response: "3 timer", jobs: 40, top: false,
+      bio: "Lær at producere dine egne numre i Ableton Live – fra første beat til færdigt mix.",
+      tracks: [["Byen sover – elektronisk", "Egen produktion"]],
+      packages: [
+        ["Lektion", "Enkelt lektion", "60 minutter med skærmdeling.", 500, 2, ["60 min.", "Projektfil"]],
+        ["Forløb", "Lær Ableton på 6 uger", "Vi laver et helt nummer sammen.", 2800, 7, ["6 × 60 min.", "Projektfiler", "Feedback mellem timerne"]]
+      ],
+      reviewsList: [["Endelig forstår jeg, hvad en compressor gør.", "Jonas, hobbyproducer"]]
+    },
+
+    // Produktion
+    {
+      dept: "produktion", subs: ["Mix & master"], name: "Sofie Kjær", role: "Mix- og masteringtekniker", city: "København", online: true, color: "#2f4fd1",
+      genres: ["Pop", "Indie", "Elektronisk"], rating: 4.9, reviews: 38, response: "1 time", jobs: 112, top: true,
       bio: "Har mixet for danske indie- og popnavne de sidste otte år. Arbejder analogt-hybrid i eget studie på Nørrebro.",
       tracks: [["Natlys – indie-pop", "Mix + master"], ["Sydhavn – elektronisk", "Master"]],
       packages: [
         ["Master", "Master af én sang", "Klar til streaming på alle platforme.", 450, 2, ["1 sang", "WAV + MP3", "1 revision"]],
         ["Mix + master", "Mix og master af én sang", "Op til 40 spor. Du får et mix, der kan stå ved siden af dine referencer.", 1800, 5, ["Op til 40 spor", "3 revisioner", "Instrumental version"]],
-        ["EP", "Mix og master af en EP", "4–6 numre med en ensartet lyd hele vejen igennem.", 7500, 14, ["4–6 sange", "3 revisioner pr. sang", "Instrumental versioner"]]
+        ["EP", "Mix og master af en EP", "4–6 numre med en ensartet lyd hele vejen igennem.", 7500, 14, ["4–6 sange", "3 revisioner pr. sang", "Instrumentale versioner"]]
       ],
-      reviewsList: [["Mit nummer lyder endelig som det, jeg hørte i hovedet. Hurtig og meget lydhør.", "Mads, singer-songwriter"], ["Tredje gang jeg bruger Sofie. Hun forstår bare, hvad sangen skal.", "Band fra Aarhus"]]
+      reviewsList: [["Mit nummer lyder endelig som det, jeg hørte i hovedet. Hurtig og meget lydhør.", "Mads, singer-songwriter"]]
     },
     {
-      name: "Ahmed Rashid", role: "Producer og beatmaker", city: "Aarhus", online: true, color: "#b5432f",
-      cats: ["Produktion"], genres: ["Hiphop", "R&B", "Afrobeats"], rating: 4.8, reviews: 52, response: "3 timer", jobs: 140, top: true,
+      dept: "produktion", subs: ["Beats & produktion"], name: "Ahmed Rashid", role: "Producer og beatmaker", city: "Aarhus", online: true, color: "#b5432f",
+      genres: ["Hiphop", "R&B", "Afrobeats"], rating: 4.8, reviews: 52, response: "3 timer", jobs: 140, top: true,
       bio: "Laver beats og fulde produktioner. Kan både levere færdige beats og bygge et nummer op omkring din idé.",
       tracks: [["Sommer i byen – beats", "Produktion"], ["Gaden – hiphop", "Produktion"]],
       packages: [
@@ -1148,31 +1410,20 @@
       reviewsList: [["Forstod præcis, hvilken vibe jeg gik efter. Har allerede booket ham igen.", "Lina, rapper"]]
     },
     {
-      name: "Maja Lindholm", role: "Sangunderviser", city: "København", online: true, color: "#3c7a4f",
-      cats: ["Undervisning", "Vokal"], genres: ["Pop", "Jazz", "Musical"], rating: 5.0, reviews: 24, response: "2 timer", jobs: 60, top: true,
-      bio: "Uddannet fra Rytmisk Musikkonservatorium. Underviser begyndere og øvede i teknik, vejrtrækning og fremførelse. Sangtimer online eller i København.",
-      tracks: [["Fly Me to the Moon – jazz", "Egen vokal"]],
+      dept: "produktion", subs: ["Beats & produktion", "Mix & master"], name: "Nikolaj Friis", role: "Producer og mixer", city: "København", online: true, color: "#1f5fa6",
+      genres: ["Elektronisk", "House", "Techno"], rating: 4.7, reviews: 22, response: "6 timer", jobs: 50, top: false,
+      bio: "Producerer og mixer elektronisk musik til klub og streaming. Giver også feedback på dine egne tracks.",
+      tracks: [["Afterhours – house", "Produktion og mix"]],
       packages: [
-        ["Prøvetime", "Prøvetime", "30 minutter online, hvor vi finder ud af, hvad du skal arbejde med.", 150, 1, ["30 min.", "Online"]],
-        ["Lektion", "Enkelt lektion", "60 minutter online eller i København.", 450, 2, ["60 min.", "Øvelser til hjemmebrug"]],
-        ["Forløb", "Forløb på 5 lektioner", "Med plan og øvelser mellem timerne.", 2000, 7, ["5 × 60 min.", "Personlig plan", "Lydoptagelser"]]
+        ["Feedback", "Feedback på dit track", "Skriftlig og video-gennemgang af dit nummer.", 300, 2, ["Video-gennemgang", "Konkrete forslag"]],
+        ["Mixdown", "Mixdown", "Klar til master med to revisioner.", 1200, 5, ["2 revisioner", "Klar til master"]],
+        ["Co-produktion", "Co-produktion", "Vi færdiggør dit track sammen.", 3500, 10, ["Arrangement", "Mix", "Stems"]]
       ],
-      reviewsList: [["Jeg har fået meget mere styr på mine høje toner på bare en måned.", "Emil, hobbysanger"]]
+      reviewsList: [["Fik mit track klar til at sende til labels på en uge.", "DJ fra Roskilde"]]
     },
     {
-      name: "Jonas Brix", role: "Sessionsguitarist", city: "Odense", online: true, color: "#8a5a1f",
-      cats: ["Sessionsmusik"], genres: ["Rock", "Country", "Pop"], rating: 4.7, reviews: 19, response: "5 timer", jobs: 45, top: false,
-      bio: "Indspiller guitar til dit nummer hjemmefra og sender færdige spor. Elektrisk, akustisk og lap steel.",
-      tracks: [["Landevej – country", "Guitar og lap steel"]],
-      packages: [
-        ["Ét spor", "Ét guitarspor", "Indspillet efter dine noter eller en reference.", 600, 3, ["1 spor", "2 revisioner", "WAV-fil"]],
-        ["Arrangement", "Fuldt guitararrangement", "Op til fire guitarspor, der løfter hele nummeret.", 1600, 5, ["Op til 4 spor", "3 revisioner", "Flere bud på solo"]]
-      ],
-      reviewsList: [["Leverede tre forskellige bud på soloen dagen efter. Super professionelt.", "Band fra Vejle"]]
-    },
-    {
-      name: "Clara Vestergaard", role: "Sangskriver og topliner", city: "København", online: true, color: "#7a3c7a",
-      cats: ["Sangskrivning", "Vokal"], genres: ["Pop", "Dance"], rating: 4.9, reviews: 31, response: "4 timer", jobs: 70, top: true,
+      dept: "produktion", subs: ["Sangskrivning"], name: "Clara Vestergaard", role: "Sangskriver og topliner", city: "København", online: true, color: "#7a3c7a",
+      genres: ["Pop", "Dance"], rating: 4.9, reviews: 31, response: "4 timer", jobs: 70, top: true,
       bio: "Skriver melodier og tekster på dansk og engelsk til producere og artister. Leverer demo med vokal.",
       tracks: [["Ingen anden – pop", "Topline og demovokal"]],
       packages: [
@@ -1181,9 +1432,45 @@
       ],
       reviewsList: [["Hun fandt omkvædet, vi havde ledt efter i månedsvis.", "Ahmed, producer"]]
     },
+
+    // Livemusik
     {
-      name: "Peter Holm", role: "Lydtekniker til livekoncerter", city: "Aalborg", online: false, color: "#2b6c7a",
-      cats: ["Live"], genres: ["Rock", "Pop", "Folk"], rating: 4.6, reviews: 14, response: "1 dag", jobs: 38, top: false,
+      dept: "livemusik", subs: ["Band"], name: "Nordlys Band", role: "Liveband · 5 musikere", city: "Hele Danmark", gear: true, color: "#c2410c",
+      genres: ["Pop", "Soul", "Funk", "Danske klassikere"], rating: 4.9, reviews: 33, response: "5 timer", jobs: 84, top: true,
+      bio: "Fem musikere med sang, guitar, bas, keys og trommer. Vi spiller alt fra Gasolin og Medina til Bruno Mars og Earth, Wind & Fire til bryllupper, firmafester og fødselsdage – og tager selv lyd og lys med.",
+      tracks: [["Live til bryllup i Vejle", "Uptown Funk (cover)"], ["Firmafest i København", "Medley med danske klassikere"]],
+      packages: [
+        ["Koncert", "Koncert – 1 sæt", "45 minutters koncert, fx til en reception eller et arrangement.", 6500, 1, ["45 min. musik", "Eget lydanlæg", "Op til 150 gæster"]],
+        ["Fest", "Bryllup eller fest – 3 sæt", "3 × 45 minutter, så dansegulvet er fyldt hele aftenen.", 18000, 1, ["3 × 45 min. musik", "Lyd og lys", "Ønskesang til første dans", "Playliste mellem sættene"]],
+        ["Firmafest", "Firmafest – 4 sæt", "Hele aftenen med musik og playliste i pauserne.", 24000, 1, ["4 × 45 min. musik", "Lyd og lys", "Op til 400 gæster", "Kørsel i hele Danmark"]]
+      ],
+      reviewsList: [["Dansegulvet var fyldt fra første til sidste nummer. Alle gæsterne spurgte, hvor vi havde fundet dem.", "Sara og Mikkel, bryllup"], ["Professionelle fra start til slut – de klarede både opsætning og lyd selv.", "Eventkoordinator, firmafest"]]
+    },
+    {
+      dept: "livemusik", subs: ["Duo & solo"], name: "Ida & Sebastian", ini: "I&S", role: "Akustisk duo", city: "Sjælland", gear: true, color: "#8a6d1f",
+      genres: ["Akustisk", "Pop", "Viser"], rating: 5.0, reviews: 29, response: "3 timer", jobs: 61, top: true,
+      bio: "Sang og akustisk guitar til vielser, receptioner og middage. Vi kan spille stille i baggrunden eller få alle til at synge med.",
+      tracks: [["Vielse i Frederiksberg Kirke", "Can't Help Falling in Love"]],
+      packages: [
+        ["Vielse", "Musik til vielse", "Indmarch, 1–2 numre undervejs og udmarch.", 3500, 1, ["Op til 3 numre", "Ønskesange"]],
+        ["Reception", "Reception eller middag", "2 timers stemningsmusik.", 6000, 1, ["2 timer", "Eget lille anlæg"]]
+      ],
+      reviewsList: [["Der var ikke et tørt øje i kirken. Helt perfekt.", "Louise, bryllup"]]
+    },
+    {
+      dept: "livemusik", subs: ["DJ"], name: "DJ Malte Krogh", ini: "MK", role: "Fest- og bryllups-DJ", city: "Jylland", gear: true, color: "#2d2a6e",
+      genres: ["Pop", "80'er–00'er", "House"], rating: 4.8, reviews: 46, response: "2 timer", jobs: 150, top: false,
+      bio: "Læser dansegulvet og spiller det, gæsterne vil høre. Medbringer anlæg, lys og røgmaskine.",
+      tracks: [["Live-mix fra bryllup", "Pop og 00'er"]],
+      packages: [
+        ["Fest", "Fest op til 5 timer", "DJ med anlæg og lys.", 5500, 1, ["5 timer", "Lyd og lys", "Ønskeliste"]],
+        ["Bryllup", "Bryllup til kl. 03", "Fra første dans til natmaden.", 8500, 1, ["Fra kl. 21 til 03", "Mikrofon til taler", "Lyd og lys"]]
+      ],
+      reviewsList: [["Ramte stemningen hele natten – fra mormor til fætrene.", "Jesper, 40-års fødselsdag"]]
+    },
+    {
+      dept: "livemusik", subs: ["Lydtekniker"], name: "Peter Holm", role: "Lydtekniker til livekoncerter", city: "Aalborg", gear: true, color: "#2b6c7a",
+      genres: ["Rock", "Pop", "Folk"], rating: 4.6, reviews: 14, response: "1 dag", jobs: 38, top: false,
       bio: "Klarer lyden til koncerter, festivaler og events i Nordjylland. Kan medbringe eget udstyr.",
       tracks: [["Live fra Studenterhuset", "Livemix"]],
       packages: [
@@ -1191,69 +1478,13 @@
         ["Eget anlæg", "Koncert med eget anlæg", "PA, mixer og mikrofoner til op til 200 gæster.", 5500, 1, ["PA + mixer", "Mikrofoner", "Op til 200 gæster"]]
       ],
       reviewsList: [["Lyden var skarp hele aftenen, og han var rolig, da en mikrofon døde.", "Spillested i Aalborg"]]
-    },
-    {
-      name: "Nordlys Band", role: "Liveband · 5 musikere", city: "Hele Danmark", online: false, color: "#c2410c",
-      cats: ["Live"], genres: ["Pop", "Soul", "Funk", "Danske klassikere"], rating: 4.9, reviews: 33, response: "5 timer", jobs: 84, top: true,
-      bio: "Fem musikere med sang, guitar, bas, keys og trommer. Vi spiller alt fra Gasolin og Medina til Bruno Mars og Earth, Wind & Fire til bryllupper, firmafester og fødselsdage – og tager selv lyd og lys med.",
-      tracks: [["Live til bryllup i Vejle", "Uptown Funk (cover)"], ["Firmafest i København", "Medley med danske klassikere"]],
-      packages: [
-        ["Koncert", "Koncert – 1 sæt", "45 minutters koncert, fx til en reception eller et arrangement.", 6500, 1, ["45 min. musik", "Eget lydanlæg", "Op til 150 gæster"]],
-        ["Fest", "Bryllup eller fest – 3 sæt", "3 × 45 minutter, så dansegulvet er fyldt hele aftenen.", 18000, 1, ["3 × 45 min. musik", "Lyd og lys", "Ønskesang til første dans", "Playliste mellem sættene"]],
-        ["Firmafest", "Firmafest – 4 sæt", "Hele aftenen med musik og DJ-playliste i pauserne.", 24000, 1, ["4 × 45 min. musik", "Lyd og lys", "Op til 400 gæster", "Kørsel i hele Danmark"]]
-      ],
-      reviewsList: [["Dansegulvet var fyldt fra første til sidste nummer. Alle gæsterne spurgte, hvor vi havde fundet dem.", "Sara og Mikkel, bryllup"], ["Professionelle fra start til slut – de klarede både opsætning og lyd selv.", "Eventkoordinator, firmafest"]]
-    },
-    {
-      name: "Emma Thorsen", role: "Klaverunderviser", city: "Aarhus", online: false, color: "#a6732b",
-      cats: ["Undervisning"], genres: ["Klassisk", "Pop", "Akkompagnement"], rating: 4.9, reviews: 41, response: "3 timer", jobs: 95, top: false,
-      bio: "Underviser børn og voksne – fra første akkord til at akkompagnere sig selv. Fokus på at spille det, du har lyst til.",
-      tracks: [["Vals i a-mol", "Klaver"]],
-      packages: [
-        ["Lektion", "Enkelt lektion", "45 minutter i Aarhus C.", 350, 2, ["45 min.", "Noder inkluderet"]],
-        ["Måned", "Månedsforløb", "4 lektioner med fast tid hver uge.", 1300, 7, ["4 × 45 min.", "Fast ugentlig tid"]]
-      ],
-      reviewsList: [["Min datter glæder sig til hver eneste time.", "Forælder"]]
-    },
-    {
-      name: "Oliver Sand", role: "Trommeslager", city: "Roskilde", online: true, color: "#444038",
-      cats: ["Sessionsmusik"], genres: ["Indie", "Rock", "Funk"], rating: 4.8, reviews: 27, response: "2 timer", jobs: 66, top: false,
-      bio: "Indspiller rigtige trommer til dit nummer i eget studie. Leverer multitrack klar til mix.",
-      tracks: [["Tunnel – indie-rock", "Trommer"]],
-      packages: [
-        ["Én sang", "Trommer til én sang", "Multitrack klar til mix.", 900, 4, ["Multitrack", "2 revisioner"]],
-        ["EP", "Trommer til en EP", "Op til 6 numre indspillet i samme setup.", 4500, 10, ["Op til 6 sange", "Multitrack", "2 revisioner pr. sang"]]
-      ],
-      reviewsList: [["Det er en helt anden energi end programmerede trommer.", "Sofie, mixtekniker"]]
-    },
-    {
-      name: "Nikolaj Friis", role: "Producer og mixer", city: "København", online: true, color: "#1f5fa6",
-      cats: ["Produktion", "Mix & master"], genres: ["Elektronisk", "House", "Techno"], rating: 4.7, reviews: 22, response: "6 timer", jobs: 50, top: false,
-      bio: "Producerer og mixer elektronisk musik til klub og streaming. Giver også feedback på dine egne tracks og beats.",
-      tracks: [["Afterhours – house", "Produktion og mix"]],
-      packages: [
-        ["Feedback", "Feedback på dit track", "Skriftlig og video-gennemgang af dit nummer.", 300, 2, ["Video-gennemgang", "Konkrete forslag"]],
-        ["Mixdown", "Mixdown", "Klar til master med to revisioner.", 1200, 5, ["2 revisioner", "Klar til master"]],
-        ["Co-produktion", "Co-produktion", "Vi færdiggør dit track sammen.", 3500, 10, ["Arrangement", "Mix", "Stems"]]
-      ],
-      reviewsList: [["Fik mit track klar til at sende til labels på en uge.", "DJ fra Roskilde"]]
     }
   ]
 
-  const categories = [
-    ["Mix & master", "🎚"], ["Produktion", "🎛"], ["Undervisning", "🎓"], ["Sessionsmusik", "🎸"],
-    ["Sangskrivning", "✎"], ["Vokal", "🎤"], ["Live", "🔊"], ["Alle", "✦"]
-  ]
-
-  const state = { cat: "Alle", q: "", online: false, sort: "anbefalet" }
-
+  // ---------- Hjælpefunktioner ----------
   const $ = id => document.getElementById(id)
-  const grid = $("grid")
-  const dialog = $("profile")
-  const dlgBody = $("dlg-body")
-
-  const kr = n => n.toLocaleString("da-DK") + " kr."
-  const initials = name => name.split(" ").map(w => w[0]).join("")
+  const kr = n => n === 0 ? "Gratis" : n.toLocaleString("da-DK") + " kr."
+  const initials = p => p.ini || p.name.split(" ").map(w => w[0]).join("").slice(0, 3)
   const stars = r => r.toFixed(1).replace(".", ",")
   const days = d => d === 1 ? "1 dag" : d + " dage"
 
@@ -1270,36 +1501,95 @@
     return bars
   }
 
-  // Kategorier
-  $("cats").innerHTML = categories.map(([name, icon]) => {
-    const n = name === "Alle" ? profiles.length : profiles.filter(p => p.cats.includes(name)).length
+  const state = { dept: null, sub: "Alle", q: "", extra: false, sort: "anbefalet" }
+
+  // ---------- Afdelingsbjælke og startside ----------
+  $("deptbar").innerHTML = Object.entries(departments).map(([key, d]) =>
+    `<a class="dept-tab" href="#${key}" data-dept="${key}" style="--tab-color:${d.color}"><span class="dot"></span>${esc(d.name)}</a>`
+  ).join("")
+
+  $("deptCards").innerHTML = Object.entries(departments).map(([key, d], i) => {
+    const n = profiles.filter(p => p.dept === key).length
     return `
-      <button class="cat" type="button" data-cat="${esc(name)}" aria-pressed="${name === state.cat}">
-        <span class="cat-icon" aria-hidden="true">${icon}</span>
-        <span>
-          <span class="cat-name">${esc(name === "Alle" ? "Alle kategorier" : name)}</span>
-          <span class="cat-count mono" style="display:block">${n} ${n === 1 ? "profil" : "profiler"}</span>
-        </span>
-      </button>`
+      <a class="dept-card" href="#${key}" style="--c:${d.color}">
+        <span class="mono num">0${i + 1}</span>
+        <h2>${esc(d.name)}</h2>
+        <p>${esc(d.card)}</p>
+        <p class="ex">${esc(d.examples)}</p>
+        <span class="go"><span>${n} profiler</span><span>Gå til →</span></span>
+      </a>`
   }).join("")
 
-  $("cats").addEventListener("click", e => {
-    const b = e.target.closest(".cat")
-    if (!b) return
-    state.cat = b.dataset.cat
-    render()
-    $("profiler").scrollIntoView({ behavior: "smooth" })
-  })
+  // ---------- Visning af afdeling ----------
+  function showView() {
+    const key = location.hash.slice(1)
+    const d = departments[key]
 
-  // Søgning
-  const synonyms = { sangtimer: "sangunderviser", sangtime: "sangunderviser", trommer: "trommeslager", beats: "beat" }
-  const stopwords = new Set(["af", "min", "mit", "mine", "til", "en", "et", "og", "jeg", "med", "for", "på", "fra", "der", "som", "har", "brug", "skal", "vil", "gerne", "søger", "ny", "nyt"])
+    document.querySelectorAll(".dept-tab").forEach(t => {
+      if (t.dataset.dept === key) t.setAttribute("aria-current", "page")
+      else t.removeAttribute("aria-current")
+    })
+
+    if (!d) {
+      state.dept = null
+      $("view-home").hidden = false
+      $("view-dept").hidden = true
+      document.documentElement.style.removeProperty("--dept")
+      document.title = "Demo – Musiclinq"
+      return
+    }
+
+    Object.assign(state, { dept: key, sub: "Alle", q: "", extra: false })
+    document.documentElement.style.setProperty("--dept", d.color)
+    document.title = d.name + " – Musiclinq demo"
+
+    $("view-home").hidden = true
+    $("view-dept").hidden = false
+    $("crumb").textContent = d.name
+    $("deptTitle").textContent = d.title
+    $("deptLead").textContent = d.lead
+    $("search").value = ""
+    $("search").placeholder = d.placeholder
+    $("extraToggle").textContent = "◎ " + d.toggle[0]
+    $("extraToggle").setAttribute("aria-pressed", "false")
+
+    $("subs").innerHTML = ["Alle", ...d.subs].map(s =>
+      `<button class="sub" type="button" data-sub="${esc(s)}" aria-pressed="${s === "Alle"}">${esc(s)}</button>`
+    ).join("")
+
+    $("postTitle").textContent = d.post.title
+    $("postText").textContent = d.post.text
+    $("postForm").innerHTML = buildPostForm(d.post.fields)
+
+    render()
+  }
+
+  function buildPostForm(fields) {
+    const html = fields.map(([label, type, opt], i) => {
+      const id = "pf" + i
+      let input
+      if (type === "select") input = `<select id="${id}">${opt.map(o => `<option>${esc(o)}</option>`).join("")}</select>`
+      else if (type === "date") input = `<input id="${id}" type="date">`
+      else input = `<input id="${id}" type="text" placeholder="${esc(opt)}">`
+      return `<div><label for="${id}">${esc(label)}</label>${input}</div>`
+    })
+    return `
+      ${html[0]}
+      <div class="row">${html.slice(1).join("")}</div>
+      <button class="btn" type="submit">Post</button>
+      <p class="note" id="postNote" role="status"></p>`
+  }
+
+  // ---------- Søgning og filtre ----------
+  const synonyms = { sangtimer: "sangunderviser", sangtime: "sangunderviser", trommer: "trommeslager", bassist: "bas", beats: "beat" }
+  const stopwords = new Set(["af", "min", "mit", "mine", "til", "en", "et", "og", "jeg", "med", "for", "på", "fra", "der", "som", "har", "brug", "skal", "vil", "gerne", "søger", "ny", "nyt", "i", "vores"])
 
   function matches(p) {
-    if (state.cat !== "Alle" && !p.cats.includes(state.cat)) return false
-    if (state.online && !p.online) return false
+    if (p.dept !== state.dept) return false
+    if (state.sub !== "Alle" && !p.subs.includes(state.sub)) return false
+    if (state.extra && !departments[state.dept].toggle[1](p)) return false
     if (!state.q) return true
-    const hay = [p.name, p.role, p.city, p.bio, p.online ? "online" : "", ...p.cats, ...p.genres, ...p.packages.map(pk => pk[1])]
+    const hay = [p.name, p.role, p.city, p.bio, ...p.subs, ...p.genres, ...p.packages.map(pk => pk[1])]
       .join(" ").toLowerCase().replace(/aa/g, "å")
     const words = state.q.toLowerCase().replace(/aa/g, "å").split(/\s+/)
       .filter(w => w.length > 1 && !stopwords.has(w))
@@ -1315,9 +1605,19 @@
     return s
   }
 
+  function badgesFor(p) {
+    const b = []
+    if (p.top) b.push('<span class="badge top">Topbedømt</span>')
+    if (p.dept === "band" && p.member) b.push('<span class="badge">Åben for fast band</span>')
+    if (p.dept !== "livemusik" && p.online) b.push('<span class="badge">Online</span>')
+    if (p.dept === "livemusik" && p.gear) b.push('<span class="badge">Eget anlæg</span>')
+    return b.slice(0, 2).join("")
+  }
+
   function render() {
-    document.querySelectorAll(".cat").forEach(c => c.setAttribute("aria-pressed", c.dataset.cat === state.cat))
-    $("results-title").textContent = state.cat === "Alle" ? "Alle profiler" : state.cat
+    const d = departments[state.dept]
+    document.querySelectorAll(".sub").forEach(b => b.setAttribute("aria-pressed", b.dataset.sub === state.sub))
+    $("resultsTitle").textContent = state.sub === "Alle" ? "Alle i " + d.name.toLowerCase() : state.sub
     $("activeQuery").innerHTML = state.q
       ? `<button class="active-query" type="button" id="clearQ">“${esc(state.q)}” ✕</button>` : ""
 
@@ -1325,24 +1625,19 @@
     $("count").textContent = list.length === 1 ? "1 profil" : list.length + " profiler"
 
     if (!list.length) {
-      grid.innerHTML = `<div class="empty">Ingen profiler matcher – prøv et andet ord eller fjern et filter.<br><button type="button" id="reset">Nulstil filtre</button></div>`
+      $("grid").innerHTML = `<div class="empty">Ingen profiler matcher – prøv et andet ord eller fjern et filter.<br><button type="button" id="reset">Nulstil filtre</button></div>`
       return
     }
 
-    grid.innerHTML = list.map(p => {
-      const i = profiles.indexOf(p)
-      return `
-      <article class="card" data-i="${i}">
+    $("grid").innerHTML = list.map(p => `
+      <article class="card" data-i="${profiles.indexOf(p)}">
         <div class="card-cover" style="background:${p.color}">
-          <div class="card-badges">
-            ${p.top ? '<span class="badge top">Topbedømt</span>' : ""}
-            ${p.online ? '<span class="badge">Online</span>' : ""}
-          </div>
+          <div class="card-badges">${badgesFor(p)}</div>
           <span class="badge demo">Eksempel</span>
         </div>
         <div class="card-body">
           <div class="card-head">
-            <div class="avatar" style="background:${p.color}">${esc(initials(p.name))}</div>
+            <div class="avatar" style="background:${p.color}">${esc(initials(p))}</div>
             <div>
               <p class="name"><button type="button" class="open">${esc(p.name)}</button></p>
               <p class="role">${esc(p.role)} · ${esc(p.city)}</p>
@@ -1352,44 +1647,29 @@
           <ul class="offers" aria-label="Tilbyder">
             ${p.packages.map(pk => `<li>${esc(pk[1])}</li>`).join("")}
           </ul>
-          <div class="meta">
-            <span>⏱ Svarer inden for ${esc(p.response)}</span>
-          </div>
+          <p class="meta">⏱ Svarer inden for ${esc(p.response)}</p>
           <div class="card-foot">
             <span class="rating">★ ${stars(p.rating)} (${p.reviews})</span>
             <span class="see-more">Se priser og pakker →</span>
           </div>
         </div>
-      </article>`
-    }).join("")
+      </article>
+    `).join("")
   }
 
-  grid.addEventListener("click", e => {
-    if (e.target.id === "reset") {
-      Object.assign(state, { cat: "Alle", q: "", online: false })
-      $("search").value = ""
-      $("onlineToggle").setAttribute("aria-pressed", "false")
-      render()
-      return
-    }
-    const card = e.target.closest(".card")
-    if (!card) return
-    openProfile(profiles[card.dataset.i])
+  $("subs").addEventListener("click", e => {
+    const b = e.target.closest(".sub")
+    if (!b) return
+    state.sub = b.dataset.sub
+    render()
   })
 
   $("searchForm").addEventListener("submit", e => {
     e.preventDefault()
     state.q = $("search").value.trim()
-    state.cat = "Alle"
+    state.sub = "Alle"
     render()
     $("profiler").scrollIntoView({ behavior: "smooth" })
-  })
-
-  document.querySelector(".popular").addEventListener("click", e => {
-    const b = e.target.closest("button[data-q]")
-    if (!b) return
-    $("search").value = b.dataset.q
-    $("searchForm").requestSubmit()
   })
 
   $("activeQuery").addEventListener("click", e => {
@@ -1400,44 +1680,63 @@
     }
   })
 
-  $("onlineToggle").addEventListener("click", e => {
-    state.online = !state.online
-    e.currentTarget.setAttribute("aria-pressed", state.online)
+  $("extraToggle").addEventListener("click", e => {
+    state.extra = !state.extra
+    e.currentTarget.setAttribute("aria-pressed", state.extra)
     render()
   })
 
   $("sort").addEventListener("change", e => { state.sort = e.target.value; render() })
 
-  // Profilvisning
+  $("grid").addEventListener("click", e => {
+    if (e.target.id === "reset") {
+      Object.assign(state, { sub: "Alle", q: "", extra: false })
+      $("search").value = ""
+      $("extraToggle").setAttribute("aria-pressed", "false")
+      render()
+      return
+    }
+    const card = e.target.closest(".card")
+    if (card) openProfile(profiles[card.dataset.i])
+  })
+
+  $("postForm").addEventListener("submit", e => {
+    e.preventDefault()
+    $("postNote").innerHTML = 'Det her er kun en demo, så intet bliver postet. <a href="index.html#tilmeld">Skriv dig op</a>, så hører du fra os, når Musiclinq åbner.'
+  })
+
+  // ---------- Profilvisning ----------
+  let current = null
+
   function openProfile(p) {
+    current = p
     const seed = profiles.indexOf(p)
     const defaultPkg = Math.min(1, p.packages.length - 1)
+    const live = p.dept === "livemusik"
+    const where = live ? "Område: " + p.city : p.city + (p.online ? " · Arbejder også online" : "")
 
-    dlgBody.innerHTML = `
+    $("dlg-body").innerHTML = `
       <div class="dlg-grid">
         <div>
           <div class="dlg-head">
-            <div class="avatar" style="background:${p.color}">${esc(initials(p.name))}</div>
+            <div class="avatar" style="background:${p.color}">${esc(initials(p))}</div>
             <div>
               <p class="name" id="dlg-name">${esc(p.name)}</p>
-              <p class="role">${esc(p.role)} · ${esc(p.city)}${p.online ? " · Arbejder online" : ""}</p>
+              <p class="role">${esc(p.role)} · ${esc(where)}</p>
             </div>
           </div>
-          <div class="tags">
-            ${p.top ? '<span class="badge top">Topbedømt</span>' : ""}
-            ${[...p.cats, ...p.genres].map(g => `<span class="tag">${esc(g)}</span>`).join("")}
-          </div>
+          <div class="tags">${badgesFor(p)} ${[...p.subs, ...p.genres].map(g => `<span class="tag">${esc(g)}</span>`).join("")}</div>
 
           <div class="stats">
             <div><b>★ ${stars(p.rating)}</b><span>${p.reviews} anmeldelser</span></div>
-            <div><b>${p.jobs}</b><span>opgaver løst</span></div>
+            <div><b>${p.jobs}</b><span>${live ? "arrangementer" : p.dept === "undervisning" ? "elever" : "opgaver løst"}</span></div>
             <div><b>${esc(p.response)}</b><span>svartid</span></div>
           </div>
 
           <p>${esc(p.bio)}</p>
 
           <div class="dlg-section">
-            <p class="mono">Lyt til tidligere arbejde</p>
+            <p class="mono">${live ? "Hør dem live" : "Lyt til tidligere arbejde"}</p>
             ${p.tracks.map((t, i) => `
               <div class="player">
                 <button class="play" type="button" aria-label="Afspil ${esc(t[0])}">▶</button>
@@ -1465,58 +1764,56 @@
       </div>
     `
 
-    function showPackage(i) {
-      const pk = p.packages[i]
-      dlgBody.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.pkg == i))
-      $("orderBody").innerHTML = `
-        <div class="order-title"><b>${esc(pk[1])}</b><span class="price">${kr(pk[3])}</span></div>
-        <p class="order-desc">${esc(pk[2])}</p>
-        <ul class="includes">${pk[5].map(x => `<li>${esc(x)}</li>`).join("")}</ul>
-        <div class="order-meta"><span>${p.cats.includes("Live") ? "⌖ Kommer ud til dig" : "⇥ Levering: " + days(pk[4])}</span><span>⏱ Svarer inden for ${esc(p.response)}</span></div>
-        <button class="btn" type="button" data-action="request">Send forespørgsel</button>
-        <button class="secondary" type="button" data-action="message">Skriv til ${esc(p.name.split(" ")[0])}</button>
-        <p class="note" role="status"></p>
-      `
-    }
-
-    dlgBody.addEventListener("click", onDialogClick)
     showPackage(defaultPkg)
-    dialog.showModal()
-    dialog.scrollTop = 0
-
-    function onDialogClick(e) {
-      const tab = e.target.closest(".tab")
-      if (tab) return showPackage(Number(tab.dataset.pkg))
-
-      const play = e.target.closest(".play")
-      if (play) {
-        const player = play.closest(".player")
-        const on = player.classList.toggle("playing")
-        play.textContent = on ? "❚❚" : "▶"
-        return
-      }
-
-      const action = e.target.closest("[data-action]")
-      if (action) {
-        dlgBody.querySelector(".order .note").innerHTML =
-          'Det her er kun en demo, så intet bliver sendt. <a href="index.html#tilmeld">Skriv dig op</a>, så hører du fra os, når Musiclinq åbner.'
-      }
-    }
-
-    dialog.addEventListener("close", () => dlgBody.removeEventListener("click", onDialogClick), { once: true })
+    $("profile").showModal()
+    $("profile").scrollTop = 0
   }
 
-  $("close").addEventListener("click", () => dialog.close())
-  dialog.addEventListener("click", e => { if (e.target === dialog) dialog.close() })
+  function showPackage(i) {
+    const p = current
+    const live = p.dept === "livemusik"
+    const pk = p.packages[i]
+    const when = live ? "⌖ Kommer ud til dig"
+      : p.dept === "undervisning" ? "◷ Første time inden for " + days(pk[4])
+      : pk[3] === 0 ? "◷ Svar inden for " + days(pk[4])
+      : "⇥ Levering: " + days(pk[4])
+    document.querySelectorAll("#dlg-body .tab").forEach(t => t.setAttribute("aria-selected", t.dataset.pkg == i))
+    $("orderBody").innerHTML = `
+      <div class="order-title"><b>${esc(pk[1])}</b><span class="price">${kr(pk[3])}</span></div>
+      <p class="order-desc">${esc(pk[2])}</p>
+      <ul class="includes">${pk[5].map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+      <div class="order-meta"><span>${when}</span><span>⏱ Svarer inden for ${esc(p.response)}</span></div>
+      <button class="btn" type="button" data-action="request">${live ? "Tjek dato og send forespørgsel" : "Send forespørgsel"}</button>
+      <button class="secondary" type="button" data-action="message">Skriv til ${esc(p.name.replace(/^DJ /, "").split(" ")[0])}</button>
+      <p class="note" role="status"></p>
+    `
+  }
 
-  // Post et projekt
-  $("p-cat").innerHTML = categories.filter(c => c[0] !== "Alle").map(c => `<option>${esc(c[0])}</option>`).join("")
-  $("postForm").addEventListener("submit", e => {
-    e.preventDefault()
-    $("postNote").innerHTML = 'Det her er kun en demo, så projektet bliver ikke postet. <a href="index.html#tilmeld">Skriv dig op</a>, så hører du fra os, når Musiclinq åbner.'
+  $("dlg-body").addEventListener("click", e => {
+    const tab = e.target.closest(".tab")
+    if (tab) {
+      showPackage(Number(tab.dataset.pkg))
+      return
+    }
+
+    const play = e.target.closest(".play")
+    if (play) {
+      const on = play.closest(".player").classList.toggle("playing")
+      play.textContent = on ? "❚❚" : "▶"
+      return
+    }
+
+    if (e.target.closest("[data-action]")) {
+      document.querySelector("#orderBody .note").innerHTML =
+        'Det her er kun en demo, så intet bliver sendt. <a href="index.html#tilmeld">Skriv dig op</a>, så hører du fra os, når Musiclinq åbner.'
+    }
   })
 
-  render()
+  $("close").addEventListener("click", () => $("profile").close())
+  $("profile").addEventListener("click", e => { if (e.target === $("profile")) $("profile").close() })
+
+  window.addEventListener("hashchange", () => { showView(); window.scrollTo(0, 0) })
+  showView()
 </script>
 
   <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "2ea1f83e7dc14497b9a7e1850a22fbc7"}'></script><!-- End Cloudflare Web Analytics -->
