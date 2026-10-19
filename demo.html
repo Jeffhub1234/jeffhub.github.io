@@ -434,6 +434,10 @@
 
     .sub:hover { border-color: #fff; }
 
+    .sub-more {
+      border-style: dashed;
+    }
+
     .sub[aria-pressed="true"] {
       background: var(--paper);
       color: var(--ink);
@@ -1316,6 +1320,7 @@
       examples: "Guitar · Bas · Trommer · Keys · Vokal",
       placeholder: "Fx “bassist til indie-band i Aarhus”",
       subs: ["Guitar", "Bas", "Trommer", "Keys", "Vokal"],
+      moreSubs: ["Kor", "Kontrabas", "Synth", "Percussion", "Saxofon", "Trompet", "Trombone", "Violin", "Cello", "Fløjte", "Harmonika", "Banjo & mandolin", "Rapper", "DJ & elektronik", "Producer i bandet"],
       toggle: ["Åben for fast band", p => p.member],
       post: {
         title: "Søg en musiker",
@@ -1335,6 +1340,7 @@
       examples: "Sang · Klaver · Guitar · Produktion",
       placeholder: "Fx “sangtimer for begyndere”",
       subs: ["Sang", "Klaver", "Guitar", "Produktion"],
+      moreSubs: ["Trommer", "Bas", "Violin", "Cello", "Saxofon", "Trompet", "Fløjte", "Ukulele", "Musikteori & hørelære", "Sangskrivning", "DJ", "Klassisk sang", "Musik for børn", "Optagelsesprøver (MGK & konservatorie)", "Kor & ensemble"],
       toggle: ["Underviser online", p => p.online],
       post: {
         title: "Fortæl, hvad du vil lære",
@@ -1354,6 +1360,7 @@
       examples: "Mix & master · Beats · Sangskrivning",
       placeholder: "Fx “mix og master af min single”",
       subs: ["Mix & master", "Beats & produktion", "Sangskrivning"],
+      moreSubs: ["Indspilning & studie", "Vokalproduktion & tuning", "Arrangement", "Strygerarrangementer", "Remix", "Lyd til film & spil", "Podcast & lydredigering", "Jingles & reklame", "Noder & transskription", "Musikvideo", "Coverart & grafik", "Promovering & PR"],
       toggle: ["Kan arbejde online", p => p.online],
       post: {
         title: "Beskriv dit projekt",
@@ -1373,6 +1380,7 @@
       examples: "Band · Duo & solo · DJ · Lydtekniker",
       placeholder: "Fx “band til bryllup i juni”",
       subs: ["Band", "Duo & solo", "DJ", "Lydtekniker"],
+      moreSubs: ["Pianist", "Jazzband", "Bigband", "Strygekvartet", "Kor & gospel", "Blæsere", "Folkemusik & spillemænd", "Tribute- & coverband", "Kirkemusik", "Børnekoncert", "Trubadur", "Lys & scene"],
       toggle: ["Medbringer eget anlæg", p => p.gear],
       post: {
         title: "Beskriv dit arrangement",
@@ -1774,9 +1782,8 @@
     $("extraToggle").textContent = "◎ " + d.toggle[0]
     $("extraToggle").setAttribute("aria-pressed", "false")
 
-    $("subs").innerHTML = ["Alle", ...d.subs].map(s =>
-      `<button class="sub" type="button" data-sub="${esc(s)}" aria-pressed="${s === "Alle"}">${esc(s)}</button>`
-    ).join("")
+    state.showAllSubs = false
+    renderSubs()
 
     $("postEyebrow").textContent = requestsView() ? "Vil du findes af andre?" : "Fandt du ikke den rette?"
     $("postTitle").textContent = t.post.title
@@ -1784,6 +1791,23 @@
     $("postForm").innerHTML = buildPostForm(t.post.fields, requestsView() ? "Opret profil" : "Post opslag")
 
     render()
+  }
+
+  function renderSubs() {
+    const d = departments[state.dept]
+    const more = d.moreSubs || []
+    const show = state.showAllSubs || more.includes(state.sub)
+    const btn = s => `<button class="sub" type="button" data-sub="${esc(s)}" aria-pressed="${s === state.sub}">${esc(s)}</button>`
+    $("subs").innerHTML = ["Alle", ...d.subs, ...(show ? more : [])].map(btn).join("") +
+      (more.length ? `<button class="sub sub-more" type="button" data-more>${show ? "Se færre" : "Se flere (+" + more.length + ")"}</button>` : "")
+  }
+
+  // Tekst, når der ikke er nogen eksempler at vise
+  function emptyText(kind) {
+    if (state.sub !== "Alle" && !state.q) {
+      return `Demoen har ingen eksempler i “${esc(state.sub)}” endnu – men på Musiclinq bliver der også plads til ${esc(state.sub.toLowerCase())}.`
+    }
+    return `Ingen ${kind} matcher – prøv et andet ord eller en anden kategori.`
   }
 
   function renderHome() {
@@ -1866,7 +1890,6 @@
 
   function render() {
     const d = departments[state.dept]
-    document.querySelectorAll(".sub").forEach(b => b.setAttribute("aria-pressed", b.dataset.sub === state.sub))
     $("activeQuery").innerHTML = state.q
       ? `<button class="active-query" type="button" id="clearQ">“${esc(state.q)}” ✕</button>` : ""
 
@@ -1877,7 +1900,7 @@
     $("count").textContent = list.length === 1 ? "1 profil" : list.length + " profiler"
 
     if (!list.length) {
-      $("grid").innerHTML = `<div class="empty">Ingen profiler matcher – prøv et andet ord eller fjern et filter.<br><button type="button" id="reset">Nulstil filtre</button></div>`
+      $("grid").innerHTML = `<div class="empty">${emptyText("profiler")}<br><button type="button" id="reset">Nulstil filtre</button></div>`
       return
     }
 
@@ -1915,7 +1938,7 @@
     $("count").textContent = list.length === 1 ? "1 opslag" : list.length + " opslag"
 
     if (!list.length) {
-      $("grid").innerHTML = `<div class="empty">Ingen opslag matcher – prøv et andet ord eller en anden kategori.<br><button type="button" id="reset">Nulstil filtre</button></div>`
+      $("grid").innerHTML = `<div class="empty">${emptyText("opslag")}<br><button type="button" id="reset">Nulstil filtre</button></div>`
       return
     }
 
@@ -1950,7 +1973,15 @@
   $("subs").addEventListener("click", e => {
     const b = e.target.closest(".sub")
     if (!b) return
-    state.sub = b.dataset.sub
+    if (b.hasAttribute("data-more")) {
+      const more = departments[state.dept].moreSubs || []
+      const open = state.showAllSubs || more.includes(state.sub)
+      state.showAllSubs = !open
+      if (open && more.includes(state.sub)) state.sub = "Alle"
+    } else {
+      state.sub = b.dataset.sub
+    }
+    renderSubs()
     render()
   })
 
@@ -1958,6 +1989,7 @@
     e.preventDefault()
     state.q = $("search").value.trim()
     state.sub = "Alle"
+    renderSubs()
     render()
     $("profiler").scrollIntoView({ behavior: "smooth" })
   })
@@ -1983,6 +2015,7 @@
       Object.assign(state, { sub: "Alle", q: "", extra: false })
       $("search").value = ""
       $("extraToggle").setAttribute("aria-pressed", "false")
+      renderSubs()
       render()
       return
     }
