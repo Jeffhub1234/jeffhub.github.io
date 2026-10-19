@@ -110,6 +110,54 @@
 
     .pill:hover { border-color: var(--accent-2); }
 
+    /* ---------- Søger / tilbyder ---------- */
+    .modebar {
+      background: var(--ink);
+      border-top: 1px solid #3a3833;
+    }
+
+    .modebar .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .mode-tab {
+      display: block;
+      text-decoration: none;
+      color: var(--soft);
+      padding: 14px 18px;
+      border: 2px solid #3a3833;
+      border-bottom: 0;
+    }
+
+    .mode-tab + .mode-tab { border-left: 0; }
+
+    .mode-tab .mode-label {
+      display: block;
+      font-weight: 900;
+      font-stretch: 70%;
+      font-size: 24px;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .mode-tab small {
+      display: block;
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .mode-tab:hover { color: var(--paper); }
+
+    .mode-tab[aria-current="true"] {
+      background: var(--paper);
+      color: var(--ink);
+      border-color: var(--paper);
+    }
+
+    .mode-tab[aria-current="true"] small { color: var(--muted); }
+
     /* ---------- Afdelingsbjælke + demo-bånd (klæber til toppen) ---------- */
     .sticky-top {
       position: sticky;
@@ -628,6 +676,98 @@
 
     .card:hover .see-more { color: var(--dept); border-color: var(--dept); }
 
+    /* ---------- Opslag (tilbyder-siden) ---------- */
+    .req {
+      border-left: 10px solid var(--dept);
+    }
+
+    .req .card-body { gap: 10px; }
+
+    .req-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .req-title {
+      font-weight: 800;
+      font-size: 20px;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .req-who { font-size: 14px; color: var(--muted); margin: 0; }
+
+    .req-text { font-size: 15px; margin: 0; }
+
+    .facts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 14px;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .facts dt {
+      font-family: "DM Mono", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+
+    .facts dd { margin: 0 0 4px; font-weight: 700; }
+
+    .facts-box {
+      border: 2px solid var(--line);
+      padding: 14px;
+      margin: 18px 0;
+      gap: 10px 18px;
+    }
+
+    .badge.new { background: var(--dept); color: var(--paper); border-color: var(--dept); }
+
+    .offer-form {
+      display: grid;
+      gap: 14px;
+    }
+
+    .offer-form label {
+      display: block;
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .offer-form input,
+    .offer-form textarea {
+      width: 100%;
+      font: inherit;
+      color: var(--ink);
+      background: transparent;
+      border: 0;
+      border-bottom: 2px solid var(--line);
+      border-radius: 0;
+      padding: 6px 0 8px;
+      outline: none;
+    }
+
+    .offer-form textarea {
+      min-height: 90px;
+      resize: vertical;
+      border: 2px solid var(--line);
+      padding: 10px;
+    }
+
+    .offer-form input:focus,
+    .offer-form textarea:focus { border-color: var(--dept); }
+
+    .offer-form .btn { width: 100%; }
+
     .empty {
       grid-column: 1 / -1;
       border: 2px dashed var(--muted);
@@ -1019,6 +1159,9 @@
 
     @media (max-width: 560px) {
       .header-links .hide-sm { display: none; }
+      .mode-tab { padding: 10px 12px; }
+      .mode-tab .mode-label { font-size: 19px; }
+      .mode-tab small { font-size: 10px; }
       .deptbar .container { justify-content: space-between; }
       .dept-tab, .dept-tab:first-child { padding: 12px 0 9px; font-size: 14px; }
       .dept-tab .dot { display: none; }
@@ -1056,12 +1199,25 @@
     </div>
   </header>
 
+  <nav class="modebar" aria-label="Søger eller tilbyder">
+    <div class="container">
+      <a class="mode-tab" data-mode="soeger" href="#soeger">
+        <span class="mode-label">Jeg søger</span>
+        <small>Find folk til din musik</small>
+      </a>
+      <a class="mode-tab" data-mode="tilbyder" href="#tilbyder">
+        <span class="mode-label">Jeg tilbyder</span>
+        <small>Find opgaver og bliv fundet</small>
+      </a>
+    </div>
+  </nav>
+
   <div class="sticky-top">
     <nav class="deptbar" aria-label="Afdelinger">
       <div class="container" id="deptbar"></div>
     </nav>
     <div class="demo-strip">
-      <b>DEMO</b>Musiclinq er ikke åbnet endnu. Profilerne er opdigtede eksempler.
+      <b>DEMO</b>Musiclinq er ikke åbnet endnu. Profiler og opslag er opdigtede eksempler.
       <a href="index.html#tilmeld">Skriv dig op</a>
     </div>
   </div>
@@ -1078,8 +1234,8 @@
           </p>
         </div>
 
-        <h1>Hvad leder <em>du efter?</em></h1>
-        <p class="hero-lead">Musiclinq er delt op i fire afdelinger. Vælg den, der passer til det, du skal bruge.</p>
+        <h1 id="homeTitle"></h1>
+        <p class="hero-lead" id="homeLead"></p>
 
         <div class="dept-cards" id="deptCards"></div>
       </div>
@@ -1090,7 +1246,7 @@
   <div id="view-dept" hidden>
     <section class="dept-hero">
       <div class="container">
-        <p class="crumbs mono"><a href="#">Alle afdelinger</a> / <span id="crumb"></span></p>
+        <p class="crumbs mono"><a href="#" id="crumbHome"></a> / <span id="crumb"></span></p>
         <h1 id="deptTitle"></h1>
         <p class="hero-lead" id="deptLead"></p>
 
@@ -1110,7 +1266,7 @@
           <span class="mono" id="count"></span>
         </div>
 
-        <div class="toolbar">
+        <div class="toolbar" id="toolbar">
           <div class="filters">
             <button class="toggle" type="button" id="extraToggle" aria-pressed="false"></button>
             <span id="activeQuery"></span>
@@ -1128,7 +1284,7 @@
       <section class="block" id="projekt">
         <div class="post">
           <div class="post-intro">
-            <p class="mono">Fandt du ikke den rette?</p>
+            <p class="mono" id="postEyebrow"></p>
             <h3 id="postTitle"></h3>
             <p id="postText"></p>
           </div>
@@ -1189,7 +1345,7 @@
 
   <dialog id="profile" aria-labelledby="dlg-name">
     <div class="dlg-top">
-      <span class="mono"><span class="badge-demo">Demo</span> &nbsp;Opdigtet eksempelprofil</span>
+      <span class="mono"><span class="badge-demo">Demo</span> &nbsp;<span id="dlgKind">Opdigtet eksempelprofil</span></span>
       <button class="dlg-close" id="close" type="button">Luk ✕</button>
     </div>
     <div id="dlg-body"></div>
@@ -1481,12 +1637,117 @@
     }
   ]
 
+  // ---------- Tekster til tilbyder-siden ----------
+  const sellerText = {
+    band: {
+      title: "Musikere søges",
+      lead: "Bands og artister, der mangler en musiker – til en indspilning, en koncert eller som fast medlem. Svar på de opslag, der passer til dig.",
+      card: "Se bands og artister, der søger en musiker lige nu, og lav en profil, så de kan finde dig.",
+      placeholder: "Fx “trommer” eller “Aarhus”",
+      post: {
+        title: "Opret din musikerprofil",
+        text: "Vis hvad du spiller, hvor du bor, og om du er åben for et fast band.",
+        fields: [
+          ["Navn eller kunstnernavn", "text", "Fx Line Mørk"],
+          ["Instrument", "select", ["Guitar", "Bas", "Trommer", "Keys", "Vokal", "Andet"]],
+          ["Tilbyder", "select", ["Indspilning", "Koncert / vikar", "Fast medlem", "Det hele"]]
+        ]
+      }
+    },
+    undervisning: {
+      title: "Elever søger undervisning",
+      lead: "Folk, der vil lære at synge, spille eller producere. Find elever, der passer til dit instrument og dit område.",
+      card: "Find elever, der søger undervisning i dit instrument – online eller i dit område.",
+      placeholder: "Fx “klaver” eller “online”",
+      post: {
+        title: "Opret din underviserprofil",
+        text: "Vis hvad du underviser i, dine priser, og om du underviser online.",
+        fields: [
+          ["Navn", "text", "Fx Maja Lindholm"],
+          ["Fag", "select", ["Sang", "Klaver", "Guitar", "Produktion", "Andet"]],
+          ["Pris pr. time", "select", ["Under 300 kr.", "300–450 kr.", "450–600 kr.", "Over 600 kr."]]
+        ]
+      }
+    },
+    produktion: {
+      title: "Projekter søger producere",
+      lead: "Artister og bands, der har brug for mix, master, beats eller sangskrivning. Send et tilbud på de projekter, der passer til dig.",
+      card: "Find artister, der har brug for mix, master, beats eller en sangskriver – og send dem et tilbud.",
+      placeholder: "Fx “mix” eller “hiphop”",
+      post: {
+        title: "Opret din producerprofil",
+        text: "Vis dine bedste numre, og læg dine pakker op med faste priser.",
+        fields: [
+          ["Navn eller kunstnernavn", "text", "Fx Sofie Kjær"],
+          ["Ydelse", "select", ["Mix & master", "Beats & produktion", "Sangskrivning"]],
+          ["Pris fra", "select", ["Under 500 kr.", "500–1.500 kr.", "1.500–5.000 kr.", "Over 5.000 kr."]]
+        ]
+      }
+    },
+    livemusik: {
+      title: "Arrangementer søger musik",
+      lead: "Bryllupper, firmafester og fødselsdage, der mangler et band, en duo, en DJ eller en lydtekniker. Byd på dem, der passer til din kalender.",
+      card: "Se bryllupper, fester og events, der mangler musik eller lyd – og byd på dem.",
+      placeholder: "Fx “bryllup” eller “Jylland”",
+      post: {
+        title: "Opret din profil som liveartist",
+        text: "Vis hvad I spiller, hvor I kan spille, og om I har eget anlæg med.",
+        fields: [
+          ["Navn på band, duo eller DJ", "text", "Fx Nordlys Band"],
+          ["Type", "select", ["Band", "Duo & solo", "DJ", "Lydtekniker"]],
+          ["Område", "select", ["Hele Danmark", "Sjælland", "Fyn", "Jylland"]]
+        ]
+      }
+    }
+  }
+
+  // ---------- Opdigtede opslag fra folk, der søger – kun til demo ----------
+  const requests = [
+    // Band
+    { dept: "band", sub: "Bas", title: "Bassist søges til indie-band", who: "Kollektivet Sne", city: "København NV", kind: "Fast medlem", when: "Øver tirsdage", budget: "Deler gager", posted: "2 dage siden", replies: 4, isNew: true,
+      text: "Vi er fire, der spiller drømmende indie-pop med eget materiale og har 6 koncerter i kalenderen i foråret. Vi mangler en fast bassist, der har lyst til at være med til at skrive." },
+    { dept: "band", sub: "Trommer", title: "Trommeslager til 2 koncerter i marts", who: "Sangerinde Asta B.", city: "Aarhus", kind: "Koncert / vikar", when: "14. og 21. marts", budget: "2.500 kr. pr. koncert", posted: "5 dage siden", replies: 7, isNew: false,
+      text: "Min faste trommeslager er på turné. Sættet er 10 numre i pop/soul-genren, og vi har to prøver inden koncerterne." },
+    { dept: "band", sub: "Vokal", title: "Kor på 3 numre til debut-EP", who: "Jonas & The Ghosts", city: "Online", kind: "Indspilning", when: "Inden 1. februar", budget: "1.500 kr.", posted: "I dag", replies: 1, isNew: true,
+      text: "Vi søger en kvindelig korsanger til tre numre. Vi sender demo og noder – du indspiller hjemmefra og sender tørre spor." },
+    { dept: "band", sub: "Guitar", title: "Guitarist til coverband", who: "Fredagsbaren", city: "Odense", kind: "Fast medlem", when: "Ca. 2 jobs om måneden", budget: "1.500 kr. pr. job", posted: "1 uge siden", replies: 3, isNew: false,
+      text: "Vi spiller til fester og firmaarrangementer på Fyn. Du skal kunne spille både rytme og solo og gerne synge kor." },
+
+    // Undervisning
+    { dept: "undervisning", sub: "Sang", title: "Sangtimer til min datter på 12", who: "Mette", city: "Odense", kind: "Ugentlige timer", when: "Hverdage efter kl. 16", budget: "300–400 kr. pr. time", posted: "I dag", replies: 2, isNew: true,
+      text: "Min datter synger i skolekoret og vil gerne blive bedre til at synge solo. Vi søger en tålmodig underviser i Odense." },
+    { dept: "undervisning", sub: "Produktion", title: "Lær at producere i Logic Pro", who: "Mathias", city: "Online", kind: "Forløb", when: "Weekender", budget: "Ca. 2.000 kr. i alt", posted: "3 dage siden", replies: 5, isNew: false,
+      text: "Jeg skriver sange på guitar og vil gerne lære at lave mine egne demoer. Helt begynder i Logic." },
+    { dept: "undervisning", sub: "Klaver", title: "Klaver for voksen begynder", who: "Henrik, 54 år", city: "Aarhus C", kind: "Ugentlige timer", when: "Tirsdag eller torsdag aften", budget: "350 kr. pr. time", posted: "1 uge siden", replies: 3, isNew: false,
+      text: "Har altid drømt om at spille klaver. Vil gerne lære at spille efter becifring, så jeg kan akkompagnere sange." },
+
+    // Produktion
+    { dept: "produktion", sub: "Mix & master", title: "Mix og master af EP (5 numre)", who: "Bandet Lavvande", city: "Online", kind: "Mix + master", when: "Deadline 15. marts", budget: "6.000–8.000 kr.", posted: "I dag", replies: 6, isNew: true,
+      text: "Indie-rock indspillet i et øvelokale. Vi har brug for en, der kan få det til at lyde stort, men stadig levende. Referencer: Alex G og Big Thief." },
+    { dept: "produktion", sub: "Beats & produktion", title: "Beat til dansk rap-single", who: "Rapperen Zaki", city: "Online", kind: "Eksklusivt beat", when: "Inden 2 uger", budget: "1.500 kr.", posted: "2 dage siden", replies: 9, isNew: false,
+      text: "Mørkt, langsomt drill-inspireret beat med plads til omkvæd. Jeg skal have stems med." },
+    { dept: "produktion", sub: "Sangskrivning", title: "Topliner til dance-track", who: "Producer Emil K.", city: "København", kind: "Co-write", when: "Fleksibelt", budget: "2.000 kr. + delt ophavsret", posted: "4 dage siden", replies: 2, isNew: false,
+      text: "Har et færdigt house-instrumental og mangler melodi og tekst på engelsk. Gerne med demovokal." },
+
+    // Livemusik
+    { dept: "livemusik", sub: "Band", title: "Band til bryllup 14. juni", who: "Sara og Mikkel", city: "Skanderborg", kind: "Bryllupsfest", when: "14. juni, kl. 21–01", budget: "15.000–20.000 kr.", posted: "I dag", replies: 3, isNew: true,
+      text: "120 gæster i en lade ved Skanderborg. Vi vil gerne have et band, der kan spille både danske klassikere og nyere pop – og fylde dansegulvet." },
+    { dept: "livemusik", sub: "Duo & solo", title: "Akustisk duo til reception", who: "Advokatfirma i København", city: "København K", kind: "Reception", when: "3. april, kl. 16–19", budget: "5.000 kr.", posted: "3 dage siden", replies: 5, isNew: false,
+      text: "Stemningsmusik i baggrunden til en reception for 80 gæster. Gerne jazz-standarder og rolig pop." },
+    { dept: "livemusik", sub: "DJ", title: "DJ til 30-års fødselsdag", who: "Camilla", city: "Aalborg", kind: "Fødselsdag", when: "22. februar, kl. 22–03", budget: "4.000 kr.", posted: "1 dag siden", replies: 4, isNew: true,
+      text: "50 gæster i et festlokale. Musik fra 00'erne og 10'erne, og gerne lidt lys med." },
+    { dept: "livemusik", sub: "Lydtekniker", title: "Lydtekniker til lille festival", who: "Festival i Roskilde", city: "Roskilde", kind: "Festival", when: "2 dage i juli", budget: "3.000 kr. pr. dag", posted: "1 uge siden", replies: 2, isNew: false,
+      text: "Vi har en scene med 8 bands over to dage. Anlægget er lejet – vi mangler en tekniker til FOH og soundcheck." }
+  ]
+
   // ---------- Hjælpefunktioner ----------
   const $ = id => document.getElementById(id)
   const kr = n => n === 0 ? "Gratis" : n.toLocaleString("da-DK") + " kr."
   const initials = p => p.ini || p.name.split(" ").map(w => w[0]).join("").slice(0, 3)
   const stars = r => r.toFixed(1).replace(".", ",")
   const days = d => d === 1 ? "1 dag" : d + " dage"
+  const link = (mode, key) => "#" + mode + (key ? "/" + key : "")
+  const demoNote = what => `Det her er kun en demo, så intet bliver ${what}. <a href="index.html#tilmeld">Skriv dig op</a>, så hører du fra os, når Musiclinq åbner.`
 
   function esc(s) {
     return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]))
@@ -1501,34 +1762,32 @@
     return bars
   }
 
-  const state = { dept: null, sub: "Alle", q: "", extra: false, sort: "anbefalet" }
+  const state = { mode: "soeger", dept: null, sub: "Alle", q: "", extra: false, sort: "anbefalet" }
+  const seller = () => state.mode === "tilbyder"
 
-  // ---------- Afdelingsbjælke og startside ----------
-  $("deptbar").innerHTML = Object.entries(departments).map(([key, d]) =>
-    `<a class="dept-tab" href="#${key}" data-dept="${key}" style="--tab-color:${d.color}"><span class="dot"></span>${esc(d.name)}</a>`
-  ).join("")
+  // ---------- Visning: søger/tilbyder × startside/afdeling ----------
+  function parseHash() {
+    const [a, b] = location.hash.slice(1).split("/")
+    if (a === "soeger" || a === "tilbyder") return { mode: a, key: b || null }
+    return { mode: "soeger", key: a || null }
+  }
 
-  $("deptCards").innerHTML = Object.entries(departments).map(([key, d], i) => {
-    const n = profiles.filter(p => p.dept === key).length
-    return `
-      <a class="dept-card" href="#${key}" style="--c:${d.color}">
-        <span class="mono num">0${i + 1}</span>
-        <h2>${esc(d.name)}</h2>
-        <p>${esc(d.card)}</p>
-        <p class="ex">${esc(d.examples)}</p>
-        <span class="go"><span>${n} profiler</span><span>Gå til →</span></span>
-      </a>`
-  }).join("")
-
-  // ---------- Visning af afdeling ----------
   function showView() {
-    const key = location.hash.slice(1)
+    const { mode, key } = parseHash()
     const d = departments[key]
+    state.mode = mode
 
-    document.querySelectorAll(".dept-tab").forEach(t => {
-      if (t.dataset.dept === key) t.setAttribute("aria-current", "page")
-      else t.removeAttribute("aria-current")
+    document.querySelectorAll(".mode-tab").forEach(t => {
+      t.setAttribute("aria-current", t.dataset.mode === mode)
+      t.href = link(t.dataset.mode, d ? key : null)
     })
+
+    $("deptbar").innerHTML = Object.entries(departments).map(([k, dep]) =>
+      `<a class="dept-tab" href="${link(mode, k)}" ${k === key ? 'aria-current="page"' : ""} style="--tab-color:${dep.color}"><span class="dot"></span>${esc(dep.name)}</a>`
+    ).join("")
+
+    $("crumbHome").textContent = seller() ? "Jeg tilbyder" : "Jeg søger"
+    $("crumbHome").href = link(mode)
 
     if (!d) {
       state.dept = null
@@ -1536,20 +1795,23 @@
       $("view-dept").hidden = true
       document.documentElement.style.removeProperty("--dept")
       document.title = "Demo – Musiclinq"
+      renderHome()
       return
     }
 
+    const t = seller() ? sellerText[key] : d
     Object.assign(state, { dept: key, sub: "Alle", q: "", extra: false })
     document.documentElement.style.setProperty("--dept", d.color)
-    document.title = d.name + " – Musiclinq demo"
+    document.title = d.name + (seller() ? " – opslag" : "") + " – Musiclinq demo"
 
     $("view-home").hidden = true
     $("view-dept").hidden = false
     $("crumb").textContent = d.name
-    $("deptTitle").textContent = d.title
-    $("deptLead").textContent = d.lead
+    $("deptTitle").textContent = t.title
+    $("deptLead").textContent = t.lead
     $("search").value = ""
-    $("search").placeholder = d.placeholder
+    $("search").placeholder = t.placeholder
+    $("toolbar").hidden = seller()
     $("extraToggle").textContent = "◎ " + d.toggle[0]
     $("extraToggle").setAttribute("aria-pressed", "false")
 
@@ -1557,14 +1819,34 @@
       `<button class="sub" type="button" data-sub="${esc(s)}" aria-pressed="${s === "Alle"}">${esc(s)}</button>`
     ).join("")
 
-    $("postTitle").textContent = d.post.title
-    $("postText").textContent = d.post.text
-    $("postForm").innerHTML = buildPostForm(d.post.fields)
+    $("postEyebrow").textContent = seller() ? "Vil du findes af andre?" : "Fandt du ikke den rette?"
+    $("postTitle").textContent = t.post.title
+    $("postText").textContent = t.post.text
+    $("postForm").innerHTML = buildPostForm(t.post.fields, seller() ? "Opret profil" : "Post opslag")
 
     render()
   }
 
-  function buildPostForm(fields) {
+  function renderHome() {
+    $("homeTitle").innerHTML = seller() ? "Hvad kan <em>du tilbyde?</em>" : "Hvad leder <em>du efter?</em>"
+    $("homeLead").textContent = seller()
+      ? "Vælg din afdeling og se, hvem der søger lige nu – eller opret en profil, så de kan finde dig."
+      : "Musiclinq er delt op i fire afdelinger. Vælg den, der passer til det, du skal bruge."
+
+    $("deptCards").innerHTML = Object.entries(departments).map(([key, d], i) => {
+      const n = seller() ? requests.filter(r => r.dept === key).length : profiles.filter(p => p.dept === key).length
+      return `
+        <a class="dept-card" href="${link(state.mode, key)}" style="--c:${d.color}">
+          <span class="mono num">0${i + 1}</span>
+          <h2>${esc(d.name)}</h2>
+          <p>${esc(seller() ? sellerText[key].card : d.card)}</p>
+          <p class="ex">${esc(d.examples)}</p>
+          <span class="go"><span>${n} ${seller() ? "opslag" : "profiler"}</span><span>Gå til →</span></span>
+        </a>`
+    }).join("")
+  }
+
+  function buildPostForm(fields, submitLabel) {
     const html = fields.map(([label, type, opt], i) => {
       const id = "pf" + i
       let input
@@ -1576,7 +1858,7 @@
     return `
       ${html[0]}
       <div class="row">${html.slice(1).join("")}</div>
-      <button class="btn" type="submit">Post</button>
+      <button class="btn" type="submit">${esc(submitLabel)}</button>
       <p class="note" id="postNote" role="status"></p>`
   }
 
@@ -1584,17 +1866,26 @@
   const synonyms = { sangtimer: "sangunderviser", sangtime: "sangunderviser", trommer: "trommeslager", bassist: "bas", beats: "beat" }
   const stopwords = new Set(["af", "min", "mit", "mine", "til", "en", "et", "og", "jeg", "med", "for", "på", "fra", "der", "som", "har", "brug", "skal", "vil", "gerne", "søger", "ny", "nyt", "i", "vores"])
 
+  function queryMatches(fields) {
+    if (!state.q) return true
+    const hay = fields.join(" ").toLowerCase().replace(/aa/g, "å")
+    const words = state.q.toLowerCase().replace(/aa/g, "å").split(/\s+/)
+      .filter(w => w.length > 1 && !stopwords.has(w))
+    if (!words.length) return true
+    return words.some(word => hay.includes(synonyms[word] || word) || hay.includes(word))
+  }
+
   function matches(p) {
     if (p.dept !== state.dept) return false
     if (state.sub !== "Alle" && !p.subs.includes(state.sub)) return false
     if (state.extra && !departments[state.dept].toggle[1](p)) return false
-    if (!state.q) return true
-    const hay = [p.name, p.role, p.city, p.bio, ...p.subs, ...p.genres, ...p.packages.map(pk => pk[1])]
-      .join(" ").toLowerCase().replace(/aa/g, "å")
-    const words = state.q.toLowerCase().replace(/aa/g, "å").split(/\s+/)
-      .filter(w => w.length > 1 && !stopwords.has(w))
-    if (!words.length) return true
-    return words.some(word => hay.includes(synonyms[word] || word))
+    return queryMatches([p.name, p.role, p.city, p.bio, ...p.subs, ...p.genres, ...p.packages.map(pk => pk[1])])
+  }
+
+  function requestMatches(r) {
+    if (r.dept !== state.dept) return false
+    if (state.sub !== "Alle" && r.sub !== state.sub) return false
+    return queryMatches([r.title, r.who, r.city, r.kind, r.sub, r.text])
   }
 
   function sorted(list) {
@@ -1617,10 +1908,12 @@
   function render() {
     const d = departments[state.dept]
     document.querySelectorAll(".sub").forEach(b => b.setAttribute("aria-pressed", b.dataset.sub === state.sub))
-    $("resultsTitle").textContent = state.sub === "Alle" ? "Alle i " + d.name.toLowerCase() : state.sub
     $("activeQuery").innerHTML = state.q
       ? `<button class="active-query" type="button" id="clearQ">“${esc(state.q)}” ✕</button>` : ""
 
+    if (seller()) return renderRequests(d)
+
+    $("resultsTitle").textContent = state.sub === "Alle" ? "Alle i " + d.name.toLowerCase() : state.sub
     const list = sorted(profiles.filter(matches))
     $("count").textContent = list.length === 1 ? "1 profil" : list.length + " profiler"
 
@@ -1651,6 +1944,39 @@
           <div class="card-foot">
             <span class="rating">★ ${stars(p.rating)} (${p.reviews})</span>
             <span class="see-more">Se priser og pakker →</span>
+          </div>
+        </div>
+      </article>
+    `).join("")
+  }
+
+  function renderRequests(d) {
+    $("resultsTitle").textContent = state.sub === "Alle" ? "Opslag i " + d.name.toLowerCase() : "Opslag: " + state.sub
+    const list = requests.filter(requestMatches)
+    $("count").textContent = list.length === 1 ? "1 opslag" : list.length + " opslag"
+
+    if (!list.length) {
+      $("grid").innerHTML = `<div class="empty">Ingen opslag matcher – prøv et andet ord eller en anden kategori.<br><button type="button" id="reset">Nulstil filtre</button></div>`
+      return
+    }
+
+    $("grid").innerHTML = list.map(r => `
+      <article class="card req" data-r="${requests.indexOf(r)}">
+        <span class="badge demo">Eksempel</span>
+        <div class="card-body">
+          <div class="tags">
+            <span class="tag">${esc(r.sub)}</span>
+            ${r.isNew ? '<span class="badge new">Nyt</span>' : ""}
+          </div>
+          <p class="name req-title"><button type="button" class="open">${esc(r.title)}</button></p>
+          <p class="req-who">${esc(r.who)} · ${esc(r.city)}</p>
+          <dl class="facts">
+            <div><dt>Budget</dt><dd>${esc(r.budget)}</dd></div>
+            <div><dt>Hvornår</dt><dd>${esc(r.when)}</dd></div>
+          </dl>
+          <div class="card-foot">
+            <span class="rating">${esc(r.posted)} · ${r.replies} svar</span>
+            <span class="see-more">Se opslag →</span>
           </div>
         </div>
       </article>
@@ -1697,12 +2023,72 @@
       return
     }
     const card = e.target.closest(".card")
-    if (card) openProfile(profiles[card.dataset.i])
+    if (!card) return
+    if (card.dataset.r !== undefined) openRequest(requests[card.dataset.r])
+    else openProfile(profiles[card.dataset.i])
   })
 
   $("postForm").addEventListener("submit", e => {
     e.preventDefault()
-    $("postNote").innerHTML = 'Det her er kun en demo, så intet bliver postet. <a href="index.html#tilmeld">Skriv dig op</a>, så hører du fra os, når Musiclinq åbner.'
+    $("postNote").innerHTML = demoNote(seller() ? "oprettet" : "postet")
+  })
+
+  // ---------- Opslag (tilbyder-siden) ----------
+  function openRequest(r) {
+    $("dlgKind").textContent = "Opdigtet eksempelopslag"
+    $("dlg-body").innerHTML = `
+      <div class="dlg-grid">
+        <div>
+          <div class="tags" style="margin-bottom:12px">
+            <span class="tag">${esc(departments[r.dept].name)}</span>
+            <span class="tag">${esc(r.sub)}</span>
+            ${r.isNew ? '<span class="badge new">Nyt</span>' : ""}
+          </div>
+          <p class="name" id="dlg-name" style="font-size:32px;font-stretch:75%;font-weight:900;line-height:1.05">${esc(r.title)}</p>
+          <p class="role">Slået op af ${esc(r.who)} · ${esc(r.posted)}</p>
+
+          <dl class="facts facts-box">
+            <div><dt>Type</dt><dd>${esc(r.kind)}</dd></div>
+            <div><dt>Sted</dt><dd>${esc(r.city)}</dd></div>
+            <div><dt>Hvornår</dt><dd>${esc(r.when)}</dd></div>
+            <div><dt>Budget</dt><dd>${esc(r.budget)}</dd></div>
+          </dl>
+
+          <div class="dlg-section">
+            <p class="mono">Om opslaget</p>
+            <p>${esc(r.text)}</p>
+            <p class="meta">${r.replies} har allerede svaret på opslaget.</p>
+          </div>
+        </div>
+
+        <aside class="order">
+          <div class="order-body">
+            <div class="order-title"><b>Send et tilbud</b></div>
+            <p class="order-desc">Skriv din pris og fortæl kort, hvorfor du er den rette. ${esc(r.who.split(" ")[0])} ser din profil sammen med tilbuddet.</p>
+            <form class="offer-form" id="offerForm">
+              <div>
+                <label for="offerPrice">Din pris</label>
+                <input id="offerPrice" type="text" placeholder="Budget: ${esc(r.budget)}">
+              </div>
+              <div>
+                <label for="offerMsg">Besked</label>
+                <textarea id="offerMsg" placeholder="Fx hvad du har lavet før, og link til dit arbejde"></textarea>
+              </div>
+              <button class="btn" type="submit">Send tilbud</button>
+              <p class="note" id="offerNote" role="status"></p>
+            </form>
+          </div>
+        </aside>
+      </div>
+    `
+    $("profile").showModal()
+    $("profile").scrollTop = 0
+  }
+
+  $("dlg-body").addEventListener("submit", e => {
+    if (e.target.id !== "offerForm") return
+    e.preventDefault()
+    $("offerNote").innerHTML = demoNote("sendt")
   })
 
   // ---------- Profilvisning ----------
@@ -1710,6 +2096,7 @@
 
   function openProfile(p) {
     current = p
+    $("dlgKind").textContent = "Opdigtet eksempelprofil"
     const seed = profiles.indexOf(p)
     const defaultPkg = Math.min(1, p.packages.length - 1)
     const live = p.dept === "livemusik"
