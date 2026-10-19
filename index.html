@@ -1214,6 +1214,13 @@
     })
   })
 
+  // Kommer man fra et link til privatlivspolitikken (fx fra tak-siden), åbnes den med det samme
+  if (location.hash === "#privatlivspolitik") {
+    const privacy = document.getElementById("privatlivspolitik")
+    privacy.open = true
+    privacy.scrollIntoView()
+  }
+
   const form = document.getElementById("signupForm")
   const message = document.getElementById("message")
   const submitBtn = document.getElementById("submitBtn")
