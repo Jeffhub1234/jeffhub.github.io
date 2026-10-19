@@ -164,8 +164,8 @@
     /* Produktforsmag: et profilkort og et opslag fra demoen */
     .preview {
       display: flex;
-      align-items: flex-start;
-      gap: 18px;
+      align-items: stretch;
+      gap: 16px;
       margin-top: 40px;
       max-width: 560px;
     }
@@ -180,8 +180,10 @@
       font-size: 14px;
     }
 
-    .pv-profile { transform: rotate(-2deg); box-shadow: 8px 8px 0 var(--accent); }
-    .pv-request { transform: translateY(26px) rotate(2deg); box-shadow: 8px 8px 0 var(--accent-2); border-left: 10px solid #7a3c7a; }
+    .pv { display: flex; flex-direction: column; }
+    .pv-body { flex: 1; }
+    .pv-foot { margin-top: auto; }
+    .pv-request .pv-cover { background: #7a3c7a; }
 
     .pv-cover {
       position: relative;
@@ -237,7 +239,6 @@
       color: var(--accent-2);
     }
 
-    .pv-request .pv-badge.demo { top: 10px; }
 
     .pv-tag {
       font-family: "DM Mono", monospace;
@@ -270,7 +271,7 @@
 
     .preview-label {
       color: var(--soft);
-      margin: 44px 0 0;
+      margin: 16px 0 0;
     }
 
     /* ---------- Formular ---------- */
@@ -830,7 +831,7 @@
         <h1>Find folk til din musik. <em>Eller bliv fundet.</em></h1>
         <p class="hero-lead">
           Musiclinq samler producere, mixteknikere, sangere, musikere og undervisere ét sted.
-          Find den rette til dit næste projekt – eller få betaling for det, du er god til.
+          Find den rette til dit næste projekt – eller del det, du er god til, med andre.
         </p>
         <a class="demo-link" href="demo.html">Se hvordan Musiclinq kommer til at se ud →</a>
 
@@ -857,11 +858,15 @@
             </div>
           </div>
           <div class="pv pv-request">
-            <span class="pv-badge demo">Eksempel</span>
+            <div class="pv-cover">
+              <div class="pv-badges"><span class="pv-badge">Søger band</span><span class="pv-badge top">Nyt</span></div>
+              <span class="pv-badge demo">Eksempel</span>
+            </div>
             <div class="pv-body">
-              <div class="pv-badges"><span class="pv-tag">Band</span><span class="pv-badge new">Nyt</span></div>
-              <p class="pv-name">Band til bryllup 14. juni</p>
-              <p class="pv-sub" style="margin-top:-6px">Sara og Mikkel · Skanderborg</p>
+              <div>
+                <p class="pv-name">Band til bryllup 14. juni</p>
+                <p class="pv-sub">Sara og Mikkel · Skanderborg</p>
+              </div>
               <dl class="pv-facts">
                 <div><dt>Budget</dt><dd>15.000–20.000 kr.</dd></div>
                 <div><dt>Hvornår</dt><dd>14. juni, kl. 21–01</dd></div>
@@ -899,7 +904,7 @@
               </label>
               <label class="role">
                 <input type="radio" name="aktivitet" value="tilbyde">
-                Sælge mine ydelser
+                Tilbyde det, jeg kan
                 <small>fx mix, undervisning, sessionspil</small>
               </label>
               <label class="role">
@@ -977,7 +982,7 @@
 
         <a class="audience dark" href="demo.html#soeger">
           <p class="mono">Er du god til noget?</p>
-          <h3>Få betaling for det, du kan</h3>
+          <h3>Tilbyd det, du er god til</h3>
           <p class="one">Lav en profil, og bliv fundet af dem, der søger.</p>
           <span class="more">Se opslag i demoen →</span>
         </a>
