@@ -373,7 +373,7 @@
 
     .dept-cards {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 16px;
     }
 
@@ -400,10 +400,13 @@
 
     .dept-card .num { color: var(--muted); }
 
+    /* Overskriften skalerer med kortets bredde, så lange ord som UNDERVISNING kan være der */
+    .dept-card { container-type: inline-size; }
+
     .dept-card h2 {
       font-stretch: 62%;
       font-weight: 900;
-      font-size: 44px;
+      font-size: clamp(28px, 17cqi, 44px);
       line-height: 0.9;
       text-transform: uppercase;
       margin: 0;
@@ -418,15 +421,43 @@
 
     .dept-card .go {
       margin-top: auto;
-      font-family: "DM Mono", monospace;
-      font-size: 13px;
-      display: flex;
-      justify-content: space-between;
-      border-top: 1px solid var(--soft);
-      padding-top: 10px;
+      display: grid;
+      gap: 10px;
+      padding-top: 6px;
     }
 
-    .dept-card:hover .go { color: var(--c); }
+    .go-count {
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* Tydelig knap i afdelingens farve, så kortet ligner noget, man kan trykke på */
+    .go-btn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-stretch: 80%;
+      font-size: 16px;
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: #fff;
+      background: var(--c);
+      border: 2px solid var(--ink);
+      padding: 12px 14px;
+      transition: transform 0.12s, box-shadow 0.12s;
+    }
+
+    .dept-card:hover .go-btn,
+    .dept-card:focus-visible .go-btn {
+      box-shadow: 4px 4px 0 var(--ink);
+      transform: translate(-2px, -2px);
+    }
+
+    .dept-card:active .go-btn { transform: translate(1px, 1px); box-shadow: none; }
 
     /* ---------- Afdelingsside ---------- */
     .dept-hero {
@@ -1915,7 +1946,7 @@
           <h2>${esc(d.name)}</h2>
           <p>${esc(requestsView() ? sellerText[key].card : d.card)}</p>
           <p class="ex">${esc(d.examples)}</p>
-          <span class="go"><span>${n} ${requestsView() ? "opslag" : "profiler"}</span><span>Gå til →</span></span>
+          <span class="go"><span class="go-count">${n} ${requestsView() ? "opslag" : "profiler"}</span><span class="go-btn">Gå til ${esc(d.name)} <span aria-hidden="true">→</span></span></span>
         </a>`
     }).join("")
   }
