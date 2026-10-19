@@ -171,21 +171,6 @@
       color: var(--ink);
     }
 
-    .demo-btn.demo-btn-light {
-      color: var(--ink);
-      border-color: var(--ink);
-      margin-top: 20px;
-    }
-
-    .demo-btn.demo-btn-light .demo-text small { color: var(--muted); }
-
-    .demo-btn.demo-btn-light:hover {
-      background: var(--ink);
-      color: var(--paper);
-    }
-
-    .demo-btn.demo-btn-light:hover .demo-text small { color: var(--soft); }
-
     .final-actions {
       display: flex;
       flex-wrap: wrap;
@@ -752,23 +737,6 @@
     a.audience:hover .more { background: var(--ink); color: var(--paper); border-color: var(--ink); }
     a.audience.dark:hover .more { background: var(--paper); color: var(--ink); border-color: var(--paper); }
 
-    /* Én linje om, hvad Musiclinq gør */
-    .statement {
-      font-stretch: 62%;
-      font-weight: 900;
-      font-size: clamp(44px, 7vw, 88px);
-      line-height: 0.9;
-      text-transform: uppercase;
-      margin: 0 0 8px;
-      max-width: 16ch;
-    }
-
-    .statement em {
-      font-style: normal;
-      white-space: nowrap;
-      color: var(--accent);
-    }
-
     /* Hvem står bag */
     .about {
       display: grid;
@@ -833,12 +801,26 @@
 
     /* ---------- Privatlivspolitik og footer ---------- */
     .privacy {
-      margin-top: 48px;
-      border-top: 2px solid var(--line);
-      padding-top: 14px;
       font-size: 15px;
       max-width: 720px;
     }
+
+    .privacy[open] {
+      border-top: 2px solid var(--line);
+      padding: 8px 0 48px;
+    }
+
+    .privacy-title {
+      font-stretch: 62%;
+      font-weight: 900;
+      font-size: 40px;
+      line-height: 1;
+      text-transform: uppercase;
+      margin: 16px 0 12px;
+    }
+
+    /* Politikken åbnes fra linket i footeren og ved samtykke-fluebenet */
+    .privacy summary { display: none; }
 
     .privacy summary {
       cursor: pointer;
@@ -862,9 +844,7 @@
     .privacy ul { padding-left: 20px; }
 
     footer {
-      margin-top: 40px;
-      padding: 12px 0 48px;
-      border-top: 2px solid var(--line);
+      padding: 20px 0;
       font-family: "DM Mono", monospace;
       font-size: 12px;
       color: var(--muted);
@@ -1086,19 +1066,6 @@
     </section>
 
     <section class="block">
-      <p class="statement">Find, aftal og lav musik – <em>ét sted.</em></p>
-
-      <a class="demo-btn demo-btn-light" href="demo.html">
-        <span class="demo-tag">Demo</span>
-        <span class="demo-text">
-          <strong>Prøv det selv i demoen</strong>
-          <small>Find en profil, åbn den og se pakkerne</small>
-        </span>
-        <span class="demo-arrow" aria-hidden="true">→</span>
-      </a>
-    </section>
-
-    <section class="block">
       <div class="section-head">
         <h2 class="big">Hvem står bag?</h2>
         <span class="mono">Et studieprojekt fra CBS</span>
@@ -1133,9 +1100,15 @@
 
   <div class="container">
 
+    <footer>
+      <span>&copy; Musiclinq · Studieprojekt, CBS</span>
+      <a href="#privatlivspolitik" class="privacy-link">Privatlivspolitik</a>
+    </footer>
+
     <!-- Privatlivspolitik -->
     <details class="privacy" id="privatlivspolitik">
       <summary>Privatlivspolitik</summary>
+      <h2 class="privacy-title">Privatlivspolitik</h2>
 
       <p>
         Musiclinq er et studieprojekt i faget Innovation på HA(it.) ved Copenhagen Business School (CBS).
@@ -1217,11 +1190,6 @@
         17-10-2026
       </p>
     </details>
-
-    <footer>
-      <span>&copy; Musiclinq · Studieprojekt, CBS</span>
-      <a href="#privatlivspolitik" class="privacy-link">Privatlivspolitik</a>
-    </footer>
   </div>
 
 
