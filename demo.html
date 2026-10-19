@@ -110,6 +110,63 @@
 
     .pill:hover { border-color: var(--accent-2); }
 
+    .pill-cta {
+      background: var(--accent-2);
+      border-color: var(--accent-2);
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .header-links a.pill-cta:hover {
+      background: var(--paper);
+      border-color: var(--paper);
+      color: var(--ink);
+    }
+
+    /* Knap til tilmeldingen, der altid kan ses */
+    .float-cta {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 30;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-stretch: 80%;
+      font-size: 17px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      color: var(--ink);
+      background: var(--accent-2);
+      border: 2px solid var(--ink);
+      padding: 12px 18px;
+      box-shadow: 5px 5px 0 var(--ink);
+      transition: transform 0.12s, box-shadow 0.12s;
+    }
+
+    .float-cta:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0 var(--ink);
+    }
+
+    .float-cta small {
+      font-family: "DM Mono", monospace;
+      font-weight: 400;
+      font-size: 11px;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    @media (max-width: 560px) {
+      .float-cta { left: 16px; right: 16px; bottom: 16px; justify-content: center; }
+      .float-cta small { display: none; }
+    }
+
+    /* Plads til den faste knap, så den ikke dækker footeren */
+    body > .container:last-of-type footer { padding-bottom: 96px; }
+
     /* ---------- Kontakt: tilbyder / søger ---------- */
     .mode-switch {
       position: relative;
@@ -906,9 +963,11 @@
 
     .note:not(:empty)::before { content: "→ "; color: var(--accent); }
 
+    .dept-main { padding-bottom: 88px; }
+
     /* ---------- Afslutning ---------- */
     .final {
-      margin-top: 88px;
+      margin-top: 0;
       background: var(--accent);
       color: var(--paper);
       padding: 56px 0;
@@ -1190,8 +1249,8 @@
         <span class="badge-demo mono">Demo</span>
       </div>
       <nav class="header-links mono">
-        <a class="hide-sm" href="index.html">Om Musiclinq</a>
-        <a class="pill" href="index.html#tilmeld">Skriv dig op</a>
+        <a class="hide-sm" href="index.html">← Tilbage til forsiden</a>
+        <a class="pill pill-cta" href="index.html#tilmeld">Skriv dig op</a>
       </nav>
     </div>
   </header>
@@ -1245,7 +1304,7 @@
       </div>
     </section>
 
-    <main class="container">
+    <main class="container dept-main">
       <section class="block" id="profiler">
         <div class="switch-row">
           <div class="switch-wrap"><p class="switch-label mono">Find nogen, som</p><div class="mode-switch" role="group" aria-label="Find nogen, som tilbyder eller søger"><button type="button" data-mode="tilbyder">tilbyder</button><button type="button" data-mode="soeger">søger</button></div></div>
@@ -1300,6 +1359,8 @@
       <a href="index.html#privatlivspolitik">Privatlivspolitik</a>
     </footer>
   </div>
+
+  <a class="float-cta" href="index.html#tilmeld">Skriv dig op til ventelisten <small>→ tilbage til forsiden</small></a>
 
   <dialog id="profile" aria-labelledby="dlg-name">
     <div class="dlg-top">
