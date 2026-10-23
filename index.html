@@ -250,30 +250,19 @@
     }
 
     /* Produktforsmag: et profilkort og et opslag fra demoen */
-    .preview-label {
-      color: var(--soft);
-      margin: 14px 0 0;
-    }
-
-    .preview {
-      display: flex;
-      align-items: stretch;
-      gap: 16px;
-      margin-top: 20px;
-      max-width: 560px;
-    }
-
     .pv {
       position: relative;
-      flex: 1 1 0;
-      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      max-width: 360px;
+      margin: 0 0 22px;
       background: var(--card);
       color: var(--ink);
-      border: 2px solid var(--paper);
+      border: 2px solid var(--ink);
       font-size: 14px;
     }
 
-    .pv { display: flex; flex-direction: column; }
+    .audience .pv { flex: 1; width: 100%; }
     .pv-body { flex: 1; }
     .pv-foot { margin-top: auto; }
     .pv-request .pv-cover { background: #7a3c7a; }
@@ -469,13 +458,6 @@
       line-height: 1.25;
     }
 
-    .role small {
-      display: block;
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 2px;
-    }
-
     .role input {
       position: absolute;
       opacity: 0;
@@ -484,7 +466,6 @@
 
     .role:hover { border-color: var(--accent); }
     .role:has(input:checked) { background: var(--ink); color: var(--paper); }
-    .role:has(input:checked) small { color: var(--soft); }
     .role:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
 
     /* Valgfrie spørgsmål */
@@ -680,38 +661,10 @@
       margin: 0 0 18px;
     }
 
-    .audience ul {
-      list-style: none;
-      margin: 0 0 22px;
-      padding: 0;
-      display: grid;
-      gap: 10px;
-    }
-
-    .audience li {
-      display: grid;
-      grid-template-columns: 22px 1fr;
-      gap: 8px;
-    }
-
-    .audience li::before {
-      content: "→";
-      font-weight: 800;
-      color: var(--accent);
-    }
-
-    .audience.dark li::before { color: var(--accent-2); }
-
-    .audience .examples {
-      font-size: 14px;
-      color: var(--muted);
-      margin: 0;
-    }
-
-    .audience.dark .examples { color: var(--soft); }
-
     a.audience {
-      display: block;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
       text-decoration: none;
       transition: transform 0.12s, box-shadow 0.12s;
     }
@@ -864,8 +817,6 @@
 
       .hero { padding-top: 36px; }
       .hero .container { gap: 40px; }
-      .preview, .preview-label { display: none; }
-
     }
 
     @media (max-width: 520px) {
@@ -900,11 +851,10 @@
     <div class="container">
 
       <div>
-        <p class="eyebrow mono">Et studieprojekt fra CBS · Vi vil gerne høre fra dig</p>
+        <p class="eyebrow mono">Et studieprojekt fra CBS</p>
         <h1>Find folk til din musik. <em>Eller bliv fundet.</em></h1>
         <p class="hero-lead">
           Musiclinq samler producere, mixteknikere, sangere, musikere og undervisere ét sted.
-          Find den rette til dit næste projekt – eller del det, du er god til, med andre.
         </p>
         <a class="demo-btn" href="demo.html">
           <span class="demo-tag">Demo</span>
@@ -914,53 +864,11 @@
           </span>
           <span class="demo-arrow" aria-hidden="true">→</span>
         </a>
-
-        <div class="preview" aria-hidden="true">
-          <div class="pv pv-profile">
-            <div class="pv-cover">
-              <div class="pv-badges"><span class="pv-badge top">Topbedømt</span><span class="pv-badge">Online</span></div>
-              <span class="pv-badge demo">Eksempel</span>
-            </div>
-            <div class="pv-body">
-              <div class="pv-head">
-                <div class="avatar">ML</div>
-                <div>
-                  <p class="pv-name">Maja Lindholm</p>
-                  <p class="pv-sub">Sangunderviser · København</p>
-                </div>
-              </div>
-              <ul class="pv-offers">
-                <li>Prøvetime</li>
-                <li>Enkelt lektion</li>
-                <li>Forløb på 5 lektioner</li>
-              </ul>
-              <div class="pv-foot"><span>★ 5,0 (24)</span><u>Se pakker →</u></div>
-            </div>
-          </div>
-          <div class="pv pv-request">
-            <div class="pv-cover">
-              <div class="pv-badges"><span class="pv-badge">Søger band</span><span class="pv-badge top">Nyt</span></div>
-              <span class="pv-badge demo">Eksempel</span>
-            </div>
-            <div class="pv-body">
-              <div>
-                <p class="pv-name">Band til bryllup 14. juni</p>
-                <p class="pv-sub">Sara og Mikkel · Skanderborg</p>
-              </div>
-              <dl class="pv-facts">
-                <div><dt>Budget</dt><dd>15.000–20.000 kr.</dd></div>
-                <div><dt>Hvornår</dt><dd>14. juni, kl. 21–01</dd></div>
-              </dl>
-              <div class="pv-foot"><span>I dag · 3 svar</span><u>Se opslag →</u></div>
-            </div>
-          </div>
-        </div>
-        <p class="preview-label mono" aria-hidden="true">Eksempler fra demoen</p>
       </div>
 
       <div class="signup" id="tilmeld">
         <h2>Skriv dig op</h2>
-        <p class="sub">Vis, at du synes, idéen er interessant. Det tager 20 sekunder, og vi skriver kun til dig, hvis du siger ja tak til det.</p>
+        <p class="sub">Vis os, at idéen er interessant – det tager 20 sekunder.</p>
 
         <form id="signupForm">
           <div class="row">
@@ -979,13 +887,11 @@
             <div class="roles">
               <label class="role">
                 <input type="radio" name="aktivitet" value="koebe">
-                Finde folk
-                <small>til mine musikprojekter</small>
+                Finde folk til min musik
               </label>
               <label class="role">
                 <input type="radio" name="aktivitet" value="tilbyde">
                 Tilbyde det, jeg kan
-                <small>fx mix, undervisning, live-musik</small>
               </label>
               <label class="role">
                 <input type="radio" name="aktivitet" value="begge">
@@ -999,7 +905,7 @@
           </fieldset>
 
           <details class="extra">
-            <summary>Hjælp os med at bygge det rigtige <span>– 3 korte spørgsmål (valgfrit)</span></summary>
+            <summary>Hjælp os med 3 korte spørgsmål <span>(valgfrit)</span></summary>
             <div class="extra-fields">
               <div>
                 <label for="beskaeftigelse">Beskæftigelse</label>
@@ -1022,7 +928,7 @@
 
           <label class="check">
             <input type="checkbox" id="mail_ved_launch">
-            <span>Ja tak, I må gerne sende mig en mail, når Musiclinq launcher.</span>
+            <span>Send mig en mail, når Musiclinq launcher.</span>
           </label>
 
           <label class="check">
@@ -1057,6 +963,27 @@
           <p class="mono">Har du et projekt?</p>
           <h3>Find den rette til din musik</h3>
           <p class="one">Søg, lyt og book – med faste priser.</p>
+          <div class="pv pv-profile" aria-hidden="true">
+            <div class="pv-cover">
+              <div class="pv-badges"><span class="pv-badge top">Topbedømt</span><span class="pv-badge">Online</span></div>
+              <span class="pv-badge demo">Eksempel</span>
+            </div>
+            <div class="pv-body">
+              <div class="pv-head">
+                <div class="avatar">ML</div>
+                <div>
+                  <p class="pv-name">Maja Lindholm</p>
+                  <p class="pv-sub">Sangunderviser · København</p>
+                </div>
+              </div>
+              <ul class="pv-offers">
+                <li>Prøvetime</li>
+                <li>Enkelt lektion</li>
+                <li>Forløb på 5 lektioner</li>
+              </ul>
+              <div class="pv-foot"><span>★ 5,0 (24)</span><u>Se pakker →</u></div>
+            </div>
+          </div>
           <span class="more"><span class="demo-tag">Demo</span>Se profiler →</span>
         </a>
 
@@ -1064,6 +991,23 @@
           <p class="mono">Er du god til noget?</p>
           <h3>Tilbyd det, du er god til</h3>
           <p class="one">Lav en profil, og bliv fundet af dem, der søger.</p>
+          <div class="pv pv-request" aria-hidden="true">
+            <div class="pv-cover">
+              <div class="pv-badges"><span class="pv-badge">Søger band</span><span class="pv-badge top">Nyt</span></div>
+              <span class="pv-badge demo">Eksempel</span>
+            </div>
+            <div class="pv-body">
+              <div>
+                <p class="pv-name">Band til bryllup 14. juni</p>
+                <p class="pv-sub">Sara og Mikkel · Skanderborg</p>
+              </div>
+              <dl class="pv-facts">
+                <div><dt>Budget</dt><dd>15.000–20.000 kr.</dd></div>
+                <div><dt>Hvornår</dt><dd>14. juni, kl. 21–01</dd></div>
+              </dl>
+              <div class="pv-foot"><span>I dag · 3 svar</span><u>Se opslag →</u></div>
+            </div>
+          </div>
           <span class="more"><span class="demo-tag">Demo</span>Se opslag →</span>
         </a>
       </div>
